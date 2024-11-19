@@ -1,0 +1,74 @@
+# To contribute improvements to CI/CD templates, please follow the Development guide at:
+# https://docs.gitlab.com/ee/development/cicd/templates.html
+# This specific template is located at:
+# https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Maven.gitlab-ci.yml
+
+# Build JAVA applications using Apache Maven (http://maven.apache.org)
+# For docker image tags see https://hub.docker.com/_/maven/
+#
+# For general lifecycle information see https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html
+
+# This template will build and test your projects
+# * Caches downloaded dependencies and plugins between invocation.
+# * Verify but don't deploy merge requests.
+# * Deploy built artifacts from master branch only.
+
+variables:
+  MAVEN_OPTS: >-
+    -Dhttps.protocols=TLSv1.2
+    -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository
+    -Dorg.slf4j.simpleLogger.showDateTime=true
+    -Djava.awt.headless=true
+    -Dmaven.test.failure.ignore=true
+
+
+  MAVEN_CLI_OPTS: >-
+    --batch-mode
+    --errors
+    --fail-at-end
+    --show-version
+    --no-transfer-progress
+    -DinstallAtEnd=true
+    -DdeployAtEnd=true
+
+image: maven:3-openjdk-17
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .m2/repository
+
+stages:
+  - test
+  - deploy
+
+
+.verify:
+  stage: test
+  script:
+    - 'if [ ! -f ci_settings.xml ]; then echo "Arquivo ci_settings.xml ausente"; exit 1; fi'
+    - 'mvn $MAVEN_CLI_OPTS -X clean verify --settings ci_settings.xml'
+  except:
+    variables:
+      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+test-jdk17:
+  stage: test
+  script:
+    - mvn $MAVEN_CLI_OPTS clean org.jacoco:jacoco-maven-plugin:prepare-agent test jacoco:report --settings ci_settings.xml
+
+  artifacts:
+    paths:
+      - target/site/jacoco/
+
+deploy:jdk17:
+  stage: deploy
+  script:
+    - if [ ! -f ci_settings.xml ]; then
+      echo "CI settings missing! If deploying to GitLab Maven Repository, please see https://docs.gitlab.com/ee/user/packages/maven_repository/index.html#create-maven-packages-with-gitlab-cicd for instructions.";
+      exit 1;
+      fi
+    - 'mvn $MAVEN_CLI_OPTS deploy --settings ci_settings.xml'
+  only:
+    - main
+    - master
