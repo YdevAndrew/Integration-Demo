@@ -16,13 +16,10 @@ public class MainView extends Application {
         ViewSwitcher.setup(primaryStage, scene);
         ViewSwitcher.switchTo(CreditCardView.HOMEPAGE.getView());
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Credit Card Module Application");
+        primaryStage.setTitle(" Application");
         primaryStage.show();
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(600);
-        primaryStage.setMaximized(true);
+        primaryStage.setMinWidth(1280);
+        primaryStage.setMinHeight(720);
+        primaryStage.setResizable(false);
     }
-
-
-
 }

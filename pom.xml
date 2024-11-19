@@ -15,6 +15,7 @@
     <maven.compiler.target>17</maven.compiler.target>
     <commons.module.version>1.0-SNAPSHOT</commons.module.version>
     <spring.boot.version>3.2.4</spring.boot.version>
+    <spring-security.version>5.6.2</spring-security.version>
     <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
     <lombok.version>1.18.28</lombok.version>
     <javafx.version>22</javafx.version>
@@ -22,6 +23,26 @@
   </properties>
 
   <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-crypto</artifactId>
+      <version>${spring-security.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+      <version>${spring.boot.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+      <version>${spring.boot.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -48,6 +69,12 @@
       <artifactId>javafx-fxml</artifactId>
       <version>${javafx.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.4</version>
+    </dependency>
+
   </dependencies>
 
   <repositories>
