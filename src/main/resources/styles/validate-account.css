@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "RobotoCondensedLight";
+    src: url("assets/fonts/RobotoCondensed-Light.ttf");
+}
+@font-face {
+    font-family: "GraphikBold";
+    src: url("assets/fonts/GraphikBold.otf");
+}
+
+.header-label {
+    -fx-font-size: 36px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5F5F5F;
+    -fx-font-family: "GraphikBold";
+}
+
+.sub-header-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #999999;
+    -fx-font-family: "RobotoCondensedLight";
+    -fx-padding: 5px 0 20px 0;
+}
+
+.text-field {
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #004BD6;
+    -fx-border-width: 1px;
+}
+
+.primary-button {
+    -fx-background-color: #004BD6;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 150px;
+}
+
+.primary-button:hover {
+    -fx-background-color: #0B61FF;
+}
+
+.primary-button:pressed {
+    -fx-background-color: #041E4F;
+}
+
+.info-label {
+    -fx-text-fill: #666666;
+    -fx-font-size: 14px;
+    -fx-font-family: "RobotoCondensedLight";
+}
