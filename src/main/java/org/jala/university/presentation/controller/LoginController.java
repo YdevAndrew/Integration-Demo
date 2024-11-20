@@ -29,6 +29,8 @@ import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 
+import static org.jala.university.infrastructure.config.SpringFXMLLoader.applicationContext;
+
 @Setter
 @Controller
 public class LoginController {
@@ -98,7 +100,8 @@ public class LoginController {
 
     @FXML
     public void handleLogin() {
-        System.out.println("called handleLogin");
+        System.out.println("Iniciando validação de login...");
+
         try {
             String cpf = cpfField.getText().trim();
             String password = passwordField.getText();
@@ -108,25 +111,28 @@ public class LoginController {
             boolean authenticated = customerService.authenticate(cpf, password);
 
             if (authenticated) {
-                System.out.println("Login bem sucedido!");
+                System.out.println("Login bem-sucedido!");
 
-                // Pegar o stage atual através do loginButton
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
 
-                // Inicializar a MainView
-                MainView mainView = new MainView();
-                mainView.start(currentStage); // Substituir o conteúdo do stage atual
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/board/DashboardApp.fxml"));
+                loader.setControllerFactory(applicationContext::getBean);
+                Parent root = loader.load();
 
+                currentStage.setScene(new Scene(root));
+                currentStage.show();
             } else {
                 showError("Credenciais inválidas");
             }
         } catch (RuntimeException e) {
+            System.err.println("Erro em tempo de execução: " + e.getMessage());
             showError(e.getMessage());
-        } catch (Exception e) {
-            System.err.println("Erro ao carregar MainView: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar Dashboard: " + e.getMessage());
             e.printStackTrace();
         }
     }
+
 
     @FXML
     public void handleForgotPassword() {
