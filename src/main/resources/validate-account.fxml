@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@styles/validate-account.css, @styles/header-validateaccount.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.ValidateAccountController">
+
+    <!-- Header -->
+    <HBox alignment="TOP_RIGHT" layoutY="-5.0" maxHeight="56.0" prefHeight="56.0" prefWidth="1280.0" spacing="15" styleClass="header" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+        <Button prefHeight="40.0" prefWidth="80.0" styleClass="primary-button" text="Help" />
+        <Region prefHeight="49.0" prefWidth="1000.0" HBox.hgrow="ALWAYS" />
+        <ImageView fitHeight="45.0" fitWidth="94.0">
+            <image>
+                <Image url="@assets/Logo.png" />
+            </image>
+        </ImageView>
+    </HBox>
+
+    <!-- Títulos -->
+    <Label layoutX="108.0" layoutY="183.0" styleClass="header-label" text="Validate your account">
+      <font>
+         <Font size="21.0" />
+      </font></Label>
+    <Label layoutX="111.0" layoutY="230.0" styleClass="sub-header-label" text="We sent a code to your email!" />
+
+    <!-- Campos de senha e código de verificação -->
+    <Label layoutX="116.0" layoutY="314.0" styleClass="label" text="Enter your password" />
+    <PasswordField fx:id="passwordField" layoutX="108.0" layoutY="331.0" prefWidth="250.0" styleClass="text-field" />
+
+    <Label layoutX="116.0" layoutY="381.0" styleClass="label" text="Repeat password" />
+    <PasswordField fx:id="repeatPasswordField" layoutX="108.0" layoutY="398.0" prefWidth="250.0" styleClass="text-field" />
+
+    <Label layoutX="116.0" layoutY="446.0" styleClass="label" text="Verification code" />
+    <TextField fx:id="verificationCodeField" layoutX="108.0" layoutY="463.0" prefWidth="250.0" promptText="000000" styleClass="text-field" />
+
+    <!-- Link e botão de ação -->
+    <Hyperlink layoutX="110.0" layoutY="539.0" prefHeight="40.0" prefWidth="127.0" styleClass="info-label" text="Resend code" />
+    <Button fx:id="validateButton" layoutX="304.0" onAction="#validateCode" layoutY="539.0" prefHeight="76.0" prefWidth="205.0" styleClass="primary-button" text="Validate" />
+    <Label fx:id="infoLabel" text="info label" visible="false"/>
+
+    <!-- Imagem de validação -->
+    <ImageView fx:id="validation" fitHeight="515.0" fitWidth="558.0" layoutX="716.0" layoutY="205.0">
+        <image>
+            <Image url="@assets/validation.png" />
+        </image>
+    </ImageView>
+
+    <!-- Botão de voltar -->
+    <ImageView fitHeight="50.0" fitWidth="49.0" layoutX="46.0" layoutY="180.0">
+        <image>
+            <Image url="@assets/back.png" />
+        </image>
+    </ImageView>
+
+</AnchorPane>

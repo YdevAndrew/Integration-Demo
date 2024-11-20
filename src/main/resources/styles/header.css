@@ -1,0 +1,162 @@
+.header {
+    -fx-background-color: #004BD6; /* Cor de fundo azul do header */
+    -fx-padding: 10px; /* Espaçamento interno */
+    -fx-alignment: center; /* Alinhamento do conteúdo */
+    -fx-spacing: 10px; /* Espaçamento entre elementos */
+}
+
+
+
+
+.help-text {
+    -fx-text-fill: white; /* Cor do texto "Help" */
+    -fx-font-size: 16px; /* Tamanho da fonte */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-padding: 5px; /* Espaçamento interno */
+    -fx-alignment: center-left; /* Alinhamento à esquerda */
+}
+
+/* Manter o restante do CSS fornecido */
+.form-container {
+    -fx-padding: 20px;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+    -fx-background-color: #f0f0f0;
+}
+
+.form-grid {
+    -fx-hgap: 15px;
+    -fx-vgap: 10px;
+    -fx-background-color: #ffffff;
+}
+
+.text-field, .combo-box {
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-border-color: #c4baf5;
+    -fx-border-width: 1px;
+}
+
+.primary-button {
+    -fx-background-color: #004BD6; /* Cor de fundo azul principal */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 40px;
+    -fx-min-width: 150px;
+}
+
+.primary-button:hover {
+    -fx-background-color: #0B61FF; /* Cor de hover */
+}
+
+.primary-button:pressed {
+    -fx-background-color: #041E4F; /* Cor de pressionado */
+}
+
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-background-color: transparent;
+}
+
+/* Alterações nos rótulos e títulos */
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #004BD6; /* Cor azul principal */
+}
+
+
+.header {
+    -fx-background-color: #004BD6; /* Cor de fundo azul do header */
+    -fx-padding: 10px; /* Espaçamento interno */
+    -fx-alignment: center; /* Alinhamento do conteúdo */
+    -fx-spacing: 10px; /* Espaçamento entre elementos */
+}
+
+    .logo {
+        -fx-pref-width: 100px; /* Largura preferencial da logo */
+        -fx-pref-height: 50px; /* Altura preferencial da logo */
+        -fx-background-image: url('../assets/Logo.png'); /* Caminho para a logo */
+        -fx-background-size: contain; /* Ajusta a imagem para caber no espaço */
+        -fx-background-repeat: no-repeat; /* Não repete a imagem */
+        -fx-background-position: center; /* Centraliza a imagem */
+    }
+
+.help-text {
+    -fx-text-fill: white; /* Cor do texto "Help" */
+    -fx-font-size: 16px; /* Tamanho da fonte */
+    -fx-font-weight: bold; /* Negrito */
+    -fx-padding: 5px; /* Espaçamento interno */
+    -fx-alignment: center-left; /* Alinhamento à esquerda */
+}
+
+/* Manter o restante do CSS fornecido */
+.form-container {
+    -fx-padding: 20px;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+    -fx-background-color: #f0f0f0;
+}
+
+.form-grid {
+    -fx-hgap: 15px;
+    -fx-vgap: 10px;
+    -fx-background-color: #ffffff;
+}
+
+.text-field, .combo-box {
+    -fx-pref-height: 40px;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-color: white;
+    -fx-border-color: #c4baf5;
+    -fx-border-width: 1px;
+}
+
+.primary-button {
+    -fx-background-color: #004BD6; /* Cor de fundo azul principal */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 40px;
+    -fx-min-width: 150px;
+}
+
+.primary-button:hover {
+    -fx-background-color: #0B61FF; /* Cor de hover */
+}
+
+.primary-button:pressed {
+    -fx-background-color: #041E4F; /* Cor de pressionado */
+}
+
+.error-label {
+    -fx-text-fill: red;
+    -fx-font-size: 12px;
+    -fx-background-color: transparent;
+}
+
+/* Alterações nos rótulos e títulos */
+.label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #004BD6; /* Cor azul principal */
+}
+
+.form-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #004BD6;
+}
+
+.form-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #004BD6;
+}

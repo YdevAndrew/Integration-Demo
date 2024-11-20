@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.ScreenSuccessController">
+
+    <!-- Caixa de mensagem de sucesso -->
+    <VBox alignment="CENTER" layoutX="50" layoutY="50" prefWidth="300.0" spacing="20">
+        <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;" text="Serviço excluído com sucesso!" />
+    </VBox>
+
+    <!-- Botão para fechar a janela -->
+    <Button layoutX="167.0" layoutY="114.0" onAction="#handleClose" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px;" text="Fechar" />
+
+</AnchorPane>
