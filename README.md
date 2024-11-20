@@ -1,4 +1,4 @@
-# Demo
+# account-module
 
 
 
@@ -15,14 +15,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://gitlab.com/jala-university1/cohort-3/oficial-pt-desenvolvimento-de-software-2-iso-124.ga.t2.24.m2/se-o-b/Capstone/demo.git
+git remote add origin https://gitlab.com/jala-university1/cohort-2/desarrollo-de-software-2-es/practitioners/capstone/account-module.git
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.com/jala-university1/cohort-3/oficial-pt-desenvolvimento-de-software-2-iso-124.ga.t2.24.m2/se-o-b/Capstone/demo/-/settings/integrations)
+- [ ] [Set up project integrations](https://gitlab.com/jala-university1/cohort-2/desarrollo-de-software-2-es/practitioners/capstone/account-module/-/settings/integrations)
 
 ## Collaborate with your team
 
