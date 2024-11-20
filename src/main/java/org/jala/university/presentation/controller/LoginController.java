@@ -19,6 +19,7 @@ import org.jala.university.application.service.CustomerService;
 import org.jala.university.infrastructure.config.SpringFXMLLoader;
 import org.jala.university.presentation.AccountView;
 import org.jala.university.commons.presentation.ViewSwitcher;
+import org.jala.university.presentation.MainView;
 import org.jala.university.utils.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -106,35 +107,24 @@ public class LoginController {
 
             boolean authenticated = customerService.authenticate(cpf, password);
 
-            System.out.println("Login bem sucedido!");
-
             if (authenticated) {
-                try {
-                    FXMLLoader loader = SpringFXMLLoader.create("/main-view.fxml");
-                    Parent root = loader.load();
+                System.out.println("Login bem sucedido!");
 
-                    // Pegar o stage atual através do loginButton
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                // Pegar o stage atual através do loginButton
+                Stage currentStage = (Stage) loginButton.getScene().getWindow();
 
-                    // Configurar a nova cena
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
+                // Inicializar a MainView
+                MainView mainView = new MainView();
+                mainView.start(currentStage); // Substituir o conteúdo do stage atual
 
-                    // Opcional: configurar título da janela
-                    stage.setTitle("Menu Principal");
-
-                    stage.show();
-
-                } catch (Exception e) {
-                    System.err.println("Erro ao carregar tela de login: " + e.getMessage());
-                    e.printStackTrace();
-                }
-                System.out.println("Login bem sucedido! 2");
             } else {
                 showError("Credenciais inválidas");
             }
         } catch (RuntimeException e) {
             showError(e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Erro ao carregar MainView: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

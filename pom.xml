@@ -31,7 +31,25 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/libs/commons-module-1.0-SNAPSHOT.jar</systemPath>
     </dependency>
+    <!-- QRCode dependencies -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.3.0</version>
+    </dependency>
 
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>javase</artifactId>
+      <version>3.3.0</version>
+    </dependency>
+
+    <!-- Dependência para org.json (para JSONObject) -->
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20210307</version>
+    </dependency>
 
     <!-- Third-party libs -->
     <dependency>
