@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1040.0" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.ManualPaymentInformationController">
+
+    <!-- Título principal -->
+    <Text layoutX="215.0" layoutY="70.0" styleClass="text-title" text="Check your payment information:" textAlignment="CENTER">
+        <font>
+            <Font name="GraphikTrial-Bold" size="40.0" />
+        </font>
+    </Text>
+
+    <!-- Seção de informações do pagamento -->
+    <VBox layoutX="263.0" layoutY="148.0" prefWidth="515.0" spacing="15" styleClass="payment-info-box">
+<!--    <VBox layoutY="148.0" spacing="15" alignment="CENTER">-->
+        <children>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Recipient's: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="receiverNameLabel" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="CNPJ: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="cnpjReceiverLabel" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Account: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="accountLabel" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Agency: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="agencyLabel" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Bank: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="bankReceiverLabel" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Due date: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="expirationDateLabel" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Service Amount: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="amountLabel" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Interest: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="interestValueLabel" prefHeight="16.0" prefWidth="0.0" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+            <HBox spacing="10">
+                <Label styleClass="payment-label" text="Total Amount Due: ">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+                <Label fx:id="totalValueLabel" prefHeight="28.0" prefWidth="0.0" styleClass="payment-value">
+                    <font>
+                        <Font name="Roboto Medium" size="22.0" />
+                    </font>
+                </Label>
+            </HBox>
+        </children>
+    </VBox>
+
+    <!-- Status Label para mensagens de erro -->
+    <Label fx:id="statusLabel" layoutX="263.0" layoutY="520.0" />
+
+    <!-- Botões -->
+    <ToggleButton layoutX="145.0" layoutY="598.0" mnemonicParsing="false" onAction="#back" styleClass="button-custom" text="Cancel" />
+    <ToggleButton layoutX="609.0" layoutY="598.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" styleClass="button-custom" text="Confirm" />
+</Pane>
