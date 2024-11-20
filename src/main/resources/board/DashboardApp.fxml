@@ -18,6 +18,8 @@
 <AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Dashboard">
     <children>
         <Pane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
+        <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+        <AnchorPane id="contentPane" fx:id="mainViewContainer" layoutX="321.0" layoutY="70.0" prefHeight="759.0" prefWidth="878.0" />
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
                 <!-- Imagem do usuário -->
@@ -204,31 +206,35 @@
                             </ImageView>
                         </graphic>
                         <content>
-                            <VBox prefHeight="156.0" prefWidth="264.0" style="-fx-background-color: transparent;">
+                            <VBox prefHeight="51.0" prefWidth="288.0" style="-fx-background-color: transparent;">
                                 <children>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="My Loans">
+                                    <Button mnemonicParsing="false"
+                                            style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
+                                            text="My Loans"
+                                            >
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/imagesLoan/Ellipse 314.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@/imagesLoan/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Request a Loan">
+                                    <!-- Botão "Request a Loan" atualizado para chamar loadMainView -->
+                                    <Button fx:id="requestLoanButton" mnemonicParsing="false"
+                                            style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
+                                            text="Request a Loan" onAction="#loadMainViewLoan">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
-                                                </image>
-                                            </ImageView>
-                                        </graphic>
-                                    </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Finalized Loans">
-                                        <graphic>
-                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                                <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/imagesLoan/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>

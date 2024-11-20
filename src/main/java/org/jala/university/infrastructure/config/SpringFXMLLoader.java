@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationContext;
 import java.net.URL;
 
 public class SpringFXMLLoader {
-    private static ApplicationContext applicationContext;
+    public static ApplicationContext applicationContext;
 
 
 
