@@ -1,5 +1,2 @@
-/target
 /.idea
-.tool-versions
-.factorypath
-.vscode
+/target

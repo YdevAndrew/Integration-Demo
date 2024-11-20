@@ -1,7 +1,7 @@
-.header {
+.header{
     -fx-background-color: linear-gradient(to right, #1e90ff, #87CEFA);
-    -fx-padding: 10px;
-    -fx-spacing: 15px;
+    -fx-padding: 10;
+    -fx-spacing: 15;
 }
 
 .img-logo{
@@ -101,7 +101,7 @@
 }
 
 .menu-item:hover {
-    -fx-background-color: #cccccc;
+    -fx-background-color: #e0e0e0;
 }
 
 .menu-item:focused {
@@ -109,7 +109,7 @@
 }
 
 
-
+/* Estilo do container de saldo */
 .balance-container {
     -fx-background-color: #f8f8f8;
     -fx-border-color: #dcdcdc;
@@ -118,14 +118,14 @@
     -fx-padding: 15;
 }
 
-
+/* Título do saldo */
 .balance-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: black;
 }
 
-
+/* Data do saldo */
 .balance-date {
     -fx-font-size: 12px;
     -fx-text-fill: #666666;
@@ -149,14 +149,6 @@
     -fx-text-fill: white;
 }
 
-.balanceLabel {
-    -fx-alignment: center-left;
-}
-
-.eyeIcon {
-    -fx-alignment: center-right;
-}
-
 
 .toggle-button {
     -fx-background-color: transparent;
@@ -174,7 +166,7 @@
 
 
 .menu-button-active {
-    -fx-background-color: #cccccc;
+    -fx-background-color: #e0f0ff;
     -fx-border-color: #1e90ff;
     -fx-border-width: 0 0 0 5;
     -fx-border-style: solid;
@@ -224,41 +216,7 @@
     -fx-text-fill: white;
 }
 
-.button:pressed {
-    -fx-text-fill: blue;
-}
-
-.button:hover {
-    -fx-cursor: hand;
-}
-
-
-
-.accordion {
-    -fx-background-color: transparent;
-}
-
-.titled-pane {
+.button:focused {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-text-fill: black;
-    -fx-font-family: "Roboto Light";
-    -fx-font-size: 22px;
-    -fx-border-width: 0;
-
-
-}
-
-.titled-pane > .title {
-    -fx-background-color: transparent;
-}
-
-.titled-pane .content {
-    -fx-background-color: transparent;
-}
-
-#vbox-mycards {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
 }

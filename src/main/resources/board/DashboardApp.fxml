@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Dashboard">
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Dashboard">
     <children>
-        <Pane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
+        <AnchorPane id="contentPane" fx:id="mainViewContainer" layoutX="321.0" layoutY="70.0" prefHeight="759.0" prefWidth="878.0" />
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
                 <!-- Imagem do usuário -->
                 <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true" styleClass="img-logo">
                     <image>
-                        <Image url="@/img/john_doe.png" />
+                        <Image url="@/images/john_doe.png" />
                     </image>
                 </ImageView>
 
@@ -49,7 +39,7 @@
                 <!-- Logo da aplicação -->
                 <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true" preserveRatio="true" styleClass="img-logo">
                     <image>
-                        <Image url="@/img/Logo.png" />
+                        <Image url="@/images/logo.png" />
                     </image>
                 </ImageView>
             </children>
@@ -67,7 +57,7 @@
                             <graphic>
                                 <ImageView fx:id="eyeIcon" fitHeight="20" fitWidth="20">
                                     <image>
-                                        <Image url="@/img/eye.png" />
+                                        <Image url="@/images/eye.png" />
                                     </image>
                                 </ImageView>
                             </graphic>
@@ -107,30 +97,18 @@
                         <graphic>
                             <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@/img/dashboard.png" />
+                                    <Image url="@/images/dashboard.png" />
                                 </image>
                             </ImageView>
                         </graphic></TitledPane>
-                    <TitledPane id="transactions-menu" animated="false" prefHeight="252.0" prefWidth="295.0" style="-fx-background-color: transparent;" text="Transactions">
+                    <TitledPane id="transactions-menu" animated="false" prefHeight="0.0" prefWidth="262.0" style="-fx-background-color: transparent;" text="Transactions">
                         <content>
-                            <VBox fx:id="transactionMenu" managed="true" visible="true" spacing="10">
-                                <children>
-                                    <Button fx:id="transferButton" styleClass="menu-button" text="Transactions">
-                                        <graphic>
-                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                                <image>
-                                                    <Image url="@/img/Ellipse.png" />
-                                                </image>
-                                            </ImageView>
-                                        </graphic>
-                                    </Button>
-                                </children>
-                            </VBox>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                         </content>
                         <graphic>
                             <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@/img/Transactions.png" />
+                                    <Image url="@/images/Transactions.png" />
                                 </image>
                             </ImageView>
                         </graphic>
@@ -139,11 +117,11 @@
                         <content>
                             <VBox id="vbox-mycards" prefHeight="200.0" prefWidth="100.0">
                                 <children>
-                                    <Button fx:id="requestcard" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" styleClass="but" text="Request a Card">
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" styleClass="but" text="Request a Card">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -152,7 +130,7 @@
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -161,7 +139,7 @@
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -170,7 +148,7 @@
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -179,7 +157,7 @@
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -190,7 +168,7 @@
                         <graphic>
                             <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@/img/my_cards.png" />
+                                    <Image url="@/images/my_cards.png" />
                                 </image>
                             </ImageView>
                         </graphic>
@@ -199,36 +177,40 @@
                         <graphic>
                             <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@/img/loans.png" />
+                                    <Image url="@/images/loans.png" />
                                 </image>
                             </ImageView>
                         </graphic>
                         <content>
-                            <VBox prefHeight="156.0" prefWidth="264.0" style="-fx-background-color: transparent;">
+                            <VBox prefHeight="51.0" prefWidth="288.0" style="-fx-background-color: transparent;">
                                 <children>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="My Loans">
+                                    <Button mnemonicParsing="false"
+                                            style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
+                                            text="My Loans"
+                                            onAction="#loadLoansView">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
+                                                </image>
+                                            </ImageView>
+                                        </graphic>
+                                        <graphic>
+                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
+                                                <image>
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Request a Loan">
+                                    <!-- Botão "Request a Loan" atualizado para chamar loadMainView -->
+                                    <Button fx:id="requestLoanButton" mnemonicParsing="false"
+                                            style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
+                                            text="Request a Loan" onAction="#loadMainView">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
-                                                </image>
-                                            </ImageView>
-                                        </graphic>
-                                    </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Finalized Loans">
-                                        <graphic>
-                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                                <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -240,46 +222,45 @@
                         <graphic>
                             <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@/img/make_payments.png" />
+                                    <Image url="@/images/make_payments.png" />
                                 </image>
                             </ImageView>
                         </graphic>
                         <content>
                             <VBox prefHeight="200.0" prefWidth="100.0">
                                 <children>
-                                    <Button fx:id="pixButton"  mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Pix">
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Pix">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button fx:id="transactionButton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Transfer">
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Transfer">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
                                     </Button>
-
-                                    <Button mnemonicParsing="false" onAction="#QRCodePayment" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="QRcode">
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="QRcode">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#scheduleAPayment" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Schedule a Payment">
+                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Schedule a Payment">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -288,7 +269,7 @@
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
-                                                    <Image url="@/img/Ellipse.png" />
+                                                    <Image url="@/images/Ellipse 314.png" />
                                                 </image>
                                             </ImageView>
                                         </graphic>
@@ -297,16 +278,14 @@
                             </VBox>
                         </content>
                     </TitledPane>
-                    <TitledPane animated="false" prefHeight="0.0" prefWidth="262.0" text="Scheduled Services " >
+                    <TitledPane animated="false" prefHeight="0.0" prefWidth="262.0" text="Scheduled Services">
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            <Button mnemonicParsing="false" onAction="#ScheduleService" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Your Services"/>
                         </content>
                         <graphic>
-
                             <ImageView fitHeight="39.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@/img/scheduled_services.png" />
+                                    <Image url="@/images/scheduled_services.png" />
                                 </image>
                             </ImageView>
                         </graphic>
@@ -318,7 +297,7 @@
                         <graphic>
                             <ImageView fitHeight="30.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                 <image>
-                                    <Image url="@/img/settings.png" />
+                                    <Image url="@/images/settings.png" />
                                 </image>
                             </ImageView>
                         </graphic>
@@ -333,7 +312,7 @@
                     <graphic>
                         <ImageView fitHeight="40" fitWidth="40">
                             <image>
-                                <Image url="@/img/Exit.png" />
+                                <Image url="@/images/Exit.png" />
                             </image>
                         </ImageView>
                     </graphic>
