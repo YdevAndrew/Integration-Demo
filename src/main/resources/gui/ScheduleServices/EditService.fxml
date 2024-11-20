@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="editServiceContent" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #f8f8f8;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.ServiceDetailController">
+
+    <!-- Título da Edição do Serviço -->
+    <Label layoutX="280.0" layoutY="100.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Edit Service Details" />
+
+    <!-- Caixa de Edição de Detalhes do Serviço -->
+    <VBox layoutX="280.0" layoutY="150.0" prefHeight="400.0" prefWidth="480.0" spacing="15" style="-fx-background-color: #F3F4F6; -fx-padding: 15; -fx-border-radius: 15; -fx-background-radius: 10;">
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Recipient:" />
+            <TextField fx:id="recipientField" promptText="Enter recipient name" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="CNPJ:" />
+            <TextField fx:id="cnpjField" promptText="00.000.000/0000-00" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Agency:" />
+            <TextField fx:id="agencyField" promptText="Enter agency number" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Account:" />
+            <TextField fx:id="accountField" promptText="Enter account number" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Bank:" />
+            <TextField fx:id="bankField" promptText="Enter bank name" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Service Amount:" />
+            <TextField fx:id="amountField" promptText="Enter service amount" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Due Date:" />
+            <DatePicker fx:id="dueDateField" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Start Date:" />
+            <DatePicker fx:id="startDateField" />
+        </HBox>
+        <HBox spacing="10">
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="End Date:" />
+            <DatePicker fx:id="endDateField" />
+        </HBox>
+    </VBox>
+
+    <!-- Botões de Ação -->
+    <Button layoutX="400.0" layoutY="600.0" style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-pref-width: 120px;" text="Save" onAction="#handleEditClick" />
+    <Button layoutX="540.0" layoutY="600.0" style="-fx-background-color: #B0B0B0; -fx-text-fill: white; -fx-pref-width: 120px;" text="Cancel" onAction="#handleEditClick" />
+
+</AnchorPane>
