@@ -1,0 +1,67 @@
+/* Estilo para o Pane principal */
+.content {
+    -fx-background-color: #ECECEC;
+    -fx-border-color: #ECECEC;
+}
+
+/* Estilo para o título principal */
+.text-title {
+    -fx-fill: #004bd6;
+    -fx-font-family: "GraphikTrial-Bold";
+    -fx-font-size: 40px;
+    -fx-text-alignment: center;
+}
+
+/* Estilo para a seção de informações de pagamento */
+.payment-info-box {
+    -fx-border-color: #000000;
+    -fx-border-radius: 15;
+    -fx-padding: 15px;
+    -fx-spacing: 10px;
+    -fx-alignment: TOP_LEFT; /* Garantir que os itens dentro da VBox fiquem à esquerda */
+}
+
+/* Estilo para os rótulos (labels) */
+.payment-label {
+    -fx-text-fill: #004bd6;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 22px;
+}
+
+.payment-value {
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 22px;
+}
+
+/* Estilo para cada HBox dentro da VBox */
+.payment-info-box HBox {
+    -fx-alignment: CENTER_LEFT; /* Alinhar todos os HBoxes à esquerda */
+    -fx-spacing: 10px;
+}
+
+/* Estilo para o status label */
+#statusLabel {
+    -fx-text-fill: red;
+    -fx-font-size: 16px;
+}
+
+/* Estilo para os botões */
+.button-custom {
+    -fx-background-color: #004bd6;
+    -fx-text-fill: #ffffff;
+    -fx-font-family: "Roboto Medium";
+    -fx-font-size: 20px;
+    -fx-pref-width: 312px;
+    -fx-pref-height: 56px;
+    -fx-background-radius: 25px;
+}
+
+.button-custom:hover {
+    -fx-background-color: #003bb3;
+}
+
+.img-custom {
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
