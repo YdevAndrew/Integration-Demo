@@ -1,5 +1,6 @@
 package org.jala.university.application.service;
 
+import org.jala.university.domain.entity.Account;
 import org.jala.university.domain.entity.Authentication;
 
 import java.util.Optional;
@@ -15,4 +16,6 @@ public interface AuthenticationService {
     void resetPassword(String email);
 
     void register(Integer id, String text);
+    
+    Account getAccount();
 }

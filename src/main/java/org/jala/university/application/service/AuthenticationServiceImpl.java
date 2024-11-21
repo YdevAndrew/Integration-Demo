@@ -1,5 +1,8 @@
 package org.jala.university.application.service;
 
+import org.jala.university.ServiceFactory;
+import org.jala.university.application.mapper.AccountMapper;
+import org.jala.university.domain.entity.Account;
 import org.jala.university.domain.entity.Authentication;
 import org.jala.university.domain.repository.AuthenticationRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,6 +15,16 @@ import java.util.Optional;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationRepository<Authentication, Integer> authenticationRepository;
     private final PasswordEncoder passwordEncoder;
+    private Authentication loggedCustomer;
+
+    public Account getAccount() {
+        
+        Integer id = loggedCustomer.getId();
+
+        AccountService accountService = ServiceFactory.accountService();
+
+        return AccountMapper.toEntity(accountService.getAccount(id));
+    }
 
     public AuthenticationServiceImpl(AuthenticationRepository<Authentication, Integer> authenticationRepository) {
         this.authenticationRepository = authenticationRepository;
@@ -44,7 +57,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (authOpt.isPresent()) {
             Authentication auth = authOpt.get();
             // Usando o PasswordEncoder para verificar a senha
-            return passwordEncoder.matches(password, auth.getPassword());
+            if (passwordEncoder.matches(password, auth.getPassword())){
+                this.loggedCustomer = auth;
+                return true;
+            }
         }
         return false;
     }
