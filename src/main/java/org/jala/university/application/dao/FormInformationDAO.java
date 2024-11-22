@@ -1,8 +1,9 @@
 package org.jala.university.application.dao;
 
 
-import org.jala.university.application.object.InforrmationForm.FinancialInfomation;
-import org.jala.university.application.object.InforrmationForm.PersonalInformation;
+
+import org.jala.university.application.object.InformarrmationForm.FinancialInfomation;
+import org.jala.university.application.object.InformarrmationForm.PersonalInformation;
 import org.jala.university.database.PostgreConnection;
 import org.jala.university.services.LoggedInUser;
 
