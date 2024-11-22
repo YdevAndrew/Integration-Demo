@@ -128,7 +128,7 @@ public class LoginController {
             System.err.println("Erro em tempo de execução: " + e.getMessage());
             showError(e.getMessage());
         } catch (IOException e) {
-            System.err.println("Erro ao carregar Dashboard: " + e.getMessage());
+            System.err.println("Erro ao carregar DashboardController: " + e.getMessage());
             e.printStackTrace();
         }
     }

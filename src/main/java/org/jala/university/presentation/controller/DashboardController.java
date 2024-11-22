@@ -1,8 +1,11 @@
 package org.jala.university.presentation.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.jala.university.presentation.controllerLoan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
@@ -20,11 +24,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @Controller
-public class Dashboard extends BaseController {
+public class DashboardController extends BaseController {
 
     private final SpringFXMLLoader springFXMLLoader;
 
-    public Dashboard(SpringFXMLLoader springFXMLLoader) {
+    public DashboardController(SpringFXMLLoader springFXMLLoader) {
         this.springFXMLLoader = springFXMLLoader;
     }
 
@@ -174,6 +178,20 @@ public class Dashboard extends BaseController {
             e.printStackTrace();
         } catch (Exception e) {
             System.err.println("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void logoutButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = org.jala.university.infrastructure.config.SpringFXMLLoader.create("/login.fxml");
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

@@ -82,13 +82,13 @@ public class PaymentReceiptController {
         // Fecha o pop-up
         currentStage.close();
 
-        // Agora, vamos carregar a tela do Dashboard (tela inicial)
+        // Agora, vamos carregar a tela do DashboardController (tela inicial)
         try {
-            // Carrega o FXML do Dashboard
+            // Carrega o FXML do DashboardController
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/board/DashboardApp.fxml"));
             Parent root = loader.load();
 
-            // Verifica se a janela principal (Dashboard) já está aberta
+            // Verifica se a janela principal (DashboardController) já está aberta
             Stage mainStage = (Stage) currentStage.getOwner(); // Tenta pegar a janela que originou o pop-up
 
             if (mainStage == null) {
@@ -100,13 +100,13 @@ public class PaymentReceiptController {
             mainStage.setTitle("External Payment Module Application");
             mainStage.setScene(new Scene(root));
 
-            // Exibe a janela com o Dashboard
+            // Exibe a janela com o DashboardController
             mainStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Em caso de erro ao carregar o Dashboard, imprime uma mensagem de erro
-            System.out.println("Erro ao carregar o Dashboard.");
+            // Em caso de erro ao carregar o DashboardController, imprime uma mensagem de erro
+            System.out.println("Erro ao carregar o DashboardController.");
         }
     }
 

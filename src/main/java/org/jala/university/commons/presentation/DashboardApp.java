@@ -71,7 +71,7 @@ public class DashboardApp extends Application {
 
         // Configuração da Janela e Exibição
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Dashboard - Bank App");
+        primaryStage.setTitle("DashboardController - Bank App");
         primaryStage.show();
     }
 
@@ -220,8 +220,8 @@ public class DashboardApp extends Application {
 
         List<Button> buttons = new ArrayList<>();
 
-        Button dashboardButton = createMenuButton("Dashboard", "/dashboard-res/dashboard.png", mainContent, buttons,
-                () -> showContent(mainContent, "Dashboard Content"));
+        Button dashboardButton = createMenuButton("DashboardController", "/dashboard-res/dashboard.png", mainContent, buttons,
+                () -> showContent(mainContent, "DashboardController Content"));
 
         Button transactionsButton = createMenuButton("Transactions", "/dashboard-res/Transactions.png", mainContent, buttons,
                 () -> showContent(mainContent, "Transactions Content"));

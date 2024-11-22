@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Dashboard">
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.DashboardController">
     <children>
         <Pane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
@@ -34,8 +34,6 @@
                 <MenuButton mnemonicParsing="false" prefHeight="58.0" prefWidth="42.0">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Profile" />
-                        <MenuItem mnemonicParsing="false" text="Settings" />
-                        <MenuItem mnemonicParsing="false" text="Logout" />
                     </items>
                 </MenuButton>
 
@@ -105,14 +103,6 @@
             </VBox>
             <Accordion id="accordion" style="-fx-background-color: transparent;" stylesheets="@style.css">
                 <panes>
-                    <TitledPane id="titled-dashboard" animated="false" prefHeight="0.0" prefWidth="262.0" style="-fx-background-color: transparent;" text="Dashboard">
-                        <graphic>
-                            <ImageView fitHeight="36.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@/img/dashboard.png" />
-                                </image>
-                            </ImageView>
-                        </graphic></TitledPane>
                     <TitledPane id="transactions-menu" animated="false" prefHeight="252.0" prefWidth="295.0" style="-fx-background-color: transparent;" text="Transactions">
                         <content>
                             <VBox fx:id="transactionMenu" managed="true" visible="true" spacing="10">
@@ -317,29 +307,17 @@
                             </ImageView>
                         </graphic>
                     </TitledPane>
-                    <TitledPane animated="false" prefHeight="109.0" prefWidth="262.0" text="Settings">
-                        <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        </content>
-                        <graphic>
-                            <ImageView fitHeight="30.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                                <image>
-                                    <Image url="@/img/settings.png" />
-                                </image>
-                            </ImageView>
-                        </graphic>
-                    </TitledPane>
                 </panes>
             </Accordion>
         </VBox>
 
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="footer" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
-                <Button graphicTextGap="0" styleClass="logout-button">
+                <Button graphicTextGap="0" styleClass="logout-button" onAction="#logoutButton" >
                     <graphic>
                         <ImageView fitHeight="40" fitWidth="40">
                             <image>
-                                <Image url="@/img/Exit.png" />
+                                <Image  url="@/img/Exit.png"/>
                             </image>
                         </ImageView>
                     </graphic>
