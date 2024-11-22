@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="391.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controllerCreditCard.SuccessModalController">
+    <children>
+        <Button fx:id="okButton" layoutX="142.0" layoutY="330.0" mnemonicParsing="false" onAction="#closeSuccessModal" prefHeight="43.0" prefWidth="106.0" style="-fx-background-color: #1346A6; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 30; -fx-border-radius: 30;" text="OK">
+            <effect>
+                <DropShadow />
+            </effect>
+        </Button>
+        <Text layoutX="98.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-weight: bold;" text="Invoice due date" />
+        <Text layoutX="73.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-fill: #1346A6;" text="successfully updated" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff04" height="200.0" layoutX="64.0" layoutY="100.0" stroke="#a1a1a1" strokeType="INSIDE" width="272.0" />
+        <Text layoutX="131.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-weight: bold;" text="DUE EVERY" />
+        <Text layoutX="139.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-fill: #1346A6;" text="DAY" />
+        <Label fx:id="dueDataLabel" layoutX="208.0" layoutY="170.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: #1346A6;" text="06" />
+        <Text layoutX="123.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="Next invoice due" />
+        <Label fx:id="labelCompletDate" layoutX="98.0" layoutY="258.0" prefHeight="30.0" prefWidth="235.0" style="-fx-font-size: 20;" text="December 6th" />
+    </children>
+</AnchorPane>

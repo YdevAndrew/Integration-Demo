@@ -8,6 +8,8 @@ import org.jala.university.commons.presentation.View;
  */
 @Getter
 public enum CreditCardView {
+    MAIN("main-view.fxml"),
+    //HOMEPAGE("gui/homepage/Homepage.fxml");
     HOMEPAGE("board/DashboardApp.fxml");
 
 

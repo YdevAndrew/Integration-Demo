@@ -12,9 +12,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Controller for managing the main view of the application.
- */
 @Controller
 public class MainViewControllerLoan {
 
@@ -34,16 +31,9 @@ public class MainViewControllerLoan {
     private ImageView image1, image2, image3, image4, image5, image6, image7, image8,
             image9, image10, image11, image12, image13, image14, image15, image16;
 
-    /**
-     * Default constructor for MainViewController.
-     */
     public MainViewControllerLoan() {
     }
 
-    /**
-     * Initializes the controller after its root element has been loaded.
-     * Populates the list of ImageView elements.
-     */
     @FXML
     public void initialize() {
         imageViews.add(image1);
@@ -64,9 +54,6 @@ public class MainViewControllerLoan {
         imageViews.add(image16);
     }
 
-    /**
-     * Starts the loan simulation process by loading the loan form view.
-     */
     @FXML
     public void startLoanSimulation() {
         try {
@@ -81,9 +68,6 @@ public class MainViewControllerLoan {
         }
     }
 
-    /**
-     * Navigates back to the main menu, restoring the initial view.
-     */
     @FXML
     public void goBackToMenu() {
         mainPane.getChildren().clear();
@@ -91,11 +75,6 @@ public class MainViewControllerLoan {
         toggleVisibility(true);
     }
 
-    /**
-     * Toggles the visibility of UI elements based on the provided flag.
-     *
-     * @param showInitial true to show the initial view, false to hide it
-     */
     public void toggleVisibility(boolean showInitial) {
         loanButton.setVisible(showInitial);
         loanButton.setManaged(showInitial);

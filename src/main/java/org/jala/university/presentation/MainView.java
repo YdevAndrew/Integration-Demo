@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.ViewSwitcher;
+
 public class MainView extends Application {
 
     @Override
@@ -16,10 +17,10 @@ public class MainView extends Application {
         ViewSwitcher.setup(primaryStage, scene);
         ViewSwitcher.switchTo(CreditCardView.HOMEPAGE.getView());
         primaryStage.setScene(scene);
-        primaryStage.setTitle(" Application");
+        primaryStage.setTitle("Credit Card Module Application");
         primaryStage.show();
-        primaryStage.setMinWidth(1280);
-        primaryStage.setMinHeight(720);
-        primaryStage.setResizable(false);
+        primaryStage.setMinWidth(800);
+        primaryStage.setMinHeight(600);
+        primaryStage.setMaximized(true);
     }
 }

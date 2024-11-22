@@ -232,6 +232,9 @@
     -fx-cursor: hand;
 }
 
+.titled-pane .button:focused {
+    -fx-text-fill: blue;
+}
 
 
 .accordion {
@@ -261,4 +264,8 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-border-width: 0;
+}
+
+.titled-pane > .arrow-button > .arrow {
+    -fx-background-color: transparent; /* Torna a seta transparente */
 }

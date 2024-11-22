@@ -2,52 +2,28 @@ package org.jala.university.presentation.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import org.jala.university.presentation.controllerLoan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
-import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-@Controller
+/**
+ * This class controls the main dashboard view of the application.
+ * It handles loading different sections of the dashboard,
+ * displaying the current date, and toggling the visibility of the account balance.
+ */
 public class Dashboard extends BaseController {
-
-    private final SpringFXMLLoader springFXMLLoader;
-
-    public Dashboard(SpringFXMLLoader springFXMLLoader) {
-        this.springFXMLLoader = springFXMLLoader;
-    }
-
-    public Button pixButton;
-    public Button transactionHistButton;
-
-    @FXML
-    private VBox myCardsVBox;
-
-    @FXML
-    private AnchorPane mainViewContainer;
-
-    @FXML
-    private VBox otherButtonsVBox;
 
     @FXML
     private Label balanceLabel;
-
-    @FXML
-    private Button transactionButton;
-
-    @FXML
-    private Pane contentPane;
 
     @FXML
     private Button toggleButton;
@@ -58,123 +34,97 @@ public class Dashboard extends BaseController {
     @FXML
     private Label dateLabel;
 
-    private boolean isBalanceVisible = false; // Controle de visibilidade do saldo
-    private double balance = 1234.56; // Exemplo de valor do saldo, substitua pelo valor real
-
     @FXML
-    public void initialize() {
-        // Configura o botão de alternância de exibição do saldo
-        toggleButton.setOnAction(event -> toggleBalanceVisibility());
+    private Pane mainContent;
 
-        // Define a data atual no formato desejado e força o local para inglês
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM, dd", Locale.ENGLISH);
-        dateLabel.setText(LocalDate.now().format(formatter));
-        dateLabel.getStyleClass().add("balance-date");
+    private boolean isBalanceVisible = false;
+    private double balance = 1234.56;
 
-        // Configurar ações dos botões
-        transactionButton.setOnAction(event -> loadTransactionView());
-        pixButton.setOnAction(event -> loadPixView());
-    }
-
+    /**
+     * Loads the "My Cards" section into the main content area of the dashboard.
+     *
+     * @throws IOException If an error occurs while loading the FXML file.
+     */
     @FXML
-    public void toggleBalanceVisibility() {
-        if (balanceLabel.getText().equals("R$ ********")) {
-            // Mostra o saldo e ajusta o ícone para "olho aberto"
-            balanceLabel.setText(String.format("R$ %.2f", balance));
-            eyeIcon.setImage(new Image(getClass().getResource("/img/eye_open.png").toExternalForm()));
-        } else {
-            // Esconde o saldo e ajusta o ícone para "olho fechado"
-            balanceLabel.setText("R$ ********");
-            eyeIcon.setImage(new Image(getClass().getResource("/img/eye.png").toExternalForm()));
+    private void loadMyCards() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cards/cards_page.fxml"));
+            Pane cardsPage = loader.load();
+            mainContent.getChildren().setAll(cardsPage);
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar cards_page.fxml: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     /**
-     * Remove todos os painéis e limpa os contêineres.
+     * Loads the "Request a Card" section into the main content area of the dashboard.
+     *
+     * @throws IOException If an error occurs while loading the FXML file.
      */
-    private void clearAllPanels() {
-        contentPane.getChildren().clear();
-        mainViewContainer.getChildren().clear();
-        myCardsVBox.setVisible(false);
-        myCardsVBox.setManaged(false);
-
-    }
-
     @FXML
-    private void loadTransactionView() {
-        try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Style/Transection_paymentScreen.fxml"));
-            Pane transactionPane = loader.load();
-            contentPane.getChildren().add(transactionPane);
-        } catch (IOException e) {
-            e.printStackTrace();
+    private void loadRequestCard() throws IOException {
+        if(CardsPageController.validIfPhysicalExist() != null){
+            if(CardsPageController.validIfVirtualExist() != null){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/creditCardFXMLs/requestACard/request_a_card.fxml"));
+                AnchorPane requestCard = loader.load();
+                mainContent.getChildren().setAll(requestCard);
+            }else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/creditCardFXMLs/requestAVirtualCard/request_a_virtual_card.fxml"));
+                AnchorPane requestCard = loader.load();
+                mainContent.getChildren().setAll(requestCard);
+
+
+            }
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/creditCardFXMLs/requestACard/request_a_card.fxml"));
+            AnchorPane requestCard = loader.load();
+            mainContent.getChildren().setAll(requestCard);
         }
+
+
+
+
     }
 
+    /**
+     * Loads the "Invoice History" section into the main content area of the dashboard.
+     *
+     * @throws IOException If an error occurs while loading the FXML file.
+     */
     @FXML
-    private void loadPixView() {
-        try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Style/Transection_TED&PIX.fxml"));
-            Pane pixPane = loader.load();
-            contentPane.getChildren().add(pixPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void loadInvoiceHistory() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/invoiceHistory/invoice_history.fxml"));
+        AnchorPane invoiceHistory = loader.load();
+        mainContent.getChildren().setAll(invoiceHistory);
     }
 
+    /**
+     * Initializes the controller. This method is automatically called after the FXML file has been loaded.
+     * It sets up the action for the toggle button and displays the current date in the date label.
+     */
     @FXML
-    private void scheduleAPayment() throws IOException {
-        clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/SchedulePaymentScreens/SchedulePayment/SchedulePayment.fxml"));
-        Pane schedulePayment = loader.load();
-        contentPane.getChildren().add(schedulePayment);
+    public void initialize() {
+        toggleButton.setOnAction(event -> toggleBalanceVisibility());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM, dd", Locale.ENGLISH);
+        dateLabel.setText(LocalDate.now().format(formatter));
+        dateLabel.getStyleClass().add("balance-date");
     }
 
+
+    /**
+     * Toggles the visibility of the account balance.
+     * If the balance is currently hidden, it will be shown; if it is shown, it will be hidden.
+     * It also updates the eye icon to reflect the visibility state.
+     */
     @FXML
-    private void QRCodePayment() throws IOException {
-        clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
-        Pane QRCodePayments = loader.load();
-        contentPane.getChildren().add(QRCodePayments);
-    }
-
-    @FXML
-    private void ScheduleService() throws IOException {
-        clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/ScheduleServices/ButtonService.fxml"));
-        Pane scheduleService = loader.load();
-        contentPane.getChildren().add(scheduleService);
-    }
-
-    @FXML
-    public void handleMyCardsClick() {
-        clearAllPanels(); // Garante que outros painéis estejam escondidos
-        boolean isVisible = myCardsVBox.isVisible();
-        myCardsVBox.setVisible(!isVisible);
-        myCardsVBox.setManaged(!isVisible);
-        otherButtonsVBox.setVisible(!isVisible);
-        otherButtonsVBox.setManaged(!isVisible);
-    }
-
-    @FXML
-    public void loadMainViewLoan() {
-        try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar o módulo Loan
-            System.out.println("Trying to load main-viewLoan.fxml...");
-
-            FXMLLoader loader = springFXMLLoader.load("/main-viewLoan.fxml");
-            Node mainViewContent = loader.load();
-            mainViewContainer.getChildren().add(mainViewContent);
-
-            System.out.println("main-viewLoan.fxml loaded successfully!");
-        } catch (IOException e) {
-            System.err.println("Error loading main-viewLoan.fxml: " + e.getMessage());
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.err.println("Unexpected error: " + e.getMessage());
-            e.printStackTrace();
+    public void toggleBalanceVisibility() {
+        if (balanceLabel.getText().equals("R$ ********")) {
+            balanceLabel.setText(String.format("R$ %.2f", balance));
+            eyeIcon.setImage(new Image(getClass().getResource("/img/eye_open.png").toExternalForm()));
+        } else {
+            balanceLabel.setText("R$ ********");
+            eyeIcon.setImage(new Image(getClass().getResource("/img/eye.png").toExternalForm()));
         }
     }
 }
