@@ -1,4 +1,4 @@
-package org.jala.university.config;
+package org.jala.university.Config;
 
 
 import org.jala.university.application.mapper.mapper_loan.FormEntityMapper;

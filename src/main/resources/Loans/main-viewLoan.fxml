@@ -15,7 +15,7 @@
 
         <ImageView fx:id="image3" fitHeight="18.0" fitWidth="172.0" layoutX="668.0" layoutY="204.0">
             <image>
-                <Image url="@imagesLoan/Fixed%20rate%20of%202%25%20per%20month.png" />
+                <Image url="@/imagesLoan/Fixed rate of 2% per month.png" />
             </image>
         </ImageView>
 

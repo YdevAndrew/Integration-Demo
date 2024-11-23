@@ -201,7 +201,7 @@
                                     <Button mnemonicParsing="false"
                                             style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
                                             text="My Loans"
-                                            >
+                                            onAction="#loadLoansView">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>

@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jala.university.presentation.controller.Loan.MyLoans;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
@@ -178,6 +179,21 @@ public class DashboardController extends BaseController {
             e.printStackTrace();
         } catch (Exception e) {
             System.err.println("Unexpected error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadLoansView() {
+        try {
+            FXMLLoader loader = springFXMLLoader.load("/Loans/Myloans/myloans.fxml");
+            Node loansView = loader.load();
+
+            MyLoans controller = loader.getController();
+            controller.loadLoanDetails();
+
+            mainViewContainer.getChildren().setAll(loansView);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

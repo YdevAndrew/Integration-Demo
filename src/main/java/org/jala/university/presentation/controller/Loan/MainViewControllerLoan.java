@@ -70,7 +70,7 @@ public class MainViewControllerLoan {
     @FXML
     public void startLoanSimulation() {
         try {
-            FXMLLoader loader = springFXMLLoader.load("/FormLoan/form.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/Loans/FormLoan/form.fxml");
             Pane loanPane = loader.load();
 
             mainPane.getChildren().clear();
