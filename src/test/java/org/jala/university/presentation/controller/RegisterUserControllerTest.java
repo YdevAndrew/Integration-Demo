@@ -5,13 +5,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.jala.university.infrastructure.config.SpringConfig;
+import org.jala.university.presentation.controller.Account.RegisterUserController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
-import org.jala.university.infrastructure.config.SpringFXMLLoader;
+import org.jala.university.Config.Account.SpringFXMLLoader;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +26,7 @@ public class RegisterUserControllerTest extends ApplicationTest {
         ApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
         SpringFXMLLoader.setApplicationContext(context); // Injetando o contexto no SpringFXMLLoader
 
-        FXMLLoader loader = SpringFXMLLoader.create("/register-user.fxml");
+        FXMLLoader loader = SpringFXMLLoader.create("/Account/register-user.fxml");
         Parent root = loader.load();
 
         controller = loader.getController();

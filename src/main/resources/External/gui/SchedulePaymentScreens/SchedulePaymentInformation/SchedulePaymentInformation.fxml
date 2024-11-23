@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #f8f8f8;" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.SchedulePaymentInformationController">
+    <Text fill="#004bd6" layoutX="173.0" layoutY="92.0" text="Check your service information:" textAlignment="CENTER">
+        <font>
+            <Font name="GraphikTrial-Bold" size="40.0" />
+        </font>
+    </Text>
+
+    <ToggleButton layoutX="599.0" layoutY="588.0" mnemonicParsing="false" onAction="#insertPassword" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Next" />
+    <ToggleButton layoutX="135.0" layoutY="588.0" mnemonicParsing="false" onAction="#back" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Back" />
+
+    <Pane layoutX="263.0" layoutY="143.0" prefHeight="393.0" prefWidth="515.0" style="-fx-border-color: #000000; -fx-border-radius: 15;">
+        <children>
+            <Text fill="#004bd6" layoutX="34.0" layoutY="35.0" text="Service description:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="serviceDescriptionText" layoutX="237.0" layoutY="35.0" wrappingWidth="268.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+
+            <Text fill="#004bd6" layoutX="34.0" layoutY="69.0" text="Recipient's:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="recipientText" layoutX="152.0" layoutY="68.0" wrappingWidth="354.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+
+            <Text fill="#004bd6" layoutX="34.0" layoutY="105.0" text="Agency:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="agencyText" layoutX="117.0" layoutY="107.0" wrappingWidth="390.0">
+            <font>
+               <Font name="Roboto Medium" size="22.0" />
+            </font></Text>
+
+            <Text fill="#004bd6" layoutX="33.0" layoutY="139.0" text="Account:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="accountText" layoutX="126.0" layoutY="138.0" wrappingWidth="390.0">
+            <font>
+               <Font name="Roboto Medium" size="22.0" />
+            </font></Text>
+
+            <Text fill="#004bd6" layoutX="33.0" layoutY="174.0" text="Bank:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="bankNameText" layoutX="94.0" layoutY="173.0" wrappingWidth="415.0">
+            <font>
+               <Font name="Roboto Medium" size="22.0" />
+            </font></Text>
+
+            <Text fill="#004bd6" layoutX="32.0" layoutY="210.0" text="Service Amount:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="serviceAmountText" layoutX="203.0" layoutY="209.0" wrappingWidth="298.0">
+            <font>
+               <Font name="Roboto Medium" size="22.0" />
+            </font></Text>
+
+            <Text fill="#004bd6" layoutX="32.0" layoutY="248.0" text="Due Date:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="dueDateText" layoutX="138.0" layoutY="247.0" wrappingWidth="364.0">
+            <font>
+               <Font name="Roboto Medium" size="22.0" />
+            </font></Text>
+
+            <Text fill="#004bd6" layoutX="32.0" layoutY="285.0" text="Start Date:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="startDateText" layoutX="147.0" layoutY="284.0" wrappingWidth="364.0">
+            <font>
+               <Font name="Roboto Medium" size="22.0" />
+            </font></Text>
+
+            <Text fill="#004bd6" layoutX="32.0" layoutY="322.0" text="End Date:">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="endDateText" layoutX="130.0" layoutY="321.0" wrappingWidth="363.99999999999994">
+            <font>
+               <Font name="Roboto Medium" size="22.0" />
+            </font></Text>
+        </children>
+    </Pane>
+</Pane>

@@ -1,8 +1,8 @@
 package org.jala.university.infrastructure.persistance;
 
-import org.jala.university.domain.entity.Account;
-import org.jala.university.domain.entity.AccountStatus;
-import org.jala.university.domain.entity.Currency;
+import org.jala.university.domain.entity.accountEntity.Account;
+import org.jala.university.domain.entity.accountEntity.AccountStatus;
+import org.jala.university.domain.entity.accountEntity.Currency;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
