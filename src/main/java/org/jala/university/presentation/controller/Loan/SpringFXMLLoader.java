@@ -1,6 +1,7 @@
 package org.jala.university.presentation.controller.Loan;
 
 import javafx.fxml.FXMLLoader;
+import lombok.Getter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
  * Integrates Spring's {@link ApplicationContext} with JavaFX's {@link FXMLLoader}.
  */
 @Component
+@Getter
 public class SpringFXMLLoader {
 
     private final ApplicationContext context;

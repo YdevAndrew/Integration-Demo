@@ -9,6 +9,7 @@ import org.jala.university.domain.entity.entity_loan.InstallmentEntity;
 import org.jala.university.domain.entity.entity_loan.LoanEntity;
 import org.jala.university.domain.entity.entity_loan.enums.PaymentMethod;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_external.ScheduledPaymentRepository;
 import org.jala.university.domain.repository.repository_loan.LoanEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;

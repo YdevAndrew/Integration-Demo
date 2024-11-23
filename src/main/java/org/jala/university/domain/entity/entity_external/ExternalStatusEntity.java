@@ -1,5 +1,6 @@
 package org.jala.university.domain.entity.entity_external;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,13 +10,12 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "transaction_type")
-public class TransactionTypeEntity {
+@Table(name = "status")
+public class ExternalStatusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "transaction_type_name", nullable = false)
-    private String transactionTypeName;
+    @Column(name = "status_name", nullable = false)
+    private String statusName;
 }
-
