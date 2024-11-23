@@ -2,13 +2,13 @@ package org.jala.university.application.mapper.mapper_external;
 
 import org.jala.university.application.dto.dto_external.PaymentHistoryDTO;
 import org.jala.university.domain.entity.entity_account.Account;
-import org.jala.university.domain.entity.entity_external.PaymentHistoryEntity;
-import org.jala.university.domain.entity.entity_external.StatusEntity;
-import org.jala.university.domain.entity.entity_external.TransactionTypeEntity;
+import org.jala.university.domain.entity.entity_external.ExternalPaymentHistoryEntity;
+import org.jala.university.domain.entity.entity_external.ExternalStatusEntity;
+import org.jala.university.domain.entity.entity_external.ExternalTransactionTypeEntity;
 
 public class PaymentHistoryMapper {
 
-    public PaymentHistoryDTO mapTo(PaymentHistoryEntity paymentHistoryEntity) {
+    public PaymentHistoryDTO mapTo(ExternalPaymentHistoryEntity paymentHistoryEntity) {
         return PaymentHistoryDTO.builder()
                 .id(paymentHistoryEntity.getId())
                 .accountId(paymentHistoryEntity.getAccount()) // Mantém a referência à entidade Account
@@ -27,8 +27,8 @@ public class PaymentHistoryMapper {
                 .build();
     }
 
-    public PaymentHistoryEntity mapFrom(PaymentHistoryDTO paymentHistoryDTO) {
-        PaymentHistoryEntity paymentHistoryEntity = PaymentHistoryEntity.builder()
+    public ExternalPaymentHistoryEntity mapFrom(PaymentHistoryDTO paymentHistoryDTO) {
+        ExternalPaymentHistoryEntity paymentHistoryEntity = ExternalPaymentHistoryEntity.builder()
                 .amount(paymentHistoryDTO.getAmount())
                 .transactionDate(paymentHistoryDTO.getTransactionDate())
                 .description(paymentHistoryDTO.getDescription())
@@ -43,8 +43,8 @@ public class PaymentHistoryMapper {
 
         // Configurar as referências às entidades relacionadas
         Account account = paymentHistoryDTO.getAccountId(); // Utiliza a entidade Account diretamente
-        TransactionTypeEntity transactionType = paymentHistoryDTO.getTransactionType(); // Utiliza a entidade TransactionType diretamente
-        StatusEntity status = paymentHistoryDTO.getStatus(); // Utiliza a entidade Status diretamente
+        ExternalTransactionTypeEntity transactionType = paymentHistoryDTO.getTransactionType(); // Utiliza a entidade TransactionType diretamente
+        ExternalStatusEntity status = paymentHistoryDTO.getStatus(); // Utiliza a entidade Status diretamente
 
         paymentHistoryEntity.setAccount(account);
         paymentHistoryEntity.setTransactionType(transactionType);
