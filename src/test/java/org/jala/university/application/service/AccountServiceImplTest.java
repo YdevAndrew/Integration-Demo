@@ -1,10 +1,12 @@
 package org.jala.university.application.service;
 
-import org.jala.university.application.dto.AccountDto;
-import org.jala.university.domain.entity.Account;
-import org.jala.university.domain.entity.AccountStatus;
-import org.jala.university.domain.entity.Currency;
-import org.jala.university.domain.repository.AccountRepository;
+import org.jala.university.application.dto.dto_account.AccountDto;
+import org.jala.university.application.service.service_account.AccountService;
+import org.jala.university.application.service.service_account.AccountServiceImpl;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.AccountStatus;
+import org.jala.university.domain.entity.entity_account.Currency;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

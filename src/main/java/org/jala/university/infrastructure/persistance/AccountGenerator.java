@@ -1,13 +1,13 @@
 package org.jala.university.infrastructure.persistance;
 
-import org.jala.university.domain.entity.Account;
-import org.jala.university.domain.entity.AccountStatus;
-import org.jala.university.domain.entity.Currency;
-
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.AccountStatus;
+import org.jala.university.domain.entity.entity_account.Currency;
 
 public class AccountGenerator {
     private static final Random RANDOM = new Random();

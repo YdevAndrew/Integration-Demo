@@ -1,7 +1,7 @@
 package org.jala.university.infrastructure.persistance;
 
-import org.jala.university.domain.entity.Authentication;
-import org.jala.university.domain.repository.AuthenticationRepository;
+import org.jala.university.domain.entity.entity_account.Authentication;
+import org.jala.university.domain.repository.repository_account.AuthenticationRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

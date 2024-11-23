@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.DashboardController">
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.commons.presentation.Controller.DashboardController">
     <children>
         <Pane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
@@ -201,7 +201,7 @@
                                     <Button mnemonicParsing="false"
                                             style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
                                             text="My Loans"
-                                            >
+                                            onAction="#loadLoansView">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>

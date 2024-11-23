@@ -5,15 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.jala.university.infrastructure.config.SpringConfig;
+
+import org.jala.university.config.config_account.SpringFXMLLoader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.jala.university.infrastructure.config.SpringFXMLLoader;
 
 import java.net.URL;
 
@@ -39,7 +37,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         try {
-            URL fxmlUrl = getClass().getResource("/home-view.fxml");
+            URL fxmlUrl = getClass().getResource("/Account/home-view.fxml");
             if (fxmlUrl == null) {
                 throw new IllegalStateException("Não foi possível encontrar /home-view.fxml");
             }
