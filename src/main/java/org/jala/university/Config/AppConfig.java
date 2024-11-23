@@ -4,7 +4,7 @@ package org.jala.university.Config;
 import org.jala.university.application.service.service_account.AccountService;
 import org.jala.university.application.service.service_account.AccountServiceImpl;
 import org.jala.university.domain.repository.AccountRepository;
-import org.jala.university.presentation.Loan.SpringFXMLLoader;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

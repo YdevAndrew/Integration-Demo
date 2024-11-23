@@ -1,4 +1,4 @@
-package org.jala.university.presentation.Loan;
+package org.jala.university.presentation.controller.Loan;
 
 import javafx.fxml.FXMLLoader;
 import org.springframework.context.ApplicationContext;
