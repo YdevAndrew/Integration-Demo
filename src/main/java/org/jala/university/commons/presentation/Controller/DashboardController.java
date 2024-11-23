@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jala.university.presentation.controller.Account.ProfileViewController;
 import org.jala.university.presentation.controller.Loan.MyLoans;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
@@ -41,6 +42,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     private AnchorPane mainViewContainer;
+
 
     @FXML
     private VBox otherButtonsVBox;
@@ -213,19 +215,18 @@ public class DashboardController extends BaseController {
     }
 
 
+    @FXML
+    private void loadProfileView() {
+        try {
+            FXMLLoader loader = springFXMLLoader.load("/Account/profile-page.fxml");
+            Node profileView = loader.load();
 
-@FXML
-private void loadProfilePage() {
-    try {
-        // Carrega o arquivo FXML da página de perfil
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/profile-page.fxml"));
-        Pane profilePage = loader.load();
+            ProfileViewController controller = loader.getController();
 
-        // Substitui o conteúdo do painel principal pela página de perfil
-        mainViewContainer.getChildren().setAll(profilePage);
-    } catch (IOException e) {
-        e.printStackTrace();
-        // Você pode exibir uma mensagem de erro ou fazer outro tipo de tratamento aqui
+
+            mainViewContainer.getChildren().setAll(profileView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
 }

@@ -8,11 +8,13 @@ import javafx.stage.FileChooser;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+@Controller
 public class ProfileViewController {
 
     @FXML
