@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #EAEEF1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Account.ProfileViewController">
    <children>
       <AnchorPane prefHeight="69.0" prefWidth="1281.0" style="-fx-background-color: #010C6F;">
@@ -16,6 +17,40 @@
                </image>
             </ImageView>
          </children>
+            <children>
+               <Label layoutX="50.0" layoutY="50.0" text="Full Name:" />
+               <Label layoutX="150.0" layoutY="50.0" fx:id="fullNameLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="100.0" text="CPF:" />
+               <Label layoutX="150.0" layoutY="100.0" fx:id="cpfLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="150.0" text="Gender:" />
+               <Label layoutX="150.0" layoutY="150.0" fx:id="genderLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="200.0" text="Birthday:" />
+               <Label layoutX="150.0" layoutY="200.0" fx:id="birthdayLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="370.0" text="Street:" />
+               <Label layoutX="150.0" layoutY="370.0" fx:id="streetLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="420.0" text="District:" />
+               <Label layoutX="150.0" layoutY="420.0" fx:id="districtLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="470.0" text="State:" />
+               <Label layoutX="150.0" layoutY="470.0" fx:id="stateLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="520.0" text="Postal Code:" />
+               <Label layoutX="150.0" layoutY="520.0" fx:id="postalCodeLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="570.0" text="Country:" />
+               <Label layoutX="150.0" layoutY="570.0" fx:id="countryLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="620.0" text="Email:" />
+               <Label layoutX="150.0" layoutY="620.0" fx:id="emailLabel" text="-" />
+
+               <Label layoutX="50.0" layoutY="670.0" text="Phone Number:" />
+               <Label layoutX="150.0" layoutY="670.0" fx:id="phoneNumberLabel" text="-" />
+            </children>
       </AnchorPane>
 
       <ImageView fx:id="profileImageView" layoutX="34.0" layoutY="469.0">

@@ -2,17 +2,24 @@ package org.jala.university.presentation.controller.Account;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
-import javafx.stage.FileChooser;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
+import org.jala.university.ServiceFactory;
+import org.jala.university.application.dto.dto_account.CustomerDto;
+import org.jala.university.application.service.service_account.CustomerService;
+import org.jala.university.application.service.service_account.CustomerServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class ProfileViewController {
@@ -32,6 +39,7 @@ public class ProfileViewController {
     @FXML
     private Button updateProfilePictureButton;
 
+    // ImageViews
     @FXML
     private ImageView profileImageView;
 
@@ -50,48 +58,98 @@ public class ProfileViewController {
     @FXML
     private ImageView logoImageView;
 
-    // Método de inicialização
+    // Labels para dados do cliente
+    @FXML
+    private Label fullNameLabel;
+
+    @FXML
+    private Label cpfLabel;
+
+    @FXML
+    private Label genderLabel;
+
+    @FXML
+    private Label birthdayLabel;
+
+    @FXML
+    private Label streetLabel;
+
+    @FXML
+    private Label districtLabel;
+
+    @FXML
+    private Label stateLabel;
+
+    @FXML
+    private Label postalCodeLabel;
+
+    @FXML
+    private Label countryLabel;
+
+    @FXML
+    private Label emailLabel;
+
+    @FXML
+    private Label phoneNumberLabel;
+
+    private final CustomerService customerService;
+
+    @Autowired
+    public ProfileViewController(CustomerService customerService) {
+        this.customerService = customerService;
+    }
+
     @FXML
     private void initialize() {
-        // Código de inicialização, se necessário
+        loadCustomerData();
     }
 
-    // Manipulador para o botão Profile
-    @FXML
-    private void handleProfileButtonAction(ActionEvent event) {
-        // Implementar a lógica para navegar para a página de perfil
-        showAlert(AlertType.INFORMATION, "Profile", "Navegar para a página de perfil.");
-    }
+    private void loadCustomerData() {
+        try {
+            CustomerDto user = customerService.getCustomer(2);
 
-    // Manipulador para o botão Dashboard
-    @FXML
-    private void handleDashboardButtonAction(ActionEvent event) {
-        // Implementar a lógica para navegar para o dashboard
-        showAlert(AlertType.INFORMATION, "Dashboard", "Navegar para o dashboard.");
-    }
-
-    // Manipulador para o botão Help
-    @FXML
-    private void handleHelpButtonAction(ActionEvent event) {
-        // Implementar a lógica para mostrar ajuda
-        showAlert(AlertType.INFORMATION, "Help", "Abrir a seção de ajuda.");
-    }
-
-    // Manipulador para o botão Logout
-    @FXML
-    private void handleLogoutButtonAction(ActionEvent event) {
-        // Implementar a lógica para logout
-        boolean confirm = confirmAction("Logout", "Tem certeza que deseja sair?");
-        if (confirm) {
-            // Implementar a lógica de logout, como fechar a aplicação ou voltar para a tela de login
-            System.exit(0);
+            fullNameLabel.setText(user.getFullName());
+            cpfLabel.setText(user.getCpf());
+            genderLabel.setText(user.getGender());
+            birthdayLabel.setText(user.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            streetLabel.setText(user.getStreet());
+            districtLabel.setText(user.getDistrict());
+            stateLabel.setText(user.getState());
+            postalCodeLabel.setText(user.getPostalCode());
+            countryLabel.setText(user.getCountry());
+            emailLabel.setText(user.getEmail());
+            phoneNumberLabel.setText(user.getPhoneNumber());
+        } catch (Exception e) {
+            showAlert(AlertType.ERROR, "Erro", "Não foi possível carregar os dados do cliente.");
+            e.printStackTrace();
         }
     }
 
-    // Manipulador para o botão Update Profile Picture
+    @FXML
+    private void handleProfileButtonAction(ActionEvent event) {
+        showAlert(AlertType.INFORMATION, "Profile", "Navegar para a página de perfil.");
+    }
+
+    @FXML
+    private void handleDashboardButtonAction(ActionEvent event) {
+        showAlert(AlertType.INFORMATION, "Dashboard", "Navegar para o dashboard.");
+    }
+
+    @FXML
+    private void handleHelpButtonAction(ActionEvent event) {
+        showAlert(AlertType.INFORMATION, "Help", "Abrir a seção de ajuda.");
+    }
+
+    @FXML
+    private void handleLogoutButtonAction(ActionEvent event) {
+        boolean confirm = confirmAction("Logout", "Tem certeza que deseja sair?");
+        if (confirm) {
+            System.exit(0); // Lógica para logout
+        }
+    }
+
     @FXML
     private void handleUpdateProfilePictureButtonAction(ActionEvent event) {
-        // Implementar a lógica para atualizar a foto de perfil
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Escolher nova foto de perfil");
         fileChooser.getExtensionFilters().addAll(
@@ -103,14 +161,14 @@ public class ProfileViewController {
                 Image newImage = new Image(new FileInputStream(selectedFile));
                 profileImageView.setImage(newImage);
                 showAlert(AlertType.INFORMATION, "Sucesso", "Foto de perfil atualizada.");
+                // Lógica adicional para salvar a imagem no backend pode ser implementada aqui
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
                 showAlert(AlertType.ERROR, "Erro", "Não foi possível carregar a imagem.");
+                e.printStackTrace();
             }
         }
     }
 
-    // Método utilitário para mostrar alertas
     private void showAlert(AlertType type, String title, String message) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
@@ -119,7 +177,6 @@ public class ProfileViewController {
         alert.showAndWait();
     }
 
-    // Método utilitário para confirmação de ações
     private boolean confirmAction(String title, String message) {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle(title);
