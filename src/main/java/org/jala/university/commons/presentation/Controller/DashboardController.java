@@ -211,4 +211,21 @@ public class DashboardController extends BaseController {
             e.printStackTrace();
         }
     }
+
+
+
+@FXML
+private void loadProfilePage() {
+    try {
+        // Carrega o arquivo FXML da página de perfil
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/profile-page.fxml"));
+        Pane profilePage = loader.load();
+
+        // Substitui o conteúdo do painel principal pela página de perfil
+        mainViewContainer.getChildren().setAll(profilePage);
+    } catch (IOException e) {
+        e.printStackTrace();
+        // Você pode exibir uma mensagem de erro ou fazer outro tipo de tratamento aqui
+    }
+}
 }
