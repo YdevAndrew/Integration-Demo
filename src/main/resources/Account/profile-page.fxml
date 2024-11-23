@@ -6,71 +6,84 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #EAEEF1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #EAEEF1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Account.ProfileViewController">
    <children>
       <AnchorPane prefHeight="69.0" prefWidth="1281.0" style="-fx-background-color: #010C6F;">
          <children>
-            <ImageView fitHeight="74.0" fitWidth="110.0" layoutX="1171.0" layoutY="-1.0">
+            <ImageView fx:id="logoImageView" fitHeight="74.0" fitWidth="110.0" layoutX="1171.0" layoutY="-1.0">
                <image>
                   <Image url="@../assets/Group 3965.png" />
                </image>
             </ImageView>
          </children>
       </AnchorPane>
-      <ImageView layoutX="34.0" layoutY="469.0">
+
+      <ImageView fx:id="profileImageView" layoutX="34.0" layoutY="469.0">
          <image>
             <Image url="@../profile-page/gg_profile.png" />
          </image>
       </ImageView>
-      <ImageView layoutX="32.0" layoutY="534.0">
+
+      <ImageView fx:id="duoIconsImageView" layoutX="32.0" layoutY="534.0">
          <image>
             <Image url="@../profile-page/duo-icons_dashboard.png" />
          </image>
       </ImageView>
-      <ImageView layoutX="36.0" layoutY="658.0">
+
+      <ImageView fx:id="logoutImageView" layoutX="36.0" layoutY="658.0">
          <image>
             <Image url="@../profile-page/logout.png" />
          </image>
       </ImageView>
-      <ImageView layoutX="39.0" layoutY="604.0">
+
+      <ImageView fx:id="helpImageView" layoutX="39.0" layoutY="604.0">
          <image>
             <Image url="@../profile-page/help.png" />
          </image>
       </ImageView>
-      <Button layoutX="32.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Profile" textAlignment="RIGHT">
+
+      <Button fx:id="profileButton" layoutX="32.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Profile" textAlignment="RIGHT" onAction="#handleProfileButtonAction">
          <font>
             <Font name="Graphik-Bold" size="14.0" />
          </font>
       </Button>
-      <ImageView fitHeight="33.0" fitWidth="33.0" layoutX="926.0" layoutY="271.0">
+
+      <ImageView fx:id="solarPenImageView" fitHeight="33.0" fitWidth="33.0" layoutX="926.0" layoutY="271.0">
          <image>
             <Image url="@../profile-page/solar_pen-bold.png" />
          </image>
       </ImageView>
-      <Button layoutX="32.0" layoutY="532.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Dashboard" textAlignment="RIGHT">
+
+      <Button fx:id="dashboardButton" layoutX="32.0" layoutY="532.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Dashboard" textAlignment="RIGHT" onAction="#handleDashboardButtonAction">
          <font>
             <Font name="Graphik-Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="32.0" layoutY="598.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Help" textAlignment="RIGHT">
+
+      <Button fx:id="helpButton" layoutX="32.0" layoutY="598.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Help" textAlignment="RIGHT" onAction="#handleHelpButtonAction">
          <font>
             <Font name="Graphik-Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="32.0" layoutY="658.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Logout" textAlignment="RIGHT">
+
+      <Button fx:id="logoutButton" layoutX="32.0" layoutY="658.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Logout" textAlignment="RIGHT" onAction="#handleLogoutButtonAction">
          <font>
             <Font name="Graphik-Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="925.0" layoutY="268.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="229.0" style="-fx-background-color: Transparent;" text="Update Profile Picture">
+
+      <Button fx:id="updateProfilePictureButton" layoutX="925.0" layoutY="268.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="229.0" style="-fx-background-color: Transparent;" text="Update Profile Picture" onAction="#handleUpdateProfilePictureButtonAction">
          <font>
             <Font name="Graphik-Bold" size="13.0" />
          </font>
       </Button>
+
+      <!--
       <ImageView fitHeight="288.0" fitWidth="361.0" layoutX="460.0" layoutY="127.0">
          <image>
-            <Image url="@../../../../../../Downloads/incaru.jpg" />
+            <Image url="@" />
          </image>
       </ImageView>
+      -->
    </children>
 </AnchorPane>
