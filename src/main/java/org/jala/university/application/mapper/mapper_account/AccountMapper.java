@@ -1,7 +1,7 @@
 package org.jala.university.application.mapper.mapper_account;
 
 import org.jala.university.application.dto.dto_account.AccountDto;
-import org.jala.university.domain.entity.accountEntity.Account;
+import org.jala.university.domain.entity.entity_account.Account;
 
 public class AccountMapper {
     public static AccountDto toDto(Account account) {

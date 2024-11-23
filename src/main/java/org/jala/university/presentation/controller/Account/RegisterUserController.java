@@ -11,14 +11,15 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
 import org.jala.university.application.dto.dto_account.AccountDto;
 import org.jala.university.application.dto.dto_account.CustomerDto;
 import org.jala.university.application.service.service_account.AccountServiceImpl;
 import org.jala.university.application.service.service_account.CustomerService;
+import org.jala.university.config.config_account.SpringFXMLLoader;
+import org.jala.university.domain.entity.entity_account.AccountStatus;
+import org.jala.university.domain.entity.entity_account.Currency;
 import org.jala.university.application.service.service_account.AuthenticationService;
-import org.jala.university.domain.entity.accountEntity.AccountStatus;
-import org.jala.university.domain.entity.accountEntity.Currency;
-import org.jala.university.Config.Account.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.jala.university.utils.EmailService;

@@ -1,11 +1,10 @@
 package org.jala.university.application.mapper.mapper_external;
 
 import org.jala.university.application.dto.dto_external.PaymentHistoryDTO;
-import org.jala.university.domain.entity.accountEntity.Account;
-import org.jala.university.domain.entity.externalEntity.PaymentHistoryEntity;
-//import org.jala.university.domain.entity.AccountEntity;
-import org.jala.university.domain.entity.externalEntity.TransactionTypeEntity;
-import org.jala.university.domain.entity.externalEntity.StatusEntity;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_external.PaymentHistoryEntity;
+import org.jala.university.domain.entity.entity_external.StatusEntity;
+import org.jala.university.domain.entity.entity_external.TransactionTypeEntity;
 
 public class PaymentHistoryMapper {
 

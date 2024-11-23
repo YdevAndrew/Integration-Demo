@@ -1,6 +1,6 @@
 package org.jala.university.application.service.service_account;
 
-import org.jala.university.domain.entity.accountEntity.Authentication;
+import org.jala.university.domain.entity.entity_account.Authentication;
 import org.jala.university.domain.repository.AuthenticationRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -1,6 +1,6 @@
 package org.jala.university.infrastructure.persistance;
 
-import org.jala.university.domain.entity.accountEntity.Authentication;
+import org.jala.university.domain.entity.entity_account.Authentication;
 import org.jala.university.domain.repository.AuthenticationRepository;
 import org.springframework.stereotype.Repository;
 

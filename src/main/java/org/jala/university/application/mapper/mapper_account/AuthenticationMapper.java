@@ -1,7 +1,7 @@
 package org.jala.university.application.mapper.mapper_account;
 
-import org.jala.university.domain.entity.accountEntity.Authentication;
 import org.jala.university.application.dto.dto_account.AuthenticationDto;
+import org.jala.university.domain.entity.entity_account.Authentication;
 
 public class AuthenticationMapper {
     public static AuthenticationDto toDto(Authentication authentication) {

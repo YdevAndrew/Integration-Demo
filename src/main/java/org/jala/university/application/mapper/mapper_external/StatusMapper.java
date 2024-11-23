@@ -1,7 +1,7 @@
 package org.jala.university.application.mapper.mapper_external;
 
 import org.jala.university.application.dto.dto_external.StatusDTO;
-import org.jala.university.domain.entity.externalEntity.StatusEntity;
+import org.jala.university.domain.entity.entity_external.StatusEntity;
 
 public class StatusMapper {
 

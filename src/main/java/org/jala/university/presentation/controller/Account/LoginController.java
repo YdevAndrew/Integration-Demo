@@ -13,10 +13,11 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.Setter;
+
 import org.jala.university.application.service.service_account.CustomerService;
-import org.jala.university.Config.Account.SpringFXMLLoader;
 import org.jala.university.presentation.AccountView;
 import org.jala.university.commons.presentation.ViewSwitcher;
+import org.jala.university.config.config_account.SpringFXMLLoader;
 import org.jala.university.utils.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,9 +25,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-import java.io.IOException;
+import static org.jala.university.config.config_account.SpringFXMLLoader.applicationContext;
 
-import static org.jala.university.Config.Account.SpringFXMLLoader.applicationContext;
+import java.io.IOException;
 
 @Setter
 @Controller

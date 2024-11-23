@@ -7,9 +7,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-
-import org.jala.university.domain.entity.accountEntity.Account;
-//import org.jala.university.domain.entity.AccountEntity;
+import org.jala.university.domain.entity.entity_account.Account;
 
 @Data
 @Builder

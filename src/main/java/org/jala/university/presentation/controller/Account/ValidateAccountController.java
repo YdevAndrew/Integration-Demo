@@ -9,9 +9,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import org.jala.university.application.dto.dto_account.CustomerDto;
 import org.jala.university.application.service.service_account.CustomerService;
-import org.jala.university.Config.Account.SpringFXMLLoader;
+import org.jala.university.config.config_account.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;

@@ -9,10 +9,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.jala.university.domain.entity.accountEntity.Account;
-//import org.jala.university.domain.entity.AccountEntity;
-import org.jala.university.domain.entity.externalEntity.StatusEntity;
-import org.jala.university.domain.entity.externalEntity.TransactionTypeEntity;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_external.StatusEntity;
+import org.jala.university.domain.entity.entity_external.TransactionTypeEntity;
 
 @Data
 @Builder

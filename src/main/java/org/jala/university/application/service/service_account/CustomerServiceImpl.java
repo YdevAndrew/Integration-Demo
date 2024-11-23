@@ -3,7 +3,7 @@ package org.jala.university.application.service.service_account;
 import lombok.AllArgsConstructor;
 import org.jala.university.application.dto.dto_account.CustomerDto;
 import org.jala.university.application.mapper.mapper_account.CustomerMapper;
-import org.jala.university.domain.entity.accountEntity.Customer;
+import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.repository.CustomerRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

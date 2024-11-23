@@ -185,7 +185,7 @@ public class DashboardController extends BaseController {
     @FXML
     public void logoutButton(ActionEvent event) {
         try {
-            FXMLLoader loader = org.jala.university.Config.Account.SpringFXMLLoader.create("/Account/login.fxml");
+            FXMLLoader loader = org.jala.university.config.config_account.SpringFXMLLoader.create("/Account/login.fxml");
             Parent root = loader.load();
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

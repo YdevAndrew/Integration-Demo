@@ -1,6 +1,6 @@
 package org.jala.university.domain.repository;
 
-import org.jala.university.domain.entity.accountEntity.Authentication;
+import org.jala.university.domain.entity.entity_account.Authentication;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

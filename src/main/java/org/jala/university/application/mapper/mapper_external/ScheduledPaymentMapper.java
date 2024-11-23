@@ -1,9 +1,8 @@
 package org.jala.university.application.mapper.mapper_external;
 
 import org.jala.university.application.dto.dto_external.ScheduledPaymentDTO;
-import org.jala.university.domain.entity.accountEntity.Account;
-import org.jala.university.domain.entity.externalEntity.ScheduledPaymentEntity;
-//import org.jala.university.domain.entity.AccountEntity;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_external.ScheduledPaymentEntity;
 
 public class ScheduledPaymentMapper {
 

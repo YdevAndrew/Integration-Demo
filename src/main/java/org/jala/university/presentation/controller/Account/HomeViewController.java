@@ -12,7 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import org.jala.university.Config.Account.SpringFXMLLoader;
+
+import org.jala.university.config.config_account.SpringFXMLLoader;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
