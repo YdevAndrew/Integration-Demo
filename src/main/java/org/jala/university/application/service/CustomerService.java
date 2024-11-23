@@ -18,4 +18,6 @@ public interface CustomerService {
     CustomerDto create(CustomerDto customerDto);
 
     boolean authenticate(String cpf, String password);
+
+    List<CustomerDto> getAllCustomersSortedByName();
 }

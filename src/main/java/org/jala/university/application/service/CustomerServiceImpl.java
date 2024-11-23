@@ -1,21 +1,18 @@
 package org.jala.university.application.service;
 
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import org.jala.university.application.dto.CustomerDto;
 import org.jala.university.application.mapper.CustomerMapper;
 import org.jala.university.domain.entity.Customer;
 import org.jala.university.domain.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @AllArgsConstructor
@@ -140,5 +137,12 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = optionalCustomer.get();
 
         return passwordEncoder.matches(password, new String(customer.getPassword()));
+    }
+
+    @Override
+    public List<CustomerDto> getAllCustomersSortedByName() {
+        return customerRepository.findAllSortedByName().stream()
+                .map(CustomerMapper::toDto)
+                .collect(Collectors.toList());
     }
 }

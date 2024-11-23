@@ -4,6 +4,7 @@ import org.jala.university.application.service.AccountService;
 import org.jala.university.application.service.CustomerService;
 import org.jala.university.application.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component // Tornando o ServiceFactory um Bean do Spring
@@ -13,6 +14,7 @@ public class ServiceFactory {
     private static AuthenticationService authenticationService;
     private static AccountService accountService;
 
+    @Qualifier("accountServiceImpl")
     @Autowired
     private AccountService accountServiceBean;
 
