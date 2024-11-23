@@ -1,12 +1,14 @@
-package org.jala.university.application.service;
+package org.jala.university.application.service.service_transaction;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.jala.university.domain.entity.Account;
-import org.jala.university.domain.entity.PaymentHistoryEntity;
-import org.jala.university.domain.entity.StatusEntity;
-import org.jala.university.domain.repository.PaymentHistoryRepository;
-import org.jala.university.domain.repository.StatusRepository;
+import org.jala.university.application.service.service_account.AccountServiceImpl;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_transaction.PaymentHistoryEntity;
+import org.jala.university.domain.entity.entity_transaction.StatusEntity;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_transaction.PaymentHistoryRepository;
+import org.jala.university.domain.repository.repository_transaction.StatusRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,13 +16,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
 public class ScheduledTransactionService {
 
 
     private final PaymentHistoryRepository paymentHistoryRepository;
-    private final AccountServiceImpl accountServiceImpl;
+    private final AccountRepository accountRepository;
     private final StatusRepository statusRepository;
 
     @Transactional
@@ -48,14 +51,14 @@ public class ScheduledTransactionService {
 
     public PaymentHistoryEntity executePayment(PaymentHistoryEntity paymentHistoryEntity) {
 
-        Account sender = accountServiceImpl.findById(paymentHistoryEntity.getAccount().getId())  // falta implementar a autenticação
+        Account sender = accountRepository.findById(paymentHistoryEntity.getAccount().getId())  // falta implementar a autenticação
                 .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
 
         if (sender.getBalance().compareTo(paymentHistoryEntity.getAmount()) < 0) {
             throw new IllegalArgumentException("Insufficient balance");
         }
 
-        Account receiver = accountServiceImpl.findByAccountNumber(paymentHistoryEntity.getAccountReceiver())
+        Account receiver = accountRepository.findByAccountNumber(paymentHistoryEntity.getAccountReceiver())
                 .orElseThrow(() -> new IllegalArgumentException("Receiver account not found"));
 
         sender.setBalance(sender.getBalance().subtract(paymentHistoryEntity.getAmount()));
@@ -63,8 +66,8 @@ public class ScheduledTransactionService {
 
         paymentHistoryEntity.setAccount(sender);
 
-        accountServiceImpl.save(sender);
-        accountServiceImpl.save(receiver);
+        accountRepository.save(sender);
+        accountRepository.save(receiver);
 
         return paymentHistoryRepository.save(paymentHistoryEntity);
     }

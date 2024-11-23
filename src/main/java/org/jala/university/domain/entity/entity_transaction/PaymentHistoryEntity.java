@@ -1,7 +1,10 @@
-package org.jala.university.domain.entity;
+package org.jala.university.domain.entity.entity_transaction;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.jala.university.domain.entity.entity_account.Account;
+
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

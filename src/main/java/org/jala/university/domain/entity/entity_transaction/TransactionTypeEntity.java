@@ -1,4 +1,4 @@
-package org.jala.university.domain.entity;
+package org.jala.university.domain.entity.entity_transaction;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

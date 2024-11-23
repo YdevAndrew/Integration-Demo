@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "transaction_type")
-public class TransactionTypeEntity {
+public class ExternalTransactionTypeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

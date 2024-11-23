@@ -1,4 +1,4 @@
-package org.jala.university.application.dto;
+package org.jala.university.application.dto.dto_transaction;
 
 import lombok.*;
 

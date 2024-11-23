@@ -1,4 +1,4 @@
-package org.jala.university.presentation.controller;
+package org.jala.university.presentation.controller.Transaction;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -15,16 +15,15 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.jala.university.application.dto.PaymentHistoryDTO;
-import org.jala.university.application.service.PaymentHistoryService;
-import org.jala.university.presentation.SpringFXMLLoader;
+import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
+import org.jala.university.application.service.service_transaction.PaymentHistoryService;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Controller
 public class TransactionPasswordController {

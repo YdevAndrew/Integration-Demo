@@ -6,7 +6,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="contentPane" prefHeight="750.0" prefWidth="862.0" stylesheets="@Assets/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.TransactionHistoryController">
+<Pane fx:id="contentPane" prefHeight="750.0" prefWidth="862.0" stylesheets="@Assets/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Transaction.TransactionHistoryController">
     <children>
         <!-- Header -->
         <Label layoutX="127.0" layoutY="26.0" style="-fx-font-size: 24px; -fx-text-fill: #003366;" text="Transaction history" />

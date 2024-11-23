@@ -1,9 +1,10 @@
-package org.jala.university.application.service;
-import java.util.List;
+package org.jala.university.application.service.service_transaction;
 
-import org.jala.university.application.dto.AccountDto;
-import org.jala.university.application.dto.PaymentHistoryDTO;
-import org.jala.university.domain.entity.Account;
+
+import org.jala.university.application.dto.dto_account.AccountDto;
+import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
+
+import java.util.List;
 
 public interface PaymentHistoryService {
     PaymentHistoryDTO createPaymentHistory(Integer userId, PaymentHistoryDTO paymentHistoryDto, String transactionType);

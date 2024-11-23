@@ -1,4 +1,4 @@
-package org.jala.university.presentation.controller;
+package org.jala.university.presentation.controller.Transaction;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,16 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import org.jala.university.application.dto.AccountDto;
-import org.jala.university.application.service.AccountServiceImpl;
-import org.jala.university.application.service.PaymentHistoryService;
+import org.jala.university.application.dto.dto_account.AccountDto;
+import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.commons.presentation.BaseController;
-import org.jala.university.domain.entity.Account;
-import org.jala.university.domain.entity.Customer;
+import org.jala.university.domain.entity.entity_account.Customer;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.jala.university.presentation.MainView;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -28,10 +27,13 @@ import java.util.Optional;
 public class TransactionPaymentScreenController extends BaseController {
 
     @Autowired
-    private AccountServiceImpl accountServiceImpl;
+    private AccountRepository accountRepository;
 
     @Autowired
     private PaymentHistoryService paymentHistoryService;
+
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
     @FXML
     private TextField accountField;
@@ -74,10 +76,10 @@ public class TransactionPaymentScreenController extends BaseController {
 
     @FXML
     public void initialize() {
-        // Load the user's account number
-        userAccountNumber = accountServiceImpl.findById(userId)
-                .map(Account::getAccountNumber)
-                .orElse(null);
+
+//        userAccountNumber = accountRepository.findById(userId)
+//                .map(Account::getAccountNumber)
+//                .orElse(null);
 
         if (savedAccountNumber != null) accountField.setText(savedAccountNumber);
         if (savedDescription != null) descriptionField.setText(savedDescription);
@@ -86,7 +88,7 @@ public class TransactionPaymentScreenController extends BaseController {
 
         validateFields();
 
-        loadSavedContacts();
+        //loadSavedContacts();
 
         accountField.textProperty().addListener((observable, oldValue, newValue) -> validateFields());
         valueField.textProperty().addListener((observable, oldValue, newValue) -> validateFields());
@@ -95,31 +97,31 @@ public class TransactionPaymentScreenController extends BaseController {
         advanceButton.setOnAction(event -> loadTransactionPasswordScreen());
     }
 
-    @FXML
-    private void loadSavedContacts() {
-        contactsListVBox.getChildren().clear();
-
-        List<AccountDto> savedContacts = paymentHistoryService.getContactList(userId);
-
-        for (AccountDto contact : savedContacts) {
-            Optional<Customer> customerOptional = accountServiceImpl.getCustomerByAccountId(contact.getId());
-
-            customerOptional.ifPresent(customer -> {
-                Button contactButton = new Button(customer.getFullName() + " (" + contact.getAccountNumber() + ")");
-                contactButton.setPrefHeight(66.0);
-                contactButton.setPrefWidth(231.0);
-                contactButton.getStyleClass().add("list-container");
-
-                contactButton.setOnAction(event -> {
-                    accountField.setText(contact.getAccountNumber());
-                    descriptionField.setText("Payment to " + customer.getFullName());
-                    valueField.requestFocus();
-                });
-
-                contactsListVBox.getChildren().add(contactButton);
-            });
-        }
-    }
+//    @FXML
+//    private void loadSavedContacts() {
+//        contactsListVBox.getChildren().clear();
+//
+//        List<AccountDto> savedContacts = paymentHistoryService.getContactList(userId);
+//
+//        for (AccountDto contact : savedContacts) {
+//            Optional<Customer> customerOptional = accountRepository.getCustomerByAccountId(contact.getId());
+//
+//            customerOptional.ifPresent(customer -> {
+//                Button contactButton = new Button(customer.getFullName() + " (" + contact.getAccountNumber() + ")");
+//                contactButton.setPrefHeight(66.0);
+//                contactButton.setPrefWidth(231.0);
+//                contactButton.getStyleClass().add("list-container");
+//
+//                contactButton.setOnAction(event -> {
+//                    accountField.setText(contact.getAccountNumber());
+//                    descriptionField.setText("Payment to " + customer.getFullName());
+//                    valueField.requestFocus();
+//                });
+//
+//                contactsListVBox.getChildren().add(contactButton);
+//            });
+//        }
+//    }
 
     private void validateFields() {
         boolean isValid = true;
@@ -174,28 +176,28 @@ public class TransactionPaymentScreenController extends BaseController {
 
             BigDecimal value = new BigDecimal(savedValue.replace(",", "."));
 
-            Integer accountId = accountServiceImpl.findByAccountNumber(savedAccountNumber)
-                    .map(Account::getId)
-                    .orElseThrow(() -> new IllegalArgumentException("Account not found."));
+//            Integer accountId = accountRepository.findByAccountNumber(savedAccountNumber)
+//                    .map(Account::getId)
+//                    .orElseThrow(() -> new IllegalArgumentException("Account not found."));
 
-            Customer customer = accountServiceImpl.getCustomerByAccountId(accountId)
-                    .orElseThrow(() -> new IllegalArgumentException("Customer not found for the account."));
+//            Customer customer = accountRepository.getCustomerByAccountId(accountId)
+//                    .orElseThrow(() -> new IllegalArgumentException("Customer not found for the account."));
 
-            String nameReceiver = customer.getFullName();
-            String cpfReceiver = customer.getCpf();
+//            String nameReceiver = customer.getFullName();
+//            String cpfReceiver = customer.getCpf();
 
-            FXMLLoader loader = MainView.getSpringFXMLLoader().load("/Style/Transection_Password.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/Style/Transection_Password.fxml");
             Pane transactionPasswordPane = loader.load();
 
-            TransactionPasswordController passwordController = loader.getController();
-            passwordController.setTransactionDetails(
-                    savedAccountNumber,
-                    savedDescription,
-                    value,
-                    nameReceiver,
-                    cpfReceiver,
-                    savedSchedulingDate
-            );
+//            TransactionPasswordController passwordController = loader.getController();
+//            passwordController.setTransactionDetails(
+//                    savedAccountNumber,
+//                    savedDescription,
+//                    value,
+//                    nameReceiver,
+//                    cpfReceiver,
+//                    savedSchedulingDate
+//            );
 
             contentPane.getChildren().clear();
             contentPane.getChildren().add(transactionPasswordPane);

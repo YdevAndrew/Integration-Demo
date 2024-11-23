@@ -1,4 +1,4 @@
-package org.jala.university.presentation.controller;
+package org.jala.university.presentation.controller.Transaction;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -7,8 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import org.jala.university.application.dto.PaymentHistoryDTO;
-import org.jala.university.application.service.PaymentHistoryService;
+import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
+import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
 

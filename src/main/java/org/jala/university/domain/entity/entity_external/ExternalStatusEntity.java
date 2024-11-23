@@ -11,7 +11,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "status")
-public class StatusEntity {
+public class ExternalStatusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

@@ -1,7 +1,8 @@
-package org.jala.university.application.mapper;
+package org.jala.university.application.mapper.mapper_transaction;
 
-import org.jala.university.application.dto.PaymentHistoryDTO;
-import org.jala.university.domain.entity.PaymentHistoryEntity;
+
+import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
+import org.jala.university.domain.entity.entity_transaction.PaymentHistoryEntity;
 import org.springframework.stereotype.Component;
 
 @Component
