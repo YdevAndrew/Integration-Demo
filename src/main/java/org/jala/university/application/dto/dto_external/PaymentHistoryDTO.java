@@ -10,8 +10,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.jala.university.domain.entity.entity_account.Account;
-import org.jala.university.domain.entity.entity_external.StatusEntity;
-import org.jala.university.domain.entity.entity_external.TransactionTypeEntity;
+import org.jala.university.domain.entity.entity_external.ExternalStatusEntity;
+import org.jala.university.domain.entity.entity_external.ExternalTransactionTypeEntity;
 
 @Data
 @Builder
@@ -24,11 +24,11 @@ public class PaymentHistoryDTO {
     String cnpjReceiver; //not null (escolher entre cpf e cnpj através da quantidade inserida)
     LocalDateTime transactionDate;
     String description;
-    TransactionTypeEntity transactionType;
+    ExternalTransactionTypeEntity transactionType;
     LocalDate expiredDate;
     String agencyReceiver;
     String accountReceiver;
     String nameReceiver;
     String bankNameReceiver;
-    StatusEntity status;
+    ExternalStatusEntity status;
 }

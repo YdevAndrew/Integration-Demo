@@ -109,7 +109,7 @@ public class DashboardController extends BaseController {
     private void loadTransactionView() {
         try {
             clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Style/Transection_paymentScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_paymentScreen.fxml"));
             Pane transactionPane = loader.load();
             contentPane.getChildren().add(transactionPane);
         } catch (IOException e) {
@@ -121,7 +121,7 @@ public class DashboardController extends BaseController {
     private void loadPixView() {
         try {
             clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Style/Transection_TED&PIX.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_TED&PIX.fxml"));
             Pane pixPane = loader.load();
             contentPane.getChildren().add(pixPane);
         } catch (IOException e) {

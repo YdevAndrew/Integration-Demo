@@ -16,7 +16,7 @@ import org.jala.university.domain.entity.entity_account.Account;
 @Builder
 @Entity
 @Table(name = "payment_history")
-public class PaymentHistoryEntity {
+public class ExternalPaymentHistoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -36,7 +36,7 @@ public class PaymentHistoryEntity {
 
     @ManyToOne
     @JoinColumn(name = "transaction_type_id", nullable = false)
-    private TransactionTypeEntity transactionType;
+    private ExternalTransactionTypeEntity transactionType;
 
     @Column(name = "expired_date", nullable = false)
     private LocalDate expiredDate;
@@ -61,7 +61,7 @@ public class PaymentHistoryEntity {
 
     @ManyToOne
     @JoinColumn(name = "status_id", nullable = false)
-    private StatusEntity status;
+    private ExternalStatusEntity status;
 
     @ManyToOne
     @JoinColumn(name = "scheduled_payment")
