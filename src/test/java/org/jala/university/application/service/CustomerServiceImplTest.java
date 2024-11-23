@@ -1,8 +1,10 @@
 package org.jala.university.application.service;
 
-import org.jala.university.application.dto.CustomerDto;
-import org.jala.university.domain.entity.Customer;
-import org.jala.university.domain.repository.CustomerRepository;
+import org.jala.university.application.dto.dto_account.CustomerDto;
+import org.jala.university.application.service.service_account.CustomerService;
+import org.jala.university.application.service.service_account.CustomerServiceImpl;
+import org.jala.university.domain.entity.entity_account.Customer;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

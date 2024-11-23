@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      nodeOrientation="RIGHT_TO_LEFT" prefHeight="700.0" prefWidth="1040.0"
+      style="-fx-background-color: #FFFFFF;" styleClass="content"
+      stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.QRCodePaymentController">
+
+    <!-- Título da tela -->
+    <Text layoutX="442.0" layoutY="166.0"
+          style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-fill: #1a73e8;"
+          text="Upload your QR code here" />
+
+    <!-- Botão para selecionar o QR Code -->
+    <Button layoutX="496.0" layoutY="242.0" prefHeight="42.0" prefWidth="200.0"
+            style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;"
+            text="Select your QRCode" onAction="#onSelectQRCodeButtonClick" />
+
+
+    <!-- Imagem do QR Code -->
+    <ImageView fx:id="qrCodeImageView" fitHeight="209.0" fitWidth="238.0"
+               layoutX="211.0" layoutY="180.0" nodeOrientation="RIGHT_TO_LEFT"
+               style="-fx-effect: dropshadow(gaussian, #d3d3d3, 10, 0.5, 0, 0); -fx-border-radius: 10px;
+                      -fx-border-color: #1a73e8; -fx-border-width: 2px;" />
+
+    <!-- Label de Status -->
+    <Label fx:id="statusLabel" layoutX="496.0" layoutY="370.0"
+           style="-fx-font-family: Arial; -fx-font-size: 14px;" />
+
+    <!-- Botão "Next" -->
+    <Button contentDisplay="RIGHT" layoutX="163.0" layoutY="559.0" prefHeight="42.0" prefWidth="129.0"
+            style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 14px;
+                   -fx-background-radius: 15px;"
+            text="Confirm" onAction="#onConfirmButtonClick" />
+
+    <!-- Botão de Inserção Manual -->
+    <Button fx:id="manualEntryButton" contentDisplay="RIGHT" layoutX="450.0" layoutY="559.0" prefHeight="42.0"
+            prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial;
+                   -fx-font-size: 14px; -fx-background-radius: 15px;" text="Insert manually"
+            onAction="#onManualEntryClick" visible="false" />
+</Pane>
+
+

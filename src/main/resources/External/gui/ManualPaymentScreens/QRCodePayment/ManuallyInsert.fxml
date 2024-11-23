@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="editServiceContent" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #f8f8f8;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.ManuallyInsertController">
+
+    <!-- Título -->
+    <Label layoutX="366.0" layoutY="108.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Payment Manual" />
+
+    <!-- Caixa de Edição -->
+    <VBox alignment="CENTER_LEFT" layoutX="274.0" layoutY="160.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="480.0" spacing="15" style="-fx-background-color: #F3F4F6; -fx-padding: 15; -fx-border-radius: 15; -fx-background-radius: 10;">
+        <!-- Recipient -->
+        <Label text="Recipient" />
+        <TextField fx:id="recipientField" prefHeight="45.0" prefWidth="250.0" promptText=" 14 digits" styleClass="text-field-custom" />
+
+        <!-- Agency -->
+        <Label text="Agency" />
+        <TextField fx:id="agencyField" prefHeight="45.0" prefWidth="250.0" promptText="0000" styleClass="text-field-custom" />
+
+        <!-- Account -->
+        <Label text="Account" />
+        <TextField fx:id="accountField" prefHeight="45.0" prefWidth="250.0" promptText="00000000-0" styleClass="text-field-custom" />
+
+        <!-- Amount -->
+        <Label text="Amount" />
+        <TextField fx:id="amountField" prefHeight="45.0" prefWidth="250.0" promptText="00,00" styleClass="text-field-custom" />
+
+        <!-- Botão com texto (Opcional) -->
+        <HBox alignment="CENTER_LEFT" spacing="10">
+            <Button fx:id="showExpiredDateButton" text="Expired Date" style="-fx-background-color: #007BFF; -fx-text-fill: white;" onAction="#showExpiredDateField" />
+            <Label text="(Opcional)" style="-fx-text-fill: #808080;" />
+        </HBox>
+
+        <!-- Expired Date (Oculto inicialmente) -->
+        <DatePicker fx:id="expiredDateField" prefHeight="45.0" prefWidth="250.0" promptText="DD/MM/AAAA" styleClass="text-field-custom" visible="false" />
+
+        <!-- Botões de Ação no final -->
+        <Region VBox.vgrow="ALWAYS" /> <!-- Preenche o espaço disponível -->
+
+        <!-- HBox para alinhar os botões -->
+        <HBox spacing="15" alignment="CENTER_RIGHT">
+            <Button style="-fx-background-color: #007BFF; -fx-text-fill: white; -fx-pref-width: 120px;" text="Save" onAction="#onSubmit" />
+            <Button style="-fx-background-color: #B0B0B0; -fx-text-fill: white; -fx-pref-width: 120px;" text="Cancel" onAction="#onManualEntryClick" />
+        </HBox>
+    </VBox>
+
+</AnchorPane>

@@ -4,11 +4,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.jala.university.application.service.CustomerService;
-import org.jala.university.infrastructure.config.SpringFXMLLoader;
-import org.junit.jupiter.api.BeforeEach;
+import org.jala.university.application.service.service_account.CustomerService;
+import org.jala.university.presentation.controller.Account.LoginController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -35,7 +33,7 @@ public class LoginControllerTest extends ApplicationTest {
         MockitoAnnotations.openMocks(this);
 
         // Load the FXML
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Account/login.fxml"));
 
         // Inject the mock CustomerService
         loader.setControllerFactory(controllerClass -> {
