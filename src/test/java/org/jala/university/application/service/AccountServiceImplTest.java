@@ -6,7 +6,7 @@ import org.jala.university.application.service.service_account.AccountServiceImp
 import org.jala.university.domain.entity.entity_account.Account;
 import org.jala.university.domain.entity.entity_account.AccountStatus;
 import org.jala.university.domain.entity.entity_account.Currency;
-import org.jala.university.domain.repository.AccountRepository;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

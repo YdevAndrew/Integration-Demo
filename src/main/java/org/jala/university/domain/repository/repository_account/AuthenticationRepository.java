@@ -1,4 +1,4 @@
-package org.jala.university.domain.repository;
+package org.jala.university.domain.repository.repository_account;
 
 import org.jala.university.domain.entity.entity_account.Authentication;
 import org.springframework.data.jpa.repository.JpaRepository;

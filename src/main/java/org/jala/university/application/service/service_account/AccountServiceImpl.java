@@ -2,7 +2,7 @@ package org.jala.university.application.service.service_account;
 
 import org.jala.university.application.dto.dto_account.AccountDto;
 import org.jala.university.domain.entity.entity_account.Account;
-import org.jala.university.domain.repository.AccountRepository;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

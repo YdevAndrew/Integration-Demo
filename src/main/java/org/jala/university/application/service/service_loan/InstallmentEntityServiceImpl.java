@@ -5,7 +5,7 @@ import java.util.List;
 import org.jala.university.application.dto.dto_loan.InstallmentEntityDto;
 import org.jala.university.application.mapper.mapper_loan.InstallmentEntityMapper;
 import org.jala.university.domain.entity.entity_loan.InstallmentEntity;
-import org.jala.university.domain.repository.InstallmentEntityRepository;
+import org.jala.university.domain.repository.repository_loan.InstallmentEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class InstallmentEntityServiceImpl {

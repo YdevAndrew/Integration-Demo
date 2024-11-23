@@ -2,7 +2,7 @@ package org.jala.university.infrastructure.persistance;
 
 import org.jala.university.application.dto.dto_account.AccountDto;
 import org.jala.university.domain.entity.entity_account.Account;
-import org.jala.university.domain.repository.AccountRepository;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

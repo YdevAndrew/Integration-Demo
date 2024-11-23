@@ -1,4 +1,4 @@
-package org.jala.university.domain.repository;
+package org.jala.university.domain.repository.repository_loan;
 
 
 import org.jala.university.domain.entity.entity_loan.FormEntity;

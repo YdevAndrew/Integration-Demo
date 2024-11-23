@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.jala.university.application.dto.dto_loan.FormEntityDto;
 import org.jala.university.application.mapper.mapper_loan.FormEntityMapper;
 import org.jala.university.domain.entity.entity_loan.FormEntity;
-import org.jala.university.domain.repository.FormEntityRepository;
+import org.jala.university.domain.repository.repository_loan.FormEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

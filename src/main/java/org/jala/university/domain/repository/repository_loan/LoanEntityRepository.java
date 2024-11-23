@@ -1,4 +1,4 @@
-package org.jala.university.domain.repository;
+package org.jala.university.domain.repository.repository_loan;
 
 import java.util.List;
 

@@ -12,7 +12,7 @@ import org.jala.university.application.service.service_loan.LoanEntityService;
 import org.jala.university.application.service.service_loan.LoanEntityServiceImpl;
 import org.jala.university.application.service.service_loan.LoanResultsService;
 import org.jala.university.application.service.service_loan.LoanResultsServiceImpl;
-import org.jala.university.domain.repository.AccountRepository;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;

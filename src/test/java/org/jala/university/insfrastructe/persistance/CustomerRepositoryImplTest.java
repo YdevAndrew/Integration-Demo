@@ -2,7 +2,7 @@ package org.jala.university.insfrastructe.persistance;
 
 import org.jala.university.MainApp;
 import org.jala.university.domain.entity.entity_account.Customer;
-import org.jala.university.domain.repository.CustomerRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
