@@ -13,13 +13,20 @@ import org.jala.university.ServiceFactory;
 import org.jala.university.application.dto.dto_account.CustomerDto;
 import org.jala.university.application.service.service_account.CustomerService;
 import org.jala.university.application.service.service_account.CustomerServiceImpl;
+import org.jala.university.domain.entity.entity_account.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 @Controller
 public class ProfileViewController {
@@ -104,26 +111,6 @@ public class ProfileViewController {
         loadCustomerData();
     }
 
-    private void loadCustomerData() {
-        try {
-            CustomerDto user = customerService.getCustomer(2);
-
-            fullNameLabel.setText(user.getFullName());
-            cpfLabel.setText(user.getCpf());
-            genderLabel.setText(user.getGender());
-            birthdayLabel.setText(user.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            streetLabel.setText(user.getStreet());
-            districtLabel.setText(user.getDistrict());
-            stateLabel.setText(user.getState());
-            postalCodeLabel.setText(user.getPostalCode());
-            countryLabel.setText(user.getCountry());
-            emailLabel.setText(user.getEmail());
-            phoneNumberLabel.setText(user.getPhoneNumber());
-        } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Erro", "Não foi possível carregar os dados do cliente.");
-            e.printStackTrace();
-        }
-    }
 
     @FXML
     private void handleProfileButtonAction(ActionEvent event) {
@@ -185,4 +172,35 @@ public class ProfileViewController {
 
         return alert.showAndWait().filter(response -> response == javafx.scene.control.ButtonType.OK).isPresent();
     }
+    private void loadCustomerData() {
+        try {
+            // Recuperando o usuário logado a partir do SecurityContextHolder
+            CustomerService customerservice = SecurityContextHolder.getContext().getAuthentication();
+            String username = customerservice.getCpf(); // O username é o email ou CPF
+
+            // Aqui, você pode usar o username para buscar o cliente
+            CustomerDto user = customerService.getCustomerByEmail(username);  // Use o email ou CPF para buscar o cliente
+
+            // Agora você preenche as informações na interface
+            fullNameLabel.setText(user.getFullName());
+            cpfLabel.setText(user.getCpf());
+            genderLabel.setText(user.getGender());
+            birthdayLabel.setText(user.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            streetLabel.setText(user.getStreet());
+            districtLabel.setText(user.getDistrict());
+            stateLabel.setText(user.getState());
+            postalCodeLabel.setText(user.getPostalCode());
+            countryLabel.setText(user.getCountry());
+            emailLabel.setText(user.getEmail());
+            phoneNumberLabel.setText(user.getPhoneNumber());
+        } catch (Exception e) {
+            showAlert(AlertType.ERROR, "Erro", "Não foi possível carregar os dados do cliente.");
+            e.printStackTrace();
+        }
+    }
 }
+
+
+
+
+

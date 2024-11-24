@@ -144,5 +144,31 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findAllSortedByName().stream()
                 .map(CustomerMapper::toDto)
                 .collect(Collectors.toList());
+
+
+    }
+    @Override
+    public CustomerDto getCustomerByEmail(String email) {
+        // Busca o cliente pelo email
+        Customer customer = customerRepository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o email: " + email));
+
+        // Converte o Customer para CustomerDto e retorna
+        return new CustomerDto(
+                customer.getId(),
+                customer.getFullName(),
+                customer.getCpf(),
+                customer.getEmail(),
+                customer.getGender(),
+                customer.getPhoneNumber(),
+                customer.getBirthday(),
+                customer.getCountry(),
+                customer.getDistrict(),
+                customer.getState(),
+                customer.getPostalCode(),
+                customer.getStreet(),
+                customer.getPassword(),
+                customer.getVerificationCode()
+        );
     }
 }
