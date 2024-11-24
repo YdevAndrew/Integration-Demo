@@ -1,6 +1,7 @@
 package org.jala.university.domain.repository.repository_account;
 
 import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,4 +26,5 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     @Query("DELETE FROM Account a WHERE a.accountNumber = :accountNumber")
     void deleteByAccountNumber(@Param("accountNumber") String accountNumber);
+
 }

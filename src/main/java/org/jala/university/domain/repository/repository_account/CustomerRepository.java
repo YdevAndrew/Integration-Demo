@@ -30,7 +30,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("SELECT c FROM Customer c ORDER BY c.fullName ASC")
     List<Customer> findAllSortedByName();
 
-
+    @Query("SELECT c FROM Customer c JOIN Account a ON c.id = a.customerId WHERE a.id = :accountId")
+    Optional<Customer> findCustomerByAccountId(@Param("accountId") Integer accountId);
 
     // Busca clientes ativos (exemplo, supomos que há um campo booleano 'active' na entidade Customer)
    // @Query("SELECT c FROM Customer c WHERE c.active = true")
