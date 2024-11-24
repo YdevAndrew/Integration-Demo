@@ -1,0 +1,32 @@
+
+.invoiceBox {
+    -fx-background-color: #1048B0;
+    -fx-alignment: center;
+    -fx-background-radius: 25;
+}
+
+.invoiceBoxPresent {
+    -fx-background-color: #0e47b8;
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-alignment: center;
+    -fx-background-radius: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 5, 0, 0, 5);
+}
+
+.payButton {
+    -fx-background-color: white;
+    -fx-text-fill: #d44f43;
+    -fx-background-radius: 10;
+    -fx-padding: 5 15;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 3);
+    -fx-border-color: #d44f43;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.payButton:pressed {
+    -fx-background-color: rgba(212, 79, 67, 0.4);
+    -fx-text-fill: #d44f43;
+}
