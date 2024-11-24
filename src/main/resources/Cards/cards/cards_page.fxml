@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: transparent;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Card.CardsPageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: transparent;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Card.CardsPageController">
    <children>
       <Pane id="physical-cards-conteiner-1" layoutX="74.0" layoutY="37.0" prefHeight="230.0" prefWidth="360.0">
          <children>
             <ImageView id="physical-cards-image1" fx:id="physicalCardsImage1" fitHeight="220.0" fitWidth="346.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/Creditcard2.png" />
+                  <Image url="@../../img/Card/Creditcard2.png" />
                </image>
             </ImageView>
             <Label id="physical-card-number" fx:id="physicalCardNumber" layoutX="14.0" layoutY="50.0" text="0000 0000 0000 0000" />
@@ -42,11 +38,12 @@
                <graphic>
                   <ImageView fx:id="configPhysical" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../img/config.png" />
+                        <Image url="@../../img/Card/config.png" />
                      </image>
                   </ImageView>
                </graphic>
             </MenuButton>
+            <Label id="physical-date-card" fx:id="physicalCvvCard1" layoutX="14.0" layoutY="155.0" prefHeight="27.0" prefWidth="37.0" text="000" />
          </children>
       </Pane>
       <Pane id="physical-cards-conteiner-2" layoutX="452.0" layoutY="37.0" prefHeight="230.0" prefWidth="346.0">
@@ -58,7 +55,7 @@
          <children>
             <ImageView id="image-virtual-card1" fx:id="VirtualCardsImage2" fitHeight="195.0" fitWidth="367.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/Creditcard1.png" />
+                  <Image url="@../../img/Card/Creditcard1.png" />
                </image></ImageView>
             <Label id="virtual-card-number" fx:id="virtualCardNumber" layoutX="18.0" layoutY="41.0" text="0000 0000 0000 0000" />
             <Label id="virtual-date-card" fx:id="virtualDateCard" layoutX="253.0" layoutY="101.0" text="00/00" />
@@ -72,7 +69,7 @@
                <graphic>
                   <ImageView fx:id="configVirtual" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../img/config.png" />
+                        <Image url="@../../img/Card/config.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -99,6 +96,7 @@
                   </MenuItem>
                </items>
             </MenuButton>
+            <Label id="physical-date-card" fx:id="physicalCvvCard2" layoutX="39.0" layoutY="130.0" prefHeight="27.0" prefWidth="37.0" text="000" />
          </children>
       </Pane>
       <Pane id="virtual-cards-conteiner1" layoutX="452.0" layoutY="334.0" prefHeight="230.0" prefWidth="346.0">

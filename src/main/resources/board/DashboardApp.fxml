@@ -17,11 +17,11 @@
 
 <AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.commons.presentation.Controller.DashboardController">
     <children>
-        <Pane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
-        <Pane fx:id="mainContent" prefHeight="800.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
-        </Pane>
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
-        <AnchorPane id="contentPane" fx:id="mainViewContainer" layoutX="321.0" layoutY="70.0" prefHeight="759.0" prefWidth="878.0" />
+        <AnchorPane  fx:id="mainViewContainer" layoutX="321.0" layoutY="70.0" prefHeight="759.0" prefWidth="878.0" />
+        <AnchorPane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
+        <AnchorPane fx:id="mainContent" prefHeight="800.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+        </AnchorPane>
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
                 <!-- Imagem do usuário -->

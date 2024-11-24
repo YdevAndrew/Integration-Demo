@@ -32,7 +32,7 @@ public class CardsPageController {
     @FXML
     private Label physicalCardNumber, physicalDateCard, physicalNameSurname;
     @FXML
-    private Label virtualCardNumber, virtualDateCard, virtualNameSurname;
+    private Label virtualCardNumber, virtualDateCard, virtualNameSurname, physicalCvvCard1, physicalCvvCard2;
     @FXML
     private Button blockButtonPhysical, blockButtonVirtual, deletCardButton, buttonAdjustLimit, buttonAdjustLimit2;
     @FXML
@@ -116,7 +116,7 @@ public class CardsPageController {
                 System.out.println("Botão de Alterar Senha 2 clicado.");
             }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/credit_card/adjustLimit/modal_adjust_limit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/adjustLimit/modal_adjust_limit.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -143,7 +143,7 @@ public class CardsPageController {
             System.out.println("Botão de Alterar Senha 2 clicado.");
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/credit_card/deletVirtualCard/delet_virtual_card.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/deletVirtualCard/delet_virtual_card.fxml"));
         Parent root = loader.load();
 
         Stage stage = new Stage();
@@ -180,7 +180,7 @@ public class CardsPageController {
             }
 
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/credit_card/changePassword/change_password.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/changePassword/change_password.fxml"));
             Parent root = loader.load();
 
 
@@ -266,12 +266,14 @@ public class CardsPageController {
                     physicalDateCard.setText(card.getExpiration_date());
                     physicalCardNumber.setText(card.getNumberCard());
                     physicalNameSurname.setText(card.getName_card());
+                    physicalCvvCard1.setText(card.getCvv());
                     System.out.println(card.getNumberCard());
                 }
                 if (card.getTypeCard().equals("Virtual")) {
                     virtualDateCard.setText(card.getExpiration_date());
                     virtualCardNumber.setText(card.getNumberCard());
                     virtualNameSurname.setText(card.getName_card());
+                    physicalCvvCard2.setText(card.getCvv());
                 }
             });
         }
