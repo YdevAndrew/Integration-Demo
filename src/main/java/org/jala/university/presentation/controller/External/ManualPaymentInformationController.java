@@ -4,12 +4,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
+
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -133,7 +134,7 @@ public class ManualPaymentInformationController extends BaseController {
             PasswordPromptController passwordPromptController = loader.getController();
             if (passwordPromptController != null) {
                 // Define a tela que irá aparecer após a confirmação da senha
-                passwordPromptController.setPath("/gui/ScheduleServices/PaymentStatus.fxml");
+                passwordPromptController.setPath("/External/ScheduleServices/PaymentStatus.fxml");
                 // Passa o controlador de PaymentDetailsController para o pop-up de senha
                 passwordPromptController.setPaymentDetailsController(this);
             } else {

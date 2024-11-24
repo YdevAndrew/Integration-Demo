@@ -10,9 +10,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
-
-import java.io.IOException;
 import java.util.function.Consumer;
+
+import java.util.function.Consumer;
+import java.io.IOException;
 
 @Controller
 public class PasswordPromptController extends BaseController {

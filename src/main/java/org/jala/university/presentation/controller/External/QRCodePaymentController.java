@@ -176,7 +176,7 @@ public class QRCodePaymentController extends BaseController {
     @FXML
     public void onManualEntryClick(ActionEvent event) {
         try {
-            FXMLLoader loader = springFXMLLoader.load("/External/PaymentModule/ManualPaymentScreens/QRCodePayment/ManuallyInsert.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/External/ManualPaymentScreens/QRCodePayment/ManuallyInsert.fxml");
             Pane manualInsertPane = loader.load();
 
             ManuallyInsertController manuallyInsertController = loader.getController();
