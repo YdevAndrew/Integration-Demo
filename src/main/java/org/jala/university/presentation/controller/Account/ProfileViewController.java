@@ -1,10 +1,6 @@
 package org.jala.university.presentation.controller.Account;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -12,10 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import org.jala.university.ServiceFactory;
 import org.jala.university.application.dto.dto_account.CustomerDto;
 import org.jala.university.application.service.service_account.CustomerService;
@@ -32,7 +25,6 @@ import org.springframework.stereotype.Controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
@@ -119,51 +111,27 @@ public class ProfileViewController {
         loadCustomerData();
     }
 
+
+    @FXML
+    private void handleProfileButtonAction(ActionEvent event) {
+        showAlert(AlertType.INFORMATION, "Profile", "Navegar para a página de perfil.");
+    }
+
     @FXML
     private void handleDashboardButtonAction(ActionEvent event) {
-            try {
-                FXMLLoader loader = org.jala.university.config.config_account.SpringFXMLLoader.create("/board/DashboardApp.fxml");
-                Parent root = loader.load();
-
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+        showAlert(AlertType.INFORMATION, "Dashboard", "Navegar para o dashboard.");
+    }
 
     @FXML
-    public void showHelpModal(ActionEvent event) {
-        try {
-            // Carregar o FXML do modal
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Account/help.fxml"));
-            Parent root = loader.load();
-
-            // Criar um novo Stage para o modal
-            Stage modalStage = new Stage();
-            modalStage.initModality(Modality.APPLICATION_MODAL);
-            modalStage.initOwner(((Node) event.getSource()).getScene().getWindow());
-            modalStage.setTitle("Help");
-
-            // Configurar a cena do modal
-            Scene scene = new Scene(root);
-            scene.setFill(null);
-            modalStage.setScene(scene);
-
-            // Exibir o modal
-            modalStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void handleHelpButtonAction(ActionEvent event) {
+        showAlert(AlertType.INFORMATION, "Help", "Abrir a seção de ajuda.");
     }
 
     @FXML
     private void handleLogoutButtonAction(ActionEvent event) {
         boolean confirm = confirmAction("Logout", "Tem certeza que deseja sair?");
         if (confirm) {
-            System.exit(0); //
+            System.exit(0); // Lógica para logout
         }
     }
 
@@ -249,9 +217,6 @@ public class ProfileViewController {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Erro", "Erro ao carregar dados do cliente: " + e.getMessage());
         }
-    }
-
-    public void deleteAccount(MouseEvent mouseEvent) {
     }
 }
 

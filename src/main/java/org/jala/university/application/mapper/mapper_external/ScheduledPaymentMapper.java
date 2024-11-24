@@ -3,6 +3,7 @@ package org.jala.university.application.mapper.mapper_external;
 import org.jala.university.application.dto.dto_external.ScheduledPaymentDTO;
 import org.jala.university.domain.entity.entity_account.Account;
 import org.jala.university.domain.entity.entity_external.ScheduledPaymentEntity;
+//import org.jala.university.domain.entity.AccountEntity;
 
 public class ScheduledPaymentMapper {
 
@@ -19,7 +20,6 @@ public class ScheduledPaymentMapper {
                 .expiredDate(scheduledPaymentEntity.getExpiredDate())
                 .startDate(scheduledPaymentEntity.getStartDate())
                 .endDate(scheduledPaymentEntity.getEndDate())
-                .transactionDate(scheduledPaymentEntity.getTransactionDate())
                 .build();
     }
 
@@ -34,7 +34,6 @@ public class ScheduledPaymentMapper {
                 .expiredDate(scheduledPaymentDTO.getExpiredDate())
                 .startDate(scheduledPaymentDTO.getStartDate())
                 .endDate(scheduledPaymentDTO.getEndDate())
-                .transactionDate(scheduledPaymentDTO.getTransactionDate())
                 .build();
 
         // Configurar a referência à entidade Account aa

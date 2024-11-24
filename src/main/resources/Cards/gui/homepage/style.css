@@ -1,0 +1,34 @@
+.container_header{
+    -fx-background-color: #004BD6;
+    -fx-border:solid;
+    -fx-border-color: #000000;
+    -fx-border-width: 0 0 5px 0;
+    -fx-padding: 0 0 0 40;
+
+}
+
+.container_main {
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #004BD6 33%, #0047CB 66%, #002770 100%);
+}
+
+
+.container_labels{
+    -fx-padding: 0 40 0 0;
+    -fx-font-size: 25;
+
+}
+
+.container_labels Label{
+    -fx-text-fill: #FFFF;
+    -fx-cursor: hand;
+}
+
+
+.footer_container{
+    -fx-background-color: #002770;
+    -fx-border:solid;
+    -fx-border-color: #000000;
+    -fx-border-width: 5px 0 0 0;
+    -fx-padding: 0 0 0 40;
+}
+

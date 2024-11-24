@@ -6,8 +6,11 @@ import lombok.Value;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
+
 
 import org.jala.university.domain.entity.entity_account.Account;
+//import org.jala.university.domain.entity.AccountEntity;
 
 @Data
 @Builder
@@ -21,8 +24,7 @@ public class ScheduledPaymentDTO {
     String cnpjReceiver;
     String accountReceiver;
     String agencyReceiver;
-    LocalDate expiredDate;
+    String expiredDate;
     LocalDate startDate;
     LocalDate endDate;
-    LocalDateTime transactionDate;
 }

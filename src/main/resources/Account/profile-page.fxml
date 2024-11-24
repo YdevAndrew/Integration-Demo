@@ -1,112 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/profile-page.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Account.ProfileViewController">
+<?import javafx.scene.control.Label?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: #EAEEF1;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Account.ProfileViewController">
    <children>
-      <AnchorPane prefHeight="720.0" prefWidth="1288.0">
+      <AnchorPane prefHeight="69.0" prefWidth="1281.0" style="-fx-background-color: #010C6F;">
+         <children>
+            <ImageView fx:id="logoImageView" fitHeight="74.0" fitWidth="110.0" layoutX="1171.0" layoutY="-1.0">
+               <image>
+                  <Image url="@../assets/Group 3965.png" />
+               </image>
+            </ImageView>
+         </children>
             <children>
-            <AnchorPane layoutX="661.0" layoutY="169.0" prefHeight="499.0" prefWidth="613.0" style="-fx-border-color: #004BD6; -fx-border-width: 10;">
-               <children>
-                  <Text layoutX="222.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Infos">
-                     <font>
-                        <Font name="Graphik-Bold" size="24.0" />
-                     </font>
-                  </Text>
-      
-                     <Label layoutX="81.0" layoutY="156.0" text="Phone Number:" />
-                     <Label fx:id="phoneNumberLabel" layoutX="218.0" layoutY="156.0" text="-" />
-               </children>
-            </AnchorPane>
-               <Label fx:id="fullNameLabel" layoutX="319.0" layoutY="388.0" text="-">
-               <font>
-                  <Font name="Graphik-Bold" size="30.0" />
-               </font></Label>
+               <Label layoutX="50.0" layoutY="50.0" text="Full Name:" />
+               <Label layoutX="150.0" layoutY="50.0" fx:id="fullNameLabel" text="-" />
 
-               <Label layoutX="770.0" layoutY="373.0" text="CPF:" />
-               <Label fx:id="cpfLabel" layoutX="836.0" layoutY="373.0" text="-" />
+               <Label layoutX="50.0" layoutY="100.0" text="CPF:" />
+               <Label layoutX="150.0" layoutY="100.0" fx:id="cpfLabel" text="-" />
 
-               <Label layoutX="759.0" layoutY="421.0" text="Gender:" />
-               <Label fx:id="genderLabel" layoutX="836.0" layoutY="421.0" text="-" />
+               <Label layoutX="50.0" layoutY="150.0" text="Gender:" />
+               <Label layoutX="150.0" layoutY="150.0" fx:id="genderLabel" text="-" />
 
-               <Label layoutX="757.0" layoutY="476.0" text="Birthday:" />
-               <Label fx:id="birthdayLabel" layoutX="839.0" layoutY="476.0" text="-" />
+               <Label layoutX="50.0" layoutY="200.0" text="Birthday:" />
+               <Label layoutX="150.0" layoutY="200.0" fx:id="birthdayLabel" text="-" />
 
-               <Label layoutX="1039.0" layoutY="388.0" text="Street:" />
-               <Label fx:id="streetLabel" layoutX="1120.0" layoutY="388.0" text="-" />
+               <Label layoutX="50.0" layoutY="370.0" text="Street:" />
+               <Label layoutX="150.0" layoutY="370.0" fx:id="streetLabel" text="-" />
 
-               <Label layoutX="1035.0" layoutY="436.0" text="District:" />
-               <Label fx:id="districtLabel" layoutX="1123.0" layoutY="436.0" text="-" />
-               <Label fx:id="stateLabel" layoutX="839.0" layoutY="528.0" prefHeight="30.0" prefWidth="6.0" text="-" />
+               <Label layoutX="50.0" layoutY="420.0" text="District:" />
+               <Label layoutX="150.0" layoutY="420.0" fx:id="districtLabel" text="-" />
 
-               <Label layoutX="1032.0" layoutY="528.0" text="Country:" />
+               <Label layoutX="50.0" layoutY="470.0" text="State:" />
+               <Label layoutX="150.0" layoutY="470.0" fx:id="stateLabel" text="-" />
 
-               <Label layoutX="1041.0" layoutY="345.0" text="Email:" />
+               <Label layoutX="50.0" layoutY="520.0" text="Postal Code:" />
+               <Label layoutX="150.0" layoutY="520.0" fx:id="postalCodeLabel" text="-" />
 
-               <Label layoutX="1020.0" layoutY="491.0" text="Postal Code:" />
+               <Label layoutX="50.0" layoutY="570.0" text="Country:" />
+               <Label layoutX="150.0" layoutY="570.0" fx:id="countryLabel" text="-" />
 
-               <Label layoutX="767.0" layoutY="528.0" text="State:" />
+               <Label layoutX="50.0" layoutY="620.0" text="Email:" />
+               <Label layoutX="150.0" layoutY="620.0" fx:id="emailLabel" text="-" />
 
-                  <Button fx:id="dashboardButton" layoutX="10.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleDashboardButtonAction" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Dashboard" textAlignment="RIGHT">
-               <font>
-                  <Font name="Graphik-Bold" size="13.0" />
-               </font>
-            </Button>
-      
-                        <Button fx:id="logoutButton" layoutX="10.0" layoutY="649.0" mnemonicParsing="false" onAction="#handleLogoutButtonAction" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Logout" textAlignment="RIGHT">
-               <font>
-                  <Font name="Graphik-Bold" size="14.0" />
-               </font>
-            </Button>
-      
-            <ImageView fx:id="logoutImageView" layoutX="26.0" layoutY="651.0">
-               <image>
-                  <Image url="@../profile-page/logout.png" />
-               </image>
-            </ImageView>
-      
-            <ImageView fx:id="helpImageView" layoutX="28.0" layoutY="605.0">
-               <image>
-                  <Image url="@../profile-page/help.png" />
-               </image>
-            </ImageView>
-      
-            <Button fx:id="helpButton" layoutX="10.0" layoutY="599.0" mnemonicParsing="false" onAction="#showHelpModal" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Help" textAlignment="RIGHT">
-               <font>
-                  <Font name="Graphik-Bold" size="14.0" />
-               </font>
-            </Button>
-
-            <ImageView fx:id="duoIconsImageView" layoutX="22.0" layoutY="552.0">
-               <image>
-                  <Image url="@../profile-page/duo-icons_dashboard.png" />
-               </image>
-            </ImageView>
-               <Label fx:id="postalCodeLabel" layoutX="1126.0" layoutY="491.0" text="-" />
-               <Label fx:id="countryLabel" layoutX="1129.0" layoutY="528.0" text="-" />
-               <Label fx:id="emailLabel" layoutX="1120.0" layoutY="345.0" text="-" />
-            <AnchorPane prefHeight="90.0" prefWidth="1280.0" style="-fx-background-color: #004BD6;">
-               <children>
-                  <ImageView fitHeight="96.0" fitWidth="146.0" layoutX="1133.0" layoutY="-3.0">
-                     <image>
-                        <Image url="@/assets/Logo.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="222.0" layoutY="145.0">
-               <image>
-                  <Image url="@../profile-page/default-pic.png" />
-               </image>
-            </ImageView>
+               <Label layoutX="50.0" layoutY="670.0" text="Phone Number:" />
+               <Label layoutX="150.0" layoutY="670.0" fx:id="phoneNumberLabel" text="-" />
             </children>
       </AnchorPane>
+
+      <ImageView fx:id="profileImageView" layoutX="34.0" layoutY="469.0">
+         <image>
+            <Image url="@../profile-page/gg_profile.png" />
+         </image>
+      </ImageView>
+
+      <ImageView fx:id="duoIconsImageView" layoutX="32.0" layoutY="534.0">
+         <image>
+            <Image url="@../profile-page/duo-icons_dashboard.png" />
+         </image>
+      </ImageView>
+
+      <ImageView fx:id="logoutImageView" layoutX="36.0" layoutY="658.0">
+         <image>
+            <Image url="@../profile-page/logout.png" />
+         </image>
+      </ImageView>
+
+      <ImageView fx:id="helpImageView" layoutX="39.0" layoutY="604.0">
+         <image>
+            <Image url="@../profile-page/help.png" />
+         </image>
+      </ImageView>
+
+      <Button fx:id="profileButton" layoutX="32.0" layoutY="469.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Profile" textAlignment="RIGHT" onAction="#handleProfileButtonAction">
+         <font>
+            <Font name="Graphik-Bold" size="14.0" />
+         </font>
+      </Button>
+
+      <ImageView fx:id="solarPenImageView" fitHeight="33.0" fitWidth="33.0" layoutX="926.0" layoutY="271.0">
+         <image>
+            <Image url="@../profile-page/solar_pen-bold.png" />
+         </image>
+      </ImageView>
+
+      <Button fx:id="dashboardButton" layoutX="32.0" layoutY="532.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Dashboard" textAlignment="RIGHT" onAction="#handleDashboardButtonAction">
+         <font>
+            <Font name="Graphik-Bold" size="13.0" />
+         </font>
+      </Button>
+
+      <Button fx:id="helpButton" layoutX="32.0" layoutY="598.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Help" textAlignment="RIGHT" onAction="#handleHelpButtonAction">
+         <font>
+            <Font name="Graphik-Bold" size="14.0" />
+         </font>
+      </Button>
+
+      <Button fx:id="logoutButton" layoutX="32.0" layoutY="658.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="199.0" style="-fx-background-color: transparent;" text="Logout" textAlignment="RIGHT" onAction="#handleLogoutButtonAction">
+         <font>
+            <Font name="Graphik-Bold" size="14.0" />
+         </font>
+      </Button>
+
+      <Button fx:id="updateProfilePictureButton" layoutX="925.0" layoutY="268.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="229.0" style="-fx-background-color: Transparent;" text="Update Profile Picture" onAction="#handleUpdateProfilePictureButtonAction">
+         <font>
+            <Font name="Graphik-Bold" size="13.0" />
+         </font>
+      </Button>
 
       <!--
       <ImageView fitHeight="288.0" fitWidth="361.0" layoutX="460.0" layoutY="127.0">
