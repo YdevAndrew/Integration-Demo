@@ -1,0 +1,27 @@
+/* Estilo do título */
+.titulo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1A2E7A;
+    -fx-wrap-text: true;
+}
+
+/* Estilo do botão */
+.botao {
+    -fx-background-color: #1A2E7A;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 15;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0.5, 0, 3);
+}
+
+.botao:pressed {
+    -fx-background-color: rgba(35, 63, 184, 0.86);
+    -fx-text-fill: white;
+}
+
+.botao:hover {
+    -fx-background-color: rgba(35, 63, 184, 0.86);
+    -fx-text-fill: white;
+}

@@ -20,6 +20,10 @@ import org.jala.university.commons.presentation.ViewSwitcher;
 import org.jala.university.config.config_account.SpringFXMLLoader;
 import org.jala.university.utils.Validations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import static org.jala.university.config.config_account.SpringFXMLLoader.applicationContext;
 
 import java.io.IOException;
+import java.util.List;
 
 @Setter
 @Controller
@@ -106,17 +111,22 @@ public class LoginController {
 
             verifyIfIsEmpty(cpf, password);
 
+            // Autenticar o usuário utilizando o Spring Security
             boolean authenticated = customerService.authenticate(cpf, password);
 
             if (authenticated) {
-                System.out.println("Login bem-sucedido!");
-
+                // Agora o Spring Security deve cuidar da autenticação e do contexto
+                Authentication auth = new UsernamePasswordAuthenticationToken(cpf, password, List.of(new SimpleGrantedAuthority("USER")));
+                SecurityContextHolder.getContext().setAuthentication(auth);
+                // Obter o Stage atual
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
 
+                // Carregar a tela de Dashboard
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/board/DashboardApp.fxml"));
                 loader.setControllerFactory(applicationContext::getBean);
                 Parent root = loader.load();
 
+                // Alterar o conteúdo da janela
                 currentStage.setScene(new Scene(root));
                 currentStage.show();
             } else {

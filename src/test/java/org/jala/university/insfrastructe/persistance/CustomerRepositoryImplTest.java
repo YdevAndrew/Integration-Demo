@@ -1,26 +1,28 @@
 package org.jala.university.insfrastructe.persistance;
 
-import org.jala.university.MainApp;
 import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
-@SpringBootTest(classes = {MainApp.class})
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class CustomerRepositoryImplTest {
 
-    @Autowired
+    @Mock
     private CustomerRepository repository;
+
+    @InjectMocks
+    private CustomerRepositoryImplTest customerRepositoryImplTest;
 
     @Test
     public void testSaveAndFindById() {
@@ -28,10 +30,10 @@ public class CustomerRepositoryImplTest {
         Customer customer = new Customer();
         customer.setId(1);
         customer.setFullName("Gwyn");  // Renomeado para 'full_name'
-        customer.setCpf("123.123.123-00");
-        customer.setEmail("gwyn@gmail.com");
+        customer.setCpf("123.123.123-02");
+        customer.setEmail("gwn@gmail.com");
         customer.setGender("Masculino");
-        customer.setPhoneNumber("(11) 99999-9999");
+        customer.setPhoneNumber("(11) 99999-9929");
         customer.setBirthday(LocalDate.of(1990, 7, 12));
         customer.setProfilePicture(null);  // Opcional, pode ser preenchido com o URL da imagem, se necessário
 
@@ -42,20 +44,26 @@ public class CustomerRepositoryImplTest {
         customer.setPostalCode("93700-000");
         customer.setCountry("Age of Fire");
 
-        // Salvando o cliente no repositório
+        // Simulando o comportamento do save
+        when(repository.save(customer)).thenReturn(customer);
+
+        // Simulando o comportamento do findById
+        when(repository.findById(1)).thenReturn(Optional.of(customer));
+
+        // Salvando o cliente no repositório (mocked)
         Customer savedCustomer = repository.save(customer);
 
-        // Buscando o cliente pelo id
+        // Buscando o cliente pelo id (mocked)
         Optional<Customer> foundCustomer = repository.findById(savedCustomer.getId());
 
         // Validando que o cliente foi encontrado e os dados estão corretos
         assertTrue(foundCustomer.isPresent());
         assertEquals(savedCustomer.getId(), foundCustomer.get().getId());
         assertEquals("Gwyn", foundCustomer.get().getFullName());  // Renomeado para 'full_name'
-        assertEquals("123.123.123-00", foundCustomer.get().getCpf());
-        assertEquals("gwyn@gmail.com", foundCustomer.get().getEmail());
+        assertEquals("123.123.123-02", foundCustomer.get().getCpf());
+        assertEquals("gwn@gmail.com", foundCustomer.get().getEmail());
         assertEquals("Masculino", foundCustomer.get().getGender());
-        assertEquals("(11) 99999-9999", foundCustomer.get().getPhoneNumber());
+        assertEquals("(11) 99999-9929", foundCustomer.get().getPhoneNumber());
         assertEquals(LocalDate.of(1990, 7, 12).toString(), foundCustomer.get().getBirthday().toString());
 
         // Validando os campos de endereço

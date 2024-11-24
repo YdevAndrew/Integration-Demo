@@ -1,0 +1,13 @@
+
+.data-button {
+    -fx-background-color: #fafafa;
+    -fx-font-family: 'Graphik Bold';
+    -fx-font-size: 35;
+    -fx-background-radius: 50%;
+    -fx-text-fill: black;
+}
+
+.data-button:selected {
+    -fx-background-color: #1346A6;
+    -fx-text-fill: #FAFAFA;
+}
