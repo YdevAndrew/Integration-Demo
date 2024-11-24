@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jala.university.presentation.controller.Card.CardsPageController;
 import org.jala.university.application.dto.dto_account.CustomerDto;
 import org.jala.university.application.service.service_account.AccountService;
 import org.jala.university.application.service.service_account.CustomerService;
@@ -80,7 +81,11 @@ public class DashboardController extends BaseController {
     @FXML
     private Label dateLabel;
 
-    private final boolean isBalanceVisible = false;
+    @FXML
+    private Pane mainContent;
+
+    private boolean isBalanceVisible = false; // Controle de visibilidade do saldo
+    private double balance = 1234.56; // Exemplo de valor do saldo, substitua pelo valor real
 
     @Autowired
     public DashboardController(SpringFXMLLoader springFXMLLoader, CustomerService customerService, AccountService accountService) {
@@ -104,6 +109,15 @@ public class DashboardController extends BaseController {
         transactionButton.setOnAction(event -> loadTransactionView());
         pixButton.setOnAction(event -> loadPixView());
     }
+
+    @FXML
+    private void loadInvoiceHistory() throws IOException {
+        clearAllPanels();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/invoiceHistory/invoice_history.fxml"));
+        AnchorPane invoiceHistory = loader.load();
+        mainContent.getChildren().setAll(invoiceHistory);
+    }
+
 
     @FXML
     public void toggleBalanceVisibility() {
@@ -136,6 +150,46 @@ public class DashboardController extends BaseController {
         }
     }
 
+    @FXML
+    private void loadMyCards() throws IOException {
+        clearAllPanels();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/cards/cards_page.fxml"));
+            Pane cardsPage = loader.load();
+            mainContent.getChildren().setAll(cardsPage);
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar cards_page.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @FXML
+    private void loadRequestCard() throws IOException {
+
+
+        clearAllPanels();
+        if(CardsPageController.validIfPhysicalExist() != null){
+            if(CardsPageController.validIfVirtualExist() != null){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestACard/request_a_card.fxml"));
+                AnchorPane requestCard = loader.load();
+                mainContent.getChildren().setAll(requestCard);
+            }else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestAVirtualCard/request_a_card.fxml"));
+                AnchorPane requestCard = loader.load();
+                mainContent.getChildren().setAll(requestCard);
+
+
+            }
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestACard/request_a_card.fxml"));
+            AnchorPane requestCard = loader.load();
+            mainContent.getChildren().setAll(requestCard);
+        }
+
+    }
+
     /**
      * Remove todos os painéis e limpa os contêineres.
      */
@@ -149,6 +203,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     private void loadTransactionView() {
+        clearAllPanels();
         try {
             clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_paymentScreen.fxml"));
@@ -161,6 +216,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     private void loadPixView() {
+        clearAllPanels();
         try {
             clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_TED&PIX.fxml"));
@@ -207,6 +263,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     public void loadMainViewLoan() {
+        clearAllPanels();
         try {
             clearAllPanels(); // Oculta os outros painéis antes de carregar o módulo Loan
             System.out.println("Trying to load main-viewLoan.fxml...");
@@ -227,6 +284,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     private void loadLoansView() {
+        clearAllPanels();
         try {
             FXMLLoader loader = springFXMLLoader.load("/Loans/Myloans/myloans.fxml");
             Node loansView = loader.load();
