@@ -14,7 +14,7 @@
     <maven.compiler.target>17</maven.compiler.target>
     <commons.module.version>1.0-SNAPSHOT</commons.module.version>
     <spring.boot.version>3.2.4</spring.boot.version>
-      <spring-security.version>5.6.2</spring-security.version>
+    <spring-security.version>5.6.2</spring-security.version>
     <jakarta.persistence.version>3.1.0</jakarta.persistence.version>
     <lombok.version>1.18.28</lombok.version>
     <javafx.version>22</javafx.version>
@@ -44,6 +44,11 @@
       <version>3.3.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.mindrot</groupId>
+      <artifactId>jbcrypt</artifactId>
+      <version>0.4</version>
+    </dependency>
     <!-- Dependência para org.json (para JSONObject) -->
     <dependency>
       <groupId>org.json</groupId>
@@ -92,6 +97,11 @@
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-fxml</artifactId>
       <version>${javafx.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.9</version>
     </dependency>
 
     <!-- Unit Test Dependencies -->
