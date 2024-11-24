@@ -22,7 +22,7 @@ public class MainViewControllerLoan {
     public SpringFXMLLoader springFXMLLoader;
 
     @FXML
-    public Pane mainPane;
+    public Pane mainContent;
 
     @FXML
     public Button loanButton;
@@ -73,8 +73,8 @@ public class MainViewControllerLoan {
             FXMLLoader loader = springFXMLLoader.load("/Loans/FormLoan/form.fxml");
             Pane loanPane = loader.load();
 
-            mainPane.getChildren().clear();
-            mainPane.getChildren().add(loanPane);
+            mainContent.getChildren().clear();
+            mainContent.getChildren().add(loanPane);
         } catch (IOException e) {
             System.err.println("Error loading form.fxml: " + e.getMessage());
             e.printStackTrace();
@@ -86,8 +86,8 @@ public class MainViewControllerLoan {
      */
     @FXML
     public void goBackToMenu() {
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add(loanButton);
+        mainContent.getChildren().clear();
+        mainContent.getChildren().add(loanButton);
         toggleVisibility(true);
     }
 

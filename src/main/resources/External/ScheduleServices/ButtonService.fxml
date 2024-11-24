@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="mainContent" prefHeight="400.0" prefWidth="600.0"   style="-fx-background-color: transparent;" styleClass="content"  xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.ButtonServiceController">
+
+    <!-- Adicionando ScrollPane para permitir rolagem -->
+    <ScrollPane fx:id="scrollPane" cache="true" cacheHint="SCALE" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+            <VBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="1174.0" prefWidth="421.0" spacing="10">
+                <Button alignment="CENTER" contentDisplay="CENTER" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleService1Click" prefHeight="39.0" prefWidth="196.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service1">
+
+
+
+                </Button>
+
+                <Button onAction="#handleService2Click" prefHeight="41.0" prefWidth="194.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 2" />
+
+                <Button onAction="#handleService3Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 3" />
+
+                <Button onAction="#handleService4Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 4" />
+
+                <Button onAction="#handleService5Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 5" />
+                <Button onAction="#handleService2Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 2" />
+
+                <Button onAction="#handleService3Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 3" />
+
+                <Button onAction="#handleService4Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 4" />
+
+                <Button onAction="#handleService5Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 5" />
+                <Button onAction="#handleService2Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 2" />
+
+                <Button onAction="#handleService3Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 3" />
+
+                <Button onAction="#handleService4Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 4" />
+
+                <Button onAction="#handleService5Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 5" />
+                <Button onAction="#handleService2Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 2" />
+
+                <Button onAction="#handleService3Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 3" />
+
+                <Button onAction="#handleService4Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 4" />
+                <Button onAction="#handleService2Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 2" />
+
+                <Button onAction="#handleService3Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 3" />
+
+                <Button onAction="#handleService4Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 4" />
+
+                <Button onAction="#handleService5Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 5" />
+                <Button onAction="#handleService2Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 2" />
+
+                <Button onAction="#handleService3Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 3" />
+
+                <Button onAction="#handleService4Click" prefHeight="42.0" prefWidth="200.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;" text="Service 4" />
+
+
+
+
+
+                <!-- Repita os botões conforme necessário -->
+
+            </VBox>
+        </content>
+    </ScrollPane>
+
+</AnchorPane>

@@ -1,22 +1,27 @@
 package org.jala.university.presentation.controller.External;
+
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.layout.AnchorPane;
+import org.jala.university.commons.presentation.BaseController;
+import org.springframework.stereotype.Controller;
+
 import java.io.IOException;
 
-public class ServiceDetailController {
+@Controller
+public class ServiceDetailController extends BaseController {
     @FXML
     private AnchorPane mainContent;
     @FXML
     public void handleEditClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ScheduleServices/EditService.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/EditService.fxml"));
         Pane serviceDetailContent = loader.load();
         mainContent.getChildren().setAll(serviceDetailContent);
     }
@@ -24,7 +29,7 @@ public class ServiceDetailController {
     public void screenDeleteClick(ActionEvent event) {
         try {
             // Carregar o FXML da tela de confirmação de exclusão
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ScheduleServices/ScreenDelete.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ScreenDelete.fxml"));
             Pane deleteConfirmationPane = loader.load();
 
             // Criar um novo Stage para  confirmação de exclusão
@@ -58,7 +63,7 @@ public class ServiceDetailController {
         // Após a exclusão ser confirmada, abrir a tela de sucesso
         try {
             // Carregar o FXML da tela de sucesso
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ScheduleServices/ScreenDeleteSuccess.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ScreenDeleteSuccess.fxml"));
             Pane successPane = loader.load();
 
             // Criar um novo Stage para o diálogo de sucesso
@@ -90,7 +95,7 @@ public class ServiceDetailController {
     public void handleBackClick(ActionEvent event) {
         // Carregar a tela anterior no mesmo AnchorPane
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ScheduleServices/ButtonService.fxml")); // Caminho para a tela anterior
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ButtonService.fxml")); // Caminho para a tela anterior
             Pane previousScreenContent = loader.load();
 
             // Substitui o conteúdo da tela atual pelo da tela anterior

@@ -3,6 +3,7 @@ package org.jala.university.domain.entity.entity_transaction;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_external.ScheduledPaymentEntity;
 
 
 import java.math.BigDecimal;
@@ -35,7 +36,7 @@ public class PaymentHistoryEntity {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @Column(name = "cpf_cnpj_receiver")
+    @Column(name = "cpf_cnpj_receiver", nullable = true)
     private String cpfReceiver;
 
     @Column(name = "transaction_date")
@@ -55,5 +56,9 @@ public class PaymentHistoryEntity {
 
     @Column(name = "bank_name_receiver")
     private String bankNameReceiver;
+
+    @ManyToOne
+    @JoinColumn(name = "scheduled_payment", nullable = true)
+    private ScheduledPaymentEntity scheduledPayment;
 
 }
