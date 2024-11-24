@@ -1,5 +1,6 @@
 package org.jala.university.presentation.controller.Transaction;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -92,7 +93,6 @@ public class TransactionPaymentScreenController extends BaseController {
         if (savedSchedulingDate != null) schedulingDatePicker.setValue(savedSchedulingDate);
 
         validateFields();
-
         loadSavedContacts();
 
         accountField.textProperty().addListener((observable, oldValue, newValue) -> validateFields());
@@ -127,11 +127,9 @@ public class TransactionPaymentScreenController extends BaseController {
             });
         }
     }
-
     private void validateFields() {
         boolean isValid = true;
 
-        // Validate account number
         if (accountField.getText().isEmpty()) {
             accountErrorLabel.setText("Account number cannot be empty.");
             isValid = false;
@@ -145,7 +143,6 @@ public class TransactionPaymentScreenController extends BaseController {
             accountErrorLabel.setText("");
         }
 
-        // Validate value
         try {
             BigDecimal value = new BigDecimal(valueField.getText().replace(",", "."));
             if (value.compareTo(BigDecimal.ZERO) <= 0) {
@@ -159,7 +156,6 @@ public class TransactionPaymentScreenController extends BaseController {
             isValid = false;
         }
 
-        // Validate scheduling date
         if (schedulingDatePicker.getValue() != null && schedulingDatePicker.getValue().isBefore(LocalDate.now())) {
             schedulingErrorLabel.setText("Scheduling date cannot be in the past.");
             isValid = false;
@@ -170,6 +166,7 @@ public class TransactionPaymentScreenController extends BaseController {
         advanceButton.setDisable(!isValid);
     }
 
+    @FXML
     private void loadTransactionPasswordScreen() {
         try {
             savedAccountNumber = accountField.getText();
@@ -191,7 +188,7 @@ public class TransactionPaymentScreenController extends BaseController {
             String nameReceiver = customer.getFullName();
             String cpfReceiver = customer.getCpf();
 
-            FXMLLoader loader = springFXMLLoader.load("/Style/Transection_Password.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_Password.fxml");
             Pane transactionPasswordPane = loader.load();
 
             TransactionPasswordController passwordController = loader.getController();

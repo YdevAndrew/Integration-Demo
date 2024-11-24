@@ -1,24 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Accordion?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TitledPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.commons.presentation.Controller.DashboardController">
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.commons.presentation.Controller.DashboardController">
     <children>
         <Pane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
-        <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
+        <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" />
         <AnchorPane id="contentPane" fx:id="mainViewContainer" layoutX="321.0" layoutY="70.0" prefHeight="759.0" prefWidth="878.0" />
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
@@ -105,9 +95,9 @@
                 <panes>
                     <TitledPane id="transactions-menu" animated="false" prefHeight="252.0" prefWidth="295.0" style="-fx-background-color: transparent;" text="Transactions">
                         <content>
-                            <VBox fx:id="transactionMenu" managed="true" visible="true" spacing="10">
+                            <VBox fx:id="transactionMenu" managed="true" spacing="10" visible="true">
                                 <children>
-                                    <Button fx:id="transferButton" styleClass="menu-button" text="Transactions">
+                                    <Button fx:id="transactionHistButton" styleClass="menu-button" text="Transactions">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -198,10 +188,7 @@
                         <content>
                             <VBox prefHeight="51.0" prefWidth="288.0" style="-fx-background-color: transparent;">
                                 <children>
-                                    <Button mnemonicParsing="false"
-                                            style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
-                                            text="My Loans"
-                                            onAction="#loadLoansView">
+                                    <Button mnemonicParsing="false" onAction="#loadLoansView" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="My Loans">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -218,9 +205,7 @@
                                         </graphic>
                                     </Button>
                                     <!-- Botão "Request a Loan" atualizado para chamar loadMainView -->
-                                    <Button fx:id="requestLoanButton" mnemonicParsing="false"
-                                            style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;"
-                                            text="Request a Loan" onAction="#loadMainViewLoan">
+                                    <Button fx:id="requestLoanButton" mnemonicParsing="false" onAction="#loadMainViewLoan" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Request a Loan">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -243,15 +228,6 @@
                         <content>
                             <VBox prefHeight="200.0" prefWidth="100.0">
                                 <children>
-                                    <Button fx:id="pixButton"  mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Pix">
-                                        <graphic>
-                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                                <image>
-                                                    <Image url="@/img/Ellipse.png" />
-                                                </image>
-                                            </ImageView>
-                                        </graphic>
-                                    </Button>
                                     <Button fx:id="transactionButton" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Transfer">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
@@ -293,10 +269,10 @@
                             </VBox>
                         </content>
                     </TitledPane>
-                    <TitledPane animated="false" prefHeight="0.0" prefWidth="262.0" text="Scheduled Services " >
+                    <TitledPane animated="false" prefHeight="0.0" prefWidth="262.0" text="Scheduled Services ">
                         <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            <Button mnemonicParsing="false" onAction="#ScheduleService" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Your Services"/>
+                            <Button mnemonicParsing="false" onAction="#ScheduleService" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Your Services" />
                         </content>
                         <graphic>
 
@@ -313,11 +289,11 @@
 
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="footer" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
-                <Button graphicTextGap="0" styleClass="logout-button" onAction="#logoutButton" >
+                <Button graphicTextGap="0" onAction="#logoutButton" styleClass="logout-button">
                     <graphic>
                         <ImageView fitHeight="40" fitWidth="40">
                             <image>
-                                <Image  url="@/img/Exit.png"/>
+                                <Image url="@/img/Exit.png" />
                             </image>
                         </ImageView>
                     </graphic>
