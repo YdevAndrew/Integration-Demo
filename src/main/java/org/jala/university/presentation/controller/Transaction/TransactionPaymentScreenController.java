@@ -1,5 +1,6 @@
 package org.jala.university.presentation.controller.Transaction;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,8 +12,10 @@ import javafx.scene.layout.VBox;
 import org.jala.university.application.dto.dto_account.AccountDto;
 import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.domain.entity.entity_account.Account;
 import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.jala.university.presentation.MainView;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +31,9 @@ public class TransactionPaymentScreenController extends BaseController {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Autowired
     private PaymentHistoryService paymentHistoryService;
@@ -77,9 +83,9 @@ public class TransactionPaymentScreenController extends BaseController {
     @FXML
     public void initialize() {
 
-//        userAccountNumber = accountRepository.findById(userId)
-//                .map(Account::getAccountNumber)
-//                .orElse(null);
+        userAccountNumber = accountRepository.findById(userId)
+                .map(Account::getAccountNumber)
+                .orElse(null);
 
         if (savedAccountNumber != null) accountField.setText(savedAccountNumber);
         if (savedDescription != null) descriptionField.setText(savedDescription);
@@ -87,8 +93,7 @@ public class TransactionPaymentScreenController extends BaseController {
         if (savedSchedulingDate != null) schedulingDatePicker.setValue(savedSchedulingDate);
 
         validateFields();
-
-        //loadSavedContacts();
+        loadSavedContacts();
 
         accountField.textProperty().addListener((observable, oldValue, newValue) -> validateFields());
         valueField.textProperty().addListener((observable, oldValue, newValue) -> validateFields());
@@ -97,36 +102,34 @@ public class TransactionPaymentScreenController extends BaseController {
         advanceButton.setOnAction(event -> loadTransactionPasswordScreen());
     }
 
-//    @FXML
-//    private void loadSavedContacts() {
-//        contactsListVBox.getChildren().clear();
-//
-//        List<AccountDto> savedContacts = paymentHistoryService.getContactList(userId);
-//
-//        for (AccountDto contact : savedContacts) {
-//            Optional<Customer> customerOptional = accountRepository.getCustomerByAccountId(contact.getId());
-//
-//            customerOptional.ifPresent(customer -> {
-//                Button contactButton = new Button(customer.getFullName() + " (" + contact.getAccountNumber() + ")");
-//                contactButton.setPrefHeight(66.0);
-//                contactButton.setPrefWidth(231.0);
-//                contactButton.getStyleClass().add("list-container");
-//
-//                contactButton.setOnAction(event -> {
-//                    accountField.setText(contact.getAccountNumber());
-//                    descriptionField.setText("Payment to " + customer.getFullName());
-//                    valueField.requestFocus();
-//                });
-//
-//                contactsListVBox.getChildren().add(contactButton);
-//            });
-//        }
-//    }
+    @FXML
+    private void loadSavedContacts() {
+        contactsListVBox.getChildren().clear();
 
+        List<AccountDto> savedContacts = paymentHistoryService.getContactList(userId);
+
+        for (AccountDto contact : savedContacts) {
+            Optional<Customer> customerOptional = customerRepository.findCustomerByAccountId(contact.getId());
+
+            customerOptional.ifPresent(customer -> {
+                Button contactButton = new Button(customer.getFullName() + " (" + contact.getAccountNumber() + ")");
+                contactButton.setPrefHeight(66.0);
+                contactButton.setPrefWidth(231.0);
+                contactButton.getStyleClass().add("list-container");
+
+                contactButton.setOnAction(event -> {
+                    accountField.setText(contact.getAccountNumber());
+                    descriptionField.setText("Payment to " + customer.getFullName());
+                    valueField.requestFocus();
+                });
+
+                contactsListVBox.getChildren().add(contactButton);
+            });
+        }
+    }
     private void validateFields() {
         boolean isValid = true;
 
-        // Validate account number
         if (accountField.getText().isEmpty()) {
             accountErrorLabel.setText("Account number cannot be empty.");
             isValid = false;
@@ -140,7 +143,6 @@ public class TransactionPaymentScreenController extends BaseController {
             accountErrorLabel.setText("");
         }
 
-        // Validate value
         try {
             BigDecimal value = new BigDecimal(valueField.getText().replace(",", "."));
             if (value.compareTo(BigDecimal.ZERO) <= 0) {
@@ -154,7 +156,6 @@ public class TransactionPaymentScreenController extends BaseController {
             isValid = false;
         }
 
-        // Validate scheduling date
         if (schedulingDatePicker.getValue() != null && schedulingDatePicker.getValue().isBefore(LocalDate.now())) {
             schedulingErrorLabel.setText("Scheduling date cannot be in the past.");
             isValid = false;
@@ -165,6 +166,7 @@ public class TransactionPaymentScreenController extends BaseController {
         advanceButton.setDisable(!isValid);
     }
 
+    @FXML
     private void loadTransactionPasswordScreen() {
         try {
             savedAccountNumber = accountField.getText();
@@ -176,28 +178,28 @@ public class TransactionPaymentScreenController extends BaseController {
 
             BigDecimal value = new BigDecimal(savedValue.replace(",", "."));
 
-//            Integer accountId = accountRepository.findByAccountNumber(savedAccountNumber)
-//                    .map(Account::getId)
-//                    .orElseThrow(() -> new IllegalArgumentException("Account not found."));
+            Integer accountId = accountRepository.findByAccountNumber(savedAccountNumber)
+                    .map(Account::getId)
+                    .orElseThrow(() -> new IllegalArgumentException("Account not found."));
 
-//            Customer customer = accountRepository.getCustomerByAccountId(accountId)
-//                    .orElseThrow(() -> new IllegalArgumentException("Customer not found for the account."));
+            Customer customer = customerRepository.findCustomerByAccountId(accountId)
+                    .orElseThrow(() -> new IllegalArgumentException("Customer not found for the account."));
 
-//            String nameReceiver = customer.getFullName();
-//            String cpfReceiver = customer.getCpf();
+            String nameReceiver = customer.getFullName();
+            String cpfReceiver = customer.getCpf();
 
-            FXMLLoader loader = springFXMLLoader.load("/Style/Transection_Password.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_Password.fxml");
             Pane transactionPasswordPane = loader.load();
 
-//            TransactionPasswordController passwordController = loader.getController();
-//            passwordController.setTransactionDetails(
-//                    savedAccountNumber,
-//                    savedDescription,
-//                    value,
-//                    nameReceiver,
-//                    cpfReceiver,
-//                    savedSchedulingDate
-//            );
+            TransactionPasswordController passwordController = loader.getController();
+            passwordController.setTransactionDetails(
+                    savedAccountNumber,
+                    savedDescription,
+                    value,
+                    nameReceiver,
+                    cpfReceiver,
+                    savedSchedulingDate
+            );
 
             contentPane.getChildren().clear();
             contentPane.getChildren().add(transactionPasswordPane);

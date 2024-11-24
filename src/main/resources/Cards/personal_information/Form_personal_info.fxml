@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="518.0" prefWidth="390.0" styleClass="anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Card.PersonalInfoController">
+    <children>
+        <Label layoutX="106.0" layoutY="25.0" styleClass="modal-title" text="Personal Information" AnchorPane.leftAnchor="106.0" AnchorPane.topAnchor="25.0" />
+
+        <Label layoutX="50.0" layoutY="67.0" styleClass="modal-label" text="Full name" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="67.0" />
+        <Label fx:id="lblName" layoutX="61.0" layoutY="85.0" text="John Doe" />
+
+        <Label layoutX="51.0" layoutY="108.0" styleClass="modal-label" text="CPF" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="108.0" />
+        <Label fx:id="lblCPF" layoutX="61.0" layoutY="126.0" text="000.000.000-00" AnchorPane.leftAnchor="61.0" AnchorPane.topAnchor="126.0" />
+
+        <Label layoutX="50.0" layoutY="155.0" styleClass="modal-label" text="Marital status" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="155.0" />
+        <HBox layoutX="50.0" layoutY="179.0" spacing="10" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="179.0">
+            <RadioButton fx:id="marriedRadio" styleClass="modal-label" text="Married">
+                <toggleGroup>
+                    <ToggleGroup fx:id="toggleGroup" />
+                </toggleGroup>
+            </RadioButton>
+            <RadioButton fx:id="dowagerRadio" styleClass="modal-label" text="Dowager" toggleGroup="$toggleGroup" />
+            <RadioButton fx:id="otherRadio" styleClass="modal-label" text="Other" toggleGroup="$toggleGroup" />
+        </HBox>
+
+        <Label layoutX="50.0" layoutY="215.0" styleClass="modal-label" text="CEP" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="215.0" />
+        <TextField fx:id="cepField" layoutX="42.0" layoutY="233.0" prefHeight="30.0" prefWidth="230.0" promptText="Type here..." AnchorPane.leftAnchor="42.0" AnchorPane.topAnchor="233.0" />
+        <Label fx:id="cepErrorLabel" layoutX="57.0" layoutY="263.0" prefHeight="18.0" prefWidth="230.0" styleClass="error-label" textFill="#d44f43" />
+
+        <Label layoutX="54.0" layoutY="284.0" styleClass="modal-label" text="Street" AnchorPane.leftAnchor="54.0" AnchorPane.topAnchor="284.0" />
+        <TextField fx:id="streetField" layoutX="45.0" layoutY="302.0" prefHeight="30.0" prefWidth="140.0" promptText="Type here..." AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="302.0" />
+        <Label fx:id="streetErrorLabel" layoutX="49.0" layoutY="334.0" prefHeight="18.0" prefWidth="130.0" styleClass="error-label" textFill="#d44f43" />
+
+        <Label layoutX="200.0" layoutY="284.0" styleClass="modal-label" text="City" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="284.0" />
+        <TextField fx:id="cityField" layoutX="195.0" layoutY="302.0" prefHeight="30.0" prefWidth="140.0" promptText="Type here..." AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="302.0" />
+        <Label fx:id="cityErrorLabel" layoutX="200.0" layoutY="334.0" prefHeight="18.0" prefWidth="130.0" styleClass="error-label" textFill="#d44f43" />
+
+        <Label layoutX="57.0" layoutY="352.0" styleClass="modal-label" text="State" AnchorPane.leftAnchor="57.0" AnchorPane.topAnchor="352.0" />
+        <TextField fx:id="stateField" layoutX="45.0" layoutY="370.0" prefHeight="30.0" prefWidth="140.0" promptText="Type here..." AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="370.0" />
+        <Label fx:id="stateErrorLabel" layoutX="49.0" layoutY="401.0" prefHeight="18.0" prefWidth="130.0" styleClass="error-label" textFill="#d44f43" />
+
+        <Label layoutX="199.0" layoutY="352.0" styleClass="modal-label" text="Country" AnchorPane.leftAnchor="199.0" AnchorPane.topAnchor="352.0" />
+        <TextField fx:id="countryField" layoutX="195.0" layoutY="370.0" prefHeight="30.0" prefWidth="140.0" promptText="Type here..." AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="370.0" />
+        <Label fx:id="countryErrorLabel" layoutX="200.0" layoutY="401.0" prefHeight="18.0" prefWidth="130.0" styleClass="error-label" textFill="#d44f43" />
+
+        <Label fx:id="maritalStatusErrorLabel" layoutX="50.0" layoutY="197.0" prefHeight="18.0" prefWidth="277.0" styleClass="error-label" textFill="#d44f43" />
+
+        <HBox layoutX="27.0" layoutY="429.0" prefHeight="31.0" prefWidth="323.0" spacing="25" AnchorPane.bottomAnchor="57.80000000000001" AnchorPane.leftAnchor="27.0">
+            <Button fx:id="nextButton" layoutX="16.0" layoutY="421.0" onAction="#loadFinancialQuestions" prefHeight="31.0" prefWidth="157.0" styleClass="next-button" text="Next" />
+            <Button fx:id="cancelButton" layoutX="197.0" layoutY="421.0" onAction="#closeModal" prefHeight="31.0" prefWidth="158.0" styleClass="cancel-button" text="Cancel" />
+        </HBox>
+
+    </children>
+</AnchorPane>

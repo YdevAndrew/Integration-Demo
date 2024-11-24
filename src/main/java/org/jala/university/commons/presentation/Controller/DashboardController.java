@@ -1,11 +1,13 @@
 package org.jala.university.commons.presentation.Controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -14,10 +16,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.jala.university.presentation.controller.Card.CardsPageController;
+import org.jala.university.application.dto.dto_account.CustomerDto;
+import org.jala.university.application.service.service_account.AccountService;
+import org.jala.university.application.service.service_account.CustomerService;
 import org.jala.university.presentation.controller.Account.ProfileViewController;
 import org.jala.university.presentation.controller.Loan.MyLoans;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
@@ -30,19 +40,25 @@ public class DashboardController extends BaseController {
 
     private final SpringFXMLLoader springFXMLLoader;
 
-    public DashboardController(SpringFXMLLoader springFXMLLoader) {
-        this.springFXMLLoader = springFXMLLoader;
-    }
+    private final CustomerService customerService;
+
+    private final AccountService accountService;
+
+    @FXML
+    public Label nameLabel;
 
     public Button pixButton;
+
     public Button transactionHistButton;
+
+    @FXML
+    public Label nameLabel2;
 
     @FXML
     private VBox myCardsVBox;
 
     @FXML
     private AnchorPane mainViewContainer;
-
 
     @FXML
     private VBox otherButtonsVBox;
@@ -65,11 +81,22 @@ public class DashboardController extends BaseController {
     @FXML
     private Label dateLabel;
 
+    @FXML
+    private Pane mainContent;
+
     private boolean isBalanceVisible = false; // Controle de visibilidade do saldo
     private double balance = 1234.56; // Exemplo de valor do saldo, substitua pelo valor real
 
+    @Autowired
+    public DashboardController(SpringFXMLLoader springFXMLLoader, CustomerService customerService, AccountService accountService) {
+        this.springFXMLLoader = springFXMLLoader;
+        this.customerService = customerService;
+        this.accountService = accountService;
+    }
+
     @FXML
     public void initialize() {
+        loadCustomerInfo();
         // Configura o botão de alternância de exibição do saldo
         toggleButton.setOnAction(event -> toggleBalanceVisibility());
 
@@ -81,19 +108,87 @@ public class DashboardController extends BaseController {
         // Configurar ações dos botões
         transactionButton.setOnAction(event -> loadTransactionView());
         pixButton.setOnAction(event -> loadPixView());
+        transactionHistButton.setOnAction(event -> loadTransactionHistoryScreen());
     }
+
+    @FXML
+    private void loadInvoiceHistory() throws IOException {
+        clearAllPanels();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/invoiceHistory/invoice_history.fxml"));
+        AnchorPane invoiceHistory = loader.load();
+        mainContent.getChildren().setAll(invoiceHistory);
+    }
+
 
     @FXML
     public void toggleBalanceVisibility() {
         if (balanceLabel.getText().equals("R$ ********")) {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Usuário não está autenticado.");
+                return;
+            }
+
+            String cpf = authentication.getName();
+            if (cpf == null || cpf.trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "CPF do usuário não encontrado.");
+                return;
+            }
+
+            CustomerDto user = customerService.getCustomerByCpf(cpf);
+            if (user == null) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Cliente não encontrado para o CPF: " + cpf);
+                return;
+            }
+
             // Mostra o saldo e ajusta o ícone para "olho aberto"
-            balanceLabel.setText(String.format("R$ %.2f", balance));
+            balanceLabel.setText(String.format("R$ %.2f", accountService.getBalanceByCustomerId(user.getId())));
             eyeIcon.setImage(new Image(getClass().getResource("/img/eye_open.png").toExternalForm()));
         } else {
             // Esconde o saldo e ajusta o ícone para "olho fechado"
             balanceLabel.setText("R$ ********");
             eyeIcon.setImage(new Image(getClass().getResource("/img/eye.png").toExternalForm()));
         }
+    }
+
+    @FXML
+    private void loadMyCards() throws IOException {
+        clearAllPanels();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/cards/cards_page.fxml"));
+            Pane cardsPage = loader.load();
+            mainContent.getChildren().setAll(cardsPage);
+        } catch (IOException e) {
+            System.err.println("Erro ao carregar cards_page.fxml: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+
+    @FXML
+    private void loadRequestCard() throws IOException {
+
+
+        clearAllPanels();
+        if(CardsPageController.validIfPhysicalExist() != null){
+            if(CardsPageController.validIfVirtualExist() != null){
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestACard/request_a_card.fxml"));
+                AnchorPane requestCard = loader.load();
+                mainContent.getChildren().setAll(requestCard);
+            }else {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestAVirtualCard/request_a_card.fxml"));
+                AnchorPane requestCard = loader.load();
+                mainContent.getChildren().setAll(requestCard);
+
+
+            }
+        }else {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestACard/request_a_card.fxml"));
+            AnchorPane requestCard = loader.load();
+            mainContent.getChildren().setAll(requestCard);
+        }
+
     }
 
     /**
@@ -109,11 +204,25 @@ public class DashboardController extends BaseController {
 
     @FXML
     private void loadTransactionView() {
+        clearAllPanels();
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_paymentScreen.fxml"));
-            Pane transactionPane = loader.load();
-            contentPane.getChildren().add(transactionPane);
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
+            Node transactionPane = loader.load();
+            TransactionPaymentScreenController controller = loader.getController();
+            mainViewContainer.getChildren().add(transactionPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadTransactionHistoryScreen(){
+        try {
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_Historical.fxml");
+            Node transactionPane = loader.load();
+            TransactionHistoryController controller = loader.getController();
+            mainViewContainer.getChildren().add(transactionPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -121,11 +230,12 @@ public class DashboardController extends BaseController {
 
     @FXML
     private void loadPixView() {
+        clearAllPanels();
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_TED&PIX.fxml"));
-            Pane pixPane = loader.load();
-            contentPane.getChildren().add(pixPane);
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_TED&PIX.fxml");
+            Node pixPane = loader.load();
+            mainViewContainer.getChildren().add(pixPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -167,6 +277,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     public void loadMainViewLoan() {
+        clearAllPanels();
         try {
             clearAllPanels(); // Oculta os outros painéis antes de carregar o módulo Loan
             System.out.println("Trying to load main-viewLoan.fxml...");
@@ -187,6 +298,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     private void loadLoansView() {
+        clearAllPanels();
         try {
             FXMLLoader loader = springFXMLLoader.load("/Loans/Myloans/myloans.fxml");
             Node loansView = loader.load();
@@ -228,5 +340,44 @@ public class DashboardController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void loadCustomerInfo() {
+        try {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            if (authentication == null) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Usuário não está autenticado.");
+                return;
+            }
+
+            String cpf = authentication.getName();
+            if (cpf == null || cpf.trim().isEmpty()) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "CPF do usuário não encontrado.");
+                return;
+            }
+
+            CustomerDto user = customerService.getCustomerByCpf(cpf);
+            if (user == null) {
+                showAlert(Alert.AlertType.ERROR, "Erro", "Cliente não encontrado para o CPF: " + cpf);
+                return;
+            }
+
+            nameLabel.setText(user.getFullName() != null ? user.getFullName() : "");
+            nameLabel2.setText(user.getFullName() != null ? user.getFullName() : "");
+            balanceLabel.setText(String.format("R$ %.2f", accountService.getBalanceByCustomerId(user.getId())));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Erro", "Erro ao carregar dados do cliente: " + e.getMessage());
+        }
+
+    }
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
