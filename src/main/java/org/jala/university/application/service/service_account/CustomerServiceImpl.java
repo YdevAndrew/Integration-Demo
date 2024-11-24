@@ -158,7 +158,7 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = optionalCustomer.get();
 
         // Verificando a senha criptografada com o PasswordEncoder
-        return passwordEncoder.matches(password, Arrays.toString(customer.getPassword()));
+        return passwordEncoder.matches(password, new String(customer.getPassword()));
     }
 
     @Override
