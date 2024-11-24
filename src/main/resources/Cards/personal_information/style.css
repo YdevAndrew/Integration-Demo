@@ -1,0 +1,71 @@
+.anchor-pane {
+    -fx-background-color: #1048B0;
+    -fx-font-weight: bold;
+}
+
+.modal-title {
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+}
+
+.modal-label {
+    -fx-text-fill: white;
+}
+
+.text-field {
+    -fx-padding: 5;
+    -fx-background-color: white;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 25;
+    -fx-background-radius: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0.0, 0, 3);
+}
+
+.text-field:focused {
+    -fx-border-color: #007BFF;
+}
+
+.cancel-button {
+    -fx-background-color: white;
+    -fx-text-fill: #d44f43;
+    -fx-background-radius: 10;
+    -fx-padding: 5 15;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 3);
+    -fx-border-color: #d44f43;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.next-button {
+    -fx-background-color: #1048B0;
+    -fx-text-fill: white;
+    -fx-background-radius: 10;
+    -fx-padding: 5 15;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 3);
+    -fx-border-color: white;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}
+
+.cancel-button:pressed {
+    -fx-background-color: rgba(212, 79, 67, 0.4);
+    -fx-text-fill: #d44f43;
+}
+.next-button:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-text-fill: white;
+}
+
+.cancel-button:hover{
+    -fx-background-color: rgba(212, 79, 67, 0.4);
+    -fx-text-fill: #d44f43;
+}
+
+.next-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.45);
+    -fx-text-fill: white;
+}
+
+

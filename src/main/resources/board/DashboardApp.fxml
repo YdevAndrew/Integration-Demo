@@ -8,7 +8,9 @@
 <AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.commons.presentation.Controller.DashboardController">
     <children>
         <Pane fx:id="contentPane" layoutX="350.0" layoutY="80.0" prefHeight="750.0" prefWidth="862.0" AnchorPane.rightAnchor="0.0" />
-        <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" />
+        <Pane fx:id="mainContent" prefHeight="800.0" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+        </Pane>
+        <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"/>
         <AnchorPane id="contentPane" fx:id="mainViewContainer" layoutX="321.0" layoutY="70.0" prefHeight="759.0" prefWidth="878.0" />
         <HBox alignment="CENTER" prefHeight="70.0" styleClass="header" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
             <children>
@@ -20,10 +22,10 @@
                 </ImageView>
 
                 <!-- Nome do usuário -->
-                <Label styleClass="label-username">John Doe</Label>
-                <MenuButton mnemonicParsing="false" prefHeight="58.0" prefWidth="42.0">
+                <Label fx:id="nameLabel" styleClass="label-username" />
+                <MenuButton mnemonicParsing="false" prefHeight="58.0" prefWidth="42.0" fx:id="profileMenuItem" text="Profile">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Profile" />
+                        <MenuItem mnemonicParsing="false" text="Profile" onAction="#loadProfileView" />
                     </items>
                 </MenuButton>
 
@@ -31,7 +33,9 @@
                 <Region HBox.hgrow="ALWAYS" />
 
                 <!-- Mensagem de boas-vindas -->
-                <Label styleClass="welcome-message">Hello John Doe, welcome!</Label>
+                <Label styleClass="welcome-message">Hello </Label>
+                <Label styleClass="welcome-message" fx:id="nameLabel2"/>
+                <Label styleClass="welcome-message">, welcome!</Label>
 
                 <!-- Espaçamento flexível adicional -->
                 <Region HBox.hgrow="ALWAYS" />
@@ -82,14 +86,7 @@
 
 
             <VBox fx:id="myCardsVBox" managed="false" spacing="10" visible="false">
-                <children>
 
-                    <Button text="Card 1" />
-                    <Button text="Card 2" />
-                    <Button text="Card 3" />
-                    <Button text="Card 4" />
-                    <Button text="Card 5" />
-                </children>
             </VBox>
             <Accordion id="accordion" style="-fx-background-color: transparent;" stylesheets="@style.css">
                 <panes>
@@ -121,7 +118,7 @@
                         <content>
                             <VBox id="vbox-mycards" prefHeight="200.0" prefWidth="100.0">
                                 <children>
-                                    <Button fx:id="requestcard" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" styleClass="but" text="Request a Card">
+                                    <Button fx:id="requestcard"  onAction="#loadRequestCard"  mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" styleClass="but" text="Request a Card">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -130,7 +127,7 @@
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Cards">
+                                    <Button onAction="#loadMyCards" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Cards">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>
@@ -139,25 +136,7 @@
                                             </ImageView>
                                         </graphic>
                                     </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Invoice History">
-                                        <graphic>
-                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                                <image>
-                                                    <Image url="@/img/Ellipse.png" />
-                                                </image>
-                                            </ImageView>
-                                        </graphic>
-                                    </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Adjust Limit">
-                                        <graphic>
-                                            <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                                                <image>
-                                                    <Image url="@/img/Ellipse.png" />
-                                                </image>
-                                            </ImageView>
-                                        </graphic>
-                                    </Button>
-                                    <Button mnemonicParsing="false" style="-fx-background-color: transparent; -fx-font-size: 18; -fx-font-family: Roboto Light;" text="Change Card Password">
+                                    <Button mnemonicParsing="false" onAction="#loadInvoiceHistory" style="-fx-background-color: transparent; -fx-font-family: Roboto Light; -fx-font-size: 18;" text="Invoice History">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>

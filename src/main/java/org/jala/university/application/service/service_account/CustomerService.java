@@ -18,4 +18,9 @@ public interface CustomerService {
     boolean authenticate(String cpf, String password);
 
     List<CustomerDto> getAllCustomersSortedByName();
+
+
+    CustomerDto getCustomerByEmail(String username);
+
+    CustomerDto getCustomerByCpf(String username);
 }

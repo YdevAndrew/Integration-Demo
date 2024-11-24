@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="194.0" prefWidth="554.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Card.SuccessModalController">
+    <children>
+        <Button fx:id="okButton" layoutX="224.0" layoutY="115.0" mnemonicParsing="false" onAction="#closeSuccessModal" prefHeight="43.0" prefWidth="106.0" style="-fx-background-color: #FF0000FF; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 20px; -fx-background-radius: 30; -fx-border-radius: 30;" text="OK" textFill="#d04949">
+            <effect>
+                <DropShadow />
+            </effect>
+        </Button>
+        <Text layoutX="-10.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-weight: bold;" text="Invoice due date" textAlignment="CENTER" wrappingWidth="550.0" />
+        <Text fill="#d04949" layoutX="4.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 25; -fx-font-weight: bold; -fx-fill: #FF0000FF;" text="Error updating, wait another year to change" textAlignment="CENTER" wrappingWidth="550.0" />
+    </children>
+</AnchorPane>
