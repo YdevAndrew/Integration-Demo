@@ -7,13 +7,22 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.jala.university.commons.presentation.BaseController;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class SchedulePaymentInformationController {
+@Controller
+public class SchedulePaymentInformationController extends BaseController {
 
     @FXML
-    private Text serviceDescriptionText;
+    private Text serviceNameText;
+    @FXML
+    private Text recipientNameText;
+    @FXML
+    private Text recipientDocumentText;
     @FXML
     private Text recipientText;
     @FXML
@@ -34,28 +43,48 @@ public class SchedulePaymentInformationController {
     private Pane mainContent;
 
     // Método para definir os dados do pagamento com validações
-    public void setPaymentData(String serviceDescription, String recipient, String amount,
+    public void setPaymentData(String serviceName, String recipient, String amount,
                                String agency, String account, String dueDate,
                                String startDate, String endDate, boolean isCNPJ) {
 
-        serviceDescriptionText.setText(serviceDescription);
+        serviceNameText.setText(serviceName);
+        recipientText.setText(recipient);
         serviceAmountText.setText(amount);
         agencyText.setText(agency);
         accountText.setText(account);
         dueDateText.setText(dueDate);
         startDateText.setText(startDate);
-        endDateText.setText(endDate);
+
+        if (endDate.trim().isEmpty()) {
+            endDateText.setText("Indefinite");
+        } else {
+            try {
+                // Converter para LocalDate
+                LocalDate date = LocalDate.parse(endDate);
+
+                // Formatar para exibir apenas mês e ano
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+                String formattedDate = date.format(formatter);
+
+                // Exibir o resultado formatado
+                endDateText.setText(formattedDate);
+            } catch (Exception e) {
+                endDateText.setText("Invalid Date");
+            }
+        }
 
         // Realiza validações baseadas em CNPJ ou CPF
         if (isCNPJ) {
-            recipientText.setText("External User");
+            recipientDocumentText.setText("CNPJ: ");
+            recipientNameText.setText("External User");
             bankNameText.setText("External Bank");
         } else {
+            recipientDocumentText.setText("CPF: ");
             if ("4545".equals(agency)) {
-                recipientText.setText("Bank User");
+                recipientNameText.setText("Bank User");
                 bankNameText.setText("JalaU");
             } else {
-                recipientText.setText("External User");
+                recipientNameText.setText("External User");
                 bankNameText.setText("External Bank");
             }
         }
@@ -63,7 +92,7 @@ public class SchedulePaymentInformationController {
 
     @FXML
     private void back() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/SchedulePaymentScreens/SchedulePayment/SchedulePayment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/SchedulePaymentScreens/SchedulePayment/SchedulePayment.fxml"));
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }
@@ -73,7 +102,7 @@ public class SchedulePaymentInformationController {
     private void insertPassword() {
         try {
             // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/password/PasswordPrompt.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/password/PasswordPrompt.fxml"));
             Parent root = loader.load();
 
             // Inicializa o controlador do pop-up de senha
