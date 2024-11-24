@@ -5,23 +5,26 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import org.jala.university.commons.presentation.BaseController;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
-public class ButtonServiceController {
+@Controller
+public class ButtonServiceController extends BaseController {
     @FXML
     private AnchorPane mainContent; // Altere para AnchorPane para corresponder ao tipo em ButtonService.fxml
 
     @FXML
     public void handleService1Click(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ScheduleServices/ServiceDetail.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ServiceDetail.fxml"));
         Pane serviceDetailContent = loader.load();
         mainContent.getChildren().setAll(serviceDetailContent);
     }
 
     @FXML
     public void handleService2Click(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ScheduleServices/ServiceDetail.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ServiceDetail.fxml"));
         Pane serviceDetailContent = loader.load();
         mainContent.getChildren().setAll(serviceDetailContent);
     }

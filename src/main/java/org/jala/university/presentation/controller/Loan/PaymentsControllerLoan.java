@@ -34,6 +34,9 @@ import javafx.scene.layout.Pane;
 public class PaymentsControllerLoan {
 
     @FXML
+    public Pane mainPane;
+
+    @FXML
     private Label dueDateLabel;
 
     @FXML
@@ -59,7 +62,7 @@ public class PaymentsControllerLoan {
     private Label installmentValueLabel;
 
     @FXML
-    private Pane mainPane;
+    private Pane mainContent;
 
     @Autowired
     private SpringFXMLLoader springFXMLLoader;
@@ -78,6 +81,7 @@ public class PaymentsControllerLoan {
     private Double valueOfInstallments;
 
     private Double totalInterest;
+
 
     /**
      * Initializes the controller, setting up event listeners and default values.
@@ -171,11 +175,11 @@ public class PaymentsControllerLoan {
     /**
      * Loads the payments pane into the specified main pane.
      *
-     * @param mainPane       the main pane where the payments pane will be loaded
+     * @param mainContent'       the main pane where the payments pane will be loaded
      * @param springFXMLLoader the loader used to load the FXML file
      * @param formEntityDto  the form entity containing loan-related data
      */
-    public static void loadPaymentsPane(Pane mainPane, SpringFXMLLoader springFXMLLoader, FormEntityDto formEntityDto) {
+    public static void loadPaymentsPane(Pane mainContent, SpringFXMLLoader springFXMLLoader, FormEntityDto formEntityDto) {
         try {
             FXMLLoader loader = springFXMLLoader.load("/Loans/PaymentsLoan/payments.fxml");
             Pane paymentsPane = loader.load();
@@ -183,9 +187,9 @@ public class PaymentsControllerLoan {
             PaymentsControllerLoan controller = loader.getController();
             controller.setFormEntity(formEntityDto);
 
-            if (mainPane != null) {
-                mainPane.getChildren().clear();
-                mainPane.getChildren().add(paymentsPane);
+            if (mainContent != null) {
+                mainContent.getChildren().clear();
+                mainContent.getChildren().add(paymentsPane);
             } else {
                 System.err.println("Erro:mainPane was not initialized in FormController.");
             }
@@ -205,9 +209,9 @@ public class PaymentsControllerLoan {
             MyLoans controller = loader.getController();
             controller.loadLoanDetails();
 
-            if (mainPane != null) {
-                mainPane.getChildren().clear();
-                mainPane.getChildren().add(myLoansPane);
+            if (mainContent != null) {
+                mainContent.getChildren().clear();
+                mainContent.getChildren().add(myLoansPane);
             } else {
                 System.err.println("Erro: mainPane was not initialized in PaymentsController.");
             }

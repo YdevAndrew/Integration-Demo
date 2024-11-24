@@ -34,7 +34,7 @@ public class MyLoans {
 
     public HBox filterBar;
 
-    public AnchorPane mainContainer;
+    public AnchorPane mainContent;
 
     @FXML
     private FlowPane loansContainer;
@@ -62,7 +62,7 @@ public class MyLoans {
         noLoanLabel = new Label("No loans found.");
         noLoanLabel.setStyle("-fx-font-size: 16; -fx-text-fill: gray;");
         loansContainer.getChildren().add(noLoanLabel);
-        mainContainer.setOnScroll(this::handleScroll);
+        mainContent.setOnScroll(this::handleScroll);
 
 
 
@@ -83,7 +83,7 @@ public class MyLoans {
         double newOffset = currentOffset - deltaY;
 
 
-        double maxOffset = loansContainer.getHeight() - mainContainer.getPrefHeight();
+        double maxOffset = loansContainer.getHeight() - mainContent.getPrefHeight();
         if (newOffset < 0) {
             newOffset = 0;
         } else if (newOffset > maxOffset) {
@@ -253,7 +253,7 @@ public class MyLoans {
 
 
     private void removeLabelAfterDelay(Label label, int seconds) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), e -> loansContainer.getChildren().remove(label)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), e -> mainContent.getChildren().remove(label)));
         timeline.setCycleCount(1);
         timeline.play();
     }

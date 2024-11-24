@@ -8,6 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.jala.university.commons.presentation.BaseController;
+import org.springframework.stereotype.Controller;
 
 
 import java.io.IOException;
@@ -15,7 +17,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-public class ManualPaymentInformationController {
+@Controller
+public class ManualPaymentInformationController extends BaseController {
 
     @FXML
     private Label amountLabel;
@@ -58,9 +61,13 @@ public class ManualPaymentInformationController {
     private String cnpjReceiver;
 
     private QRCodePaymentController qrCodePaymentController;  // Referência para o controlador da tela anterior
+    private ManuallyInsertController manuallyInsertController;
 
     public void setQRCodePaymentController(QRCodePaymentController qrCodePaymentController) {
         this.qrCodePaymentController = qrCodePaymentController;
+    }
+    public void setManuallyInsertController(ManuallyInsertController manuallyInsertController) {
+        this.manuallyInsertController = manuallyInsertController;
     }
 
     private static final double JUROS_DIA = 0.01; // 1% ao dia
@@ -81,16 +88,17 @@ public class ManualPaymentInformationController {
         agencyLabel.setText(account);  // E aqui também
         expirationDateLabel.setText(expirationDate);
         cnpjReceiverLabel.setText(cnpjReceiver);
-        bankReceiverLabel.setText("Instituição Externa");
+        bankReceiverLabel.setText("External Bank");
 
         // Verifica se a data de vencimento passou e calcula os juros
         calcularJurosSeVencido(expirationDate);
     }
 
+
     // Método para calcular juros se a data de vencimento já passou
     public void calcularJurosSeVencido(String expirationDate) {
         // Formato da data
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         // Obtém as datas
         LocalDate dataVencimento = LocalDate.parse(expirationDate, formatter);
@@ -119,12 +127,14 @@ public class ManualPaymentInformationController {
     private void onConfirmButtonClick() {
         try {
             // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/password/PasswordPrompt.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/PasswordPrompt.fxml"));
             Parent root = loader.load();
 
             // Inicializa o controlador do pop-up de senha
             PasswordPromptController passwordPromptController = loader.getController();
             if (passwordPromptController != null) {
+                // Define a tela que irá aparecer após a confirmação da senha
+                passwordPromptController.setPath("/External/ScheduleServices/PaymentStatus.fxml");
                 // Passa o controlador de PaymentDetailsController para o pop-up de senha
                 passwordPromptController.setPaymentDetailsController(this);
             } else {
@@ -151,7 +161,7 @@ public class ManualPaymentInformationController {
     public void showPaymentReceipt() {
         try {
             // Carrega a tela de comprovante de pagamento
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/PaymentReceipt/PaymentReceipt.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/PaymentReceipt/PaymentReceipt.fxml"));
             Pane paymentReceiptPane = loader.load();
 
             // Inicializa o controlador da tela de comprovante
@@ -195,12 +205,16 @@ public class ManualPaymentInformationController {
         }
     }
 
+
+
     @FXML
     private void back() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }
+
+
 }
 
 
