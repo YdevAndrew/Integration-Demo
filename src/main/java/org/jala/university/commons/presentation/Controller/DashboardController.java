@@ -1,5 +1,6 @@
 package org.jala.university.commons.presentation.Controller;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -107,6 +108,7 @@ public class DashboardController extends BaseController {
         // Configurar ações dos botões
         transactionButton.setOnAction(event -> loadTransactionView());
         pixButton.setOnAction(event -> loadPixView());
+        transactionHistButton.setOnAction(event -> loadTransactionHistoryScreen());
     }
 
     @FXML
@@ -204,10 +206,23 @@ public class DashboardController extends BaseController {
     private void loadTransactionView() {
         clearAllPanels();
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_paymentScreen.fxml"));
-            Pane transactionPane = loader.load();
-            contentPane.getChildren().add(transactionPane);
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
+            Node transactionPane = loader.load();
+            TransactionPaymentScreenController controller = loader.getController();
+            mainViewContainer.getChildren().add(transactionPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadTransactionHistoryScreen(){
+        try {
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_Historical.fxml");
+            Node transactionPane = loader.load();
+            TransactionHistoryController controller = loader.getController();
+            mainViewContainer.getChildren().add(transactionPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -217,10 +232,10 @@ public class DashboardController extends BaseController {
     private void loadPixView() {
         clearAllPanels();
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_TED&PIX.fxml"));
-            Pane pixPane = loader.load();
-            contentPane.getChildren().add(pixPane);
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_TED&PIX.fxml");
+            Node pixPane = loader.load();
+            mainViewContainer.getChildren().add(pixPane);
         } catch (IOException e) {
             e.printStackTrace();
         }

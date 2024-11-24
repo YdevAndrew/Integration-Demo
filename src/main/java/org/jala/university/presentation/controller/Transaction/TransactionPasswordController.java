@@ -158,10 +158,6 @@ public class TransactionPasswordController {
                                     .build();
 
                             paymentHistoryService.createPaymentHistory(userId, paymentHistoryDTO,"TRANSACTION");
-                            Platform.runLater(() -> {
-                                loadingStage.close();
-                                showSuccessMessage("Transaction completed successfully!");
-                            });
                         } catch (Exception e) {
                             Platform.runLater(() -> {
                                 showError("Error processing transaction: " + e.getMessage());
@@ -190,7 +186,7 @@ public class TransactionPasswordController {
 
     private void showLoadingScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Style/Transection_LoadingScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_LoadingScreen.fxml"));
             VBox loadingBox = loader.load();
 
             Button cancelButton = (Button) loadingBox.lookup("#cancelButton");
@@ -233,7 +229,7 @@ public class TransactionPasswordController {
 
     private void goBack() {
         try {
-            FXMLLoader loader = springFXMLLoader.load("/Style/Transection_paymentScreen.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
             Pane mainPagePane = loader.load();
 
             contentPane2.getChildren().clear();

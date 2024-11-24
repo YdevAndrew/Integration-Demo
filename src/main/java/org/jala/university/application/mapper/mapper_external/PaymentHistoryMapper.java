@@ -14,7 +14,6 @@ public class PaymentHistoryMapper {
                 .accountId(paymentHistoryEntity.getAccount()) // Mantém a referência à entidade Account
                 .amount(paymentHistoryEntity.getAmount())
                 .cpfReceiver(paymentHistoryEntity.getCpfReceiver())
-                .cnpjReceiver(paymentHistoryEntity.getCnpjReceiver())
                 .transactionDate(paymentHistoryEntity.getTransactionDate())
                 .description(paymentHistoryEntity.getDescription())
                 .expiredDate(paymentHistoryEntity.getExpiredDate())
@@ -38,7 +37,6 @@ public class PaymentHistoryMapper {
                 .nameReceiver(paymentHistoryDTO.getNameReceiver())
                 .bankNameReceiver(paymentHistoryDTO.getBankNameReceiver())
                 .cpfReceiver(paymentHistoryDTO.getCpfReceiver())
-                .cnpjReceiver(paymentHistoryDTO.getCnpjReceiver())
                 .build();
 
         // Configurar as referências às entidades relacionadas
