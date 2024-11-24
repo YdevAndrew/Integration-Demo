@@ -1,6 +1,5 @@
 package org.jala.university.presentation.controller.Transaction;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -16,9 +15,9 @@ import org.jala.university.domain.entity.entity_account.Account;
 import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.jala.university.domain.repository.repository_account.CustomerRepository;
-import org.jala.university.presentation.MainView;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -77,13 +76,33 @@ public class TransactionPaymentScreenController extends BaseController {
     private static LocalDate savedSchedulingDate;
 
     // Temporary for testing purposes
-    private Integer userId = 34;
+    private Integer getloggedUserId(){
+        try {
+            // Verifica se existe uma autenticação
+            org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            if (authentication != null){
+
+                Customer customer = customerRepository.findByCpf(authentication.getName())
+                        .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+                System.out.println(customer);
+                System.out.println(customer.getFullName());
+                Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                        .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+                return account.getId();
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     private String userAccountNumber; // Stores the user's own account number
 
     @FXML
     public void initialize() {
 
-        userAccountNumber = accountRepository.findById(userId)
+        userAccountNumber = accountRepository.findById(getloggedUserId())
                 .map(Account::getAccountNumber)
                 .orElse(null);
 
@@ -106,7 +125,7 @@ public class TransactionPaymentScreenController extends BaseController {
     private void loadSavedContacts() {
         contactsListVBox.getChildren().clear();
 
-        List<AccountDto> savedContacts = paymentHistoryService.getContactList(userId);
+        List<AccountDto> savedContacts = paymentHistoryService.getContactList(getloggedUserId());
 
         for (AccountDto contact : savedContacts) {
             Optional<Customer> customerOptional = customerRepository.findCustomerByAccountId(contact.getId());

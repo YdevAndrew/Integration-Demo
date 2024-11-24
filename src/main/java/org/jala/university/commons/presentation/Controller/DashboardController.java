@@ -24,6 +24,8 @@ import org.jala.university.presentation.controller.Account.ProfileViewController
 import org.jala.university.presentation.controller.Loan.MyLoans;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Transaction.TransactionHistoryController;
+import org.jala.university.presentation.controller.Transaction.TransactionPaymentScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -107,7 +109,6 @@ public class DashboardController extends BaseController {
 
         // Configurar ações dos botões
         transactionButton.setOnAction(event -> loadTransactionView());
-        pixButton.setOnAction(event -> loadPixView());
         transactionHistButton.setOnAction(event -> loadTransactionHistoryScreen());
     }
 
@@ -223,19 +224,6 @@ public class DashboardController extends BaseController {
             Node transactionPane = loader.load();
             TransactionHistoryController controller = loader.getController();
             mainViewContainer.getChildren().add(transactionPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void loadPixView() {
-        clearAllPanels();
-        try {
-            clearAllPanels();
-            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_TED&PIX.fxml");
-            Node pixPane = loader.load();
-            mainViewContainer.getChildren().add(pixPane);
         } catch (IOException e) {
             e.printStackTrace();
         }

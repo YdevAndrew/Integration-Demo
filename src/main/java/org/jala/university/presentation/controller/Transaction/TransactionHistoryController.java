@@ -10,12 +10,24 @@ import javafx.scene.layout.VBox;
 import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
 import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.Customer;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 @Controller
 public class TransactionHistoryController extends BaseController {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @FXML
     private TextField searchField;
@@ -33,6 +45,28 @@ public class TransactionHistoryController extends BaseController {
 
     public TransactionHistoryController(PaymentHistoryService paymentHistoryService) {
         this.paymentHistoryService = paymentHistoryService;
+    }
+
+    private Integer getloggedUserId(){
+        try {
+            // Verifica se existe uma autenticação
+            org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+            if (authentication != null){
+
+                Customer customer = customerRepository.findByCpf(authentication.getName())
+                        .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+                System.out.println(customer);
+                System.out.println(customer.getFullName());
+                Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                        .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+                return account.getId();
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @FXML
@@ -53,25 +87,27 @@ public class TransactionHistoryController extends BaseController {
     private void loadTransactionHistory() {
         transactionListBox.getChildren().clear();
 
+        Integer userId = getloggedUserId();
+
         String selectedFilter = filterChoiceBox.getValue();
         List<PaymentHistoryDTO> paymentHistory = null;
 
         // Aplica o filtro conforme o tipo de transação ou status
         switch (selectedFilter) {
             case "Received":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(34, false); // Filtro para transações recebidas
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(userId, false); // Filtro para transações recebidas
                 break;
             case "Sent":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(34, true); // Filtro para transações enviadas
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(userId, true); // Filtro para transações enviadas
                 break;
             case "Pending":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(34, false); // Filtro para transações pendentes
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(userId, false); // Filtro para transações pendentes
                 break;
             case "Completed":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(34, true); // Filtro para transações concluídas
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(userId, true); // Filtro para transações concluídas
                 break;
             default:
-                paymentHistory = paymentHistoryService.getPaymentHistory(34); // Sem filtro
+                paymentHistory = paymentHistoryService.getPaymentHistory(userId); // Sem filtro
         }
 
         // Exibir as transações
@@ -111,7 +147,7 @@ public class TransactionHistoryController extends BaseController {
     private void filterTransactionHistory(String searchTerm) {
         transactionListBox.getChildren().clear();
 
-        List<PaymentHistoryDTO> filteredHistory = paymentHistoryService.getPaymentHistory(34);
+        List<PaymentHistoryDTO> filteredHistory = paymentHistoryService.getPaymentHistory(getloggedUserId());
         filteredHistory = filteredHistory.stream()
                 .filter(payment -> payment.getDescription().toLowerCase().contains(searchTerm.toLowerCase()))
                 .toList();
