@@ -27,7 +27,7 @@ public class ScreenConfirmAndDeleteController extends BaseController {
 
         try {
             // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/password/PasswordPrompt.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/PasswordPrompt.fxml"));
             Parent root = loader.load();
 
             // Inicializa o controlador do pop-up de senha

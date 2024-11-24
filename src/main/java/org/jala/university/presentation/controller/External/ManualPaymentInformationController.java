@@ -127,7 +127,7 @@ public class ManualPaymentInformationController extends BaseController {
     private void onConfirmButtonClick() {
         try {
             // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/password/PasswordPrompt.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/PasswordPrompt.fxml"));
             Parent root = loader.load();
 
             // Inicializa o controlador do pop-up de senha
@@ -209,7 +209,7 @@ public class ManualPaymentInformationController extends BaseController {
 
     @FXML
     private void back() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }

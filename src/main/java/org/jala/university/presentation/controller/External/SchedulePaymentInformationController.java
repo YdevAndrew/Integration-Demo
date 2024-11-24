@@ -92,7 +92,7 @@ public class SchedulePaymentInformationController extends BaseController {
 
     @FXML
     private void back() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/SchedulePaymentScreens/SchedulePayment/SchedulePayment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/SchedulePaymentScreens/SchedulePayment/SchedulePayment.fxml"));
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }
@@ -102,7 +102,7 @@ public class SchedulePaymentInformationController extends BaseController {
     private void insertPassword() {
         try {
             // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/password/PasswordPrompt.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/PasswordPrompt.fxml"));
             Parent root = loader.load();
 
             // Inicializa o controlador do pop-up de senha

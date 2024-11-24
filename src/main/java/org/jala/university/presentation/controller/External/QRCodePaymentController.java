@@ -136,7 +136,7 @@ public class QRCodePaymentController extends BaseController {
                 agency != null && !agency.isEmpty() && account != null && !account.isEmpty() && expirationDate != null) {
 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml"));
                 Pane paymentDetailsPane = loader.load();
 
                 ManualPaymentInformationController paymentDetailsController = loader.getController();
@@ -170,7 +170,7 @@ public class QRCodePaymentController extends BaseController {
     @FXML
     public void onManualEntryClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/ManualPaymentScreens/QRCodePayment/ManuallyInsert.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/PaymentModule/ManualPaymentScreens/QRCodePayment/ManuallyInsert.fxml"));
             Pane manualInsertPane = loader.load();
 
             ManuallyInsertController manuallyInsertController = loader.getController();

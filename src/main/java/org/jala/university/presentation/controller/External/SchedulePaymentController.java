@@ -254,7 +254,7 @@ public class SchedulePaymentController extends BaseController {
     @FXML
     private void schedulePaymentInformation() throws IOException {
         if (validateAllFields()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/SchedulePaymentScreens/SchedulePaymentInformation/SchedulePaymentInformation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/SchedulePaymentScreens/SchedulePaymentInformation/SchedulePaymentInformation.fxml"));
             Pane schedulePaymentInformation = loader.load();
 
             // Obter o controlador de SchedulePaymentInformationController

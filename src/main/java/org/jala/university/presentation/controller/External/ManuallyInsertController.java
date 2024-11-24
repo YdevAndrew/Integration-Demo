@@ -111,7 +111,7 @@ public class ManuallyInsertController extends BaseController {
         if (validateAllFields()) {
             try {
                 // Carrega a nova tela de exibição dos detalhes do pagamento (como um container dentro da tela atual)
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml"));
                 Pane paymentDetailsPane = loader.load();
 
                 // Inicializa o controlador da nova tela com os dados

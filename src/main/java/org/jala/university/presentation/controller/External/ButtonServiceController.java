@@ -17,14 +17,14 @@ public class ButtonServiceController extends BaseController {
 
     @FXML
     public void handleService1Click(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/ScheduleServices/ServiceDetail.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ServiceDetail.fxml"));
         Pane serviceDetailContent = loader.load();
         mainContent.getChildren().setAll(serviceDetailContent);
     }
 
     @FXML
     public void handleService2Click(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExternalPaymentModule/ScheduleServices/ServiceDetail.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ServiceDetail.fxml"));
         Pane serviceDetailContent = loader.load();
         mainContent.getChildren().setAll(serviceDetailContent);
     }
