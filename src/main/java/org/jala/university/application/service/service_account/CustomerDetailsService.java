@@ -22,10 +22,10 @@ public class CustomerDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // Aqui você busca o usuário pelo e-mail ou CPF
-        Customer customer = (Customer) customerRepository.findByEmail(username)
+        Customer customer = (Customer) customerRepository.findByCpf(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Cliente não encontrado"));
 
-        return User.withUsername(customer.getEmail())
+        return User.withUsername(customer.getCpf())
                 .password(Arrays.toString(customer.getPassword())) // Lembre-se de garantir que a senha esteja criptografada
                 .authorities("USER") // Você pode configurar roles de usuário, se necessário
                 .build();

@@ -21,4 +21,6 @@ public interface CustomerService {
 
 
     CustomerDto getCustomerByEmail(String username);
+
+    CustomerDto getCustomerByCpf(String username);
 }

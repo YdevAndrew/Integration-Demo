@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,6 +90,28 @@ public class CustomerServiceImpl implements CustomerService {
         );
     }
 
+    public CustomerDto getCustomerByCpf(String cpf) {
+        Customer customer = customerRepository.findByCpf(cpf)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com o CPF: " + cpf));
+
+        return new CustomerDto(
+                customer.getId(),
+                customer.getFullName(),
+                customer.getCpf(),
+                customer.getEmail(),
+                customer.getGender(),
+                customer.getPhoneNumber(),
+                customer.getBirthday(),
+                customer.getCountry(),
+                customer.getDistrict(),
+                customer.getState(),
+                customer.getPostalCode(),
+                customer.getStreet(),
+                customer.getPassword(),
+                customer.getVerificationCode()
+        );
+    }
+
     @Override
     public List<CustomerDto> getAllCustomers() {
         // Lógica para obter todos os clientes
@@ -127,16 +150,15 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean authenticate(String cpf, String password) {
         Optional<Customer> optionalCustomer = customerRepository.findByCpf(cpf);
-        System.out.println(customerRepository.findByCpf(cpf));
 
         if (optionalCustomer.isEmpty()) {
             return false;
         }
 
-        System.out.println("find");
         Customer customer = optionalCustomer.get();
 
-        return passwordEncoder.matches(password, new String(customer.getPassword()));
+        // Verificando a senha criptografada com o PasswordEncoder
+        return passwordEncoder.matches(password, Arrays.toString(customer.getPassword()));
     }
 
     @Override
