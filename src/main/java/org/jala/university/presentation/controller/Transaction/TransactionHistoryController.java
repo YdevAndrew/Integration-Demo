@@ -40,9 +40,8 @@ public class TransactionHistoryController extends BaseController {
         transactionScrollPane.setFitToWidth(true);
         transactionScrollPane.setContent(transactionListBox);
 
-        // Adicionando filtros
-        filterChoiceBox.setItems(FXCollections.observableArrayList("All", "Received", "Sent", "Pending", "Completed"));
-        filterChoiceBox.getSelectionModel().select(0); // Seleciona "All" como padrão
+        filterChoiceBox.setItems(FXCollections.observableArrayList("Type", "Date"));
+        filterChoiceBox.getSelectionModel().select(0);
 
         loadTransactionHistory();
 
@@ -53,28 +52,8 @@ public class TransactionHistoryController extends BaseController {
     private void loadTransactionHistory() {
         transactionListBox.getChildren().clear();
 
-        String selectedFilter = filterChoiceBox.getValue();
-        List<PaymentHistoryDTO> paymentHistory = null;
+        List<PaymentHistoryDTO> paymentHistory = paymentHistoryService.getPaymentHistory(34);
 
-        // Aplica o filtro conforme o tipo de transação ou status
-        switch (selectedFilter) {
-            case "Received":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(34, false); // Filtro para transações recebidas
-                break;
-            case "Sent":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(34, true); // Filtro para transações enviadas
-                break;
-            case "Pending":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(34, false); // Filtro para transações pendentes
-                break;
-            case "Completed":
-                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(34, true); // Filtro para transações concluídas
-                break;
-            default:
-                paymentHistory = paymentHistoryService.getPaymentHistory(34); // Sem filtro
-        }
-
-        // Exibir as transações
         for (PaymentHistoryDTO payment : paymentHistory) {
             VBox transactionItem = createTransactionItem(payment);
             transactionListBox.getChildren().add(transactionItem);

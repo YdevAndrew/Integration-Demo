@@ -2,7 +2,6 @@ package org.jala.university.application.service.service_account;
 
 import org.jala.university.application.dto.dto_account.AccountDto;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public interface AccountService {
@@ -14,7 +13,5 @@ public interface AccountService {
     void removeAccount(AccountDto account);
 
     void updateAccount(AccountDto accountDto);
-
-    BigDecimal getBalanceByCustomerId(Integer customerId);
 
 }

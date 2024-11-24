@@ -195,6 +195,7 @@ public class ProfileViewController {
                 return;
             }
 
+            // Atualiza a interface com verificações null-safe
             fullNameLabel.setText(user.getFullName() != null ? user.getFullName() : "");
             cpfLabel.setText(user.getCpf() != null ? user.getCpf() : "");
             genderLabel.setText(user.getGender() != null ? user.getGender() : "");
@@ -217,8 +218,7 @@ public class ProfileViewController {
             e.printStackTrace();
             showAlert(AlertType.ERROR, "Erro", "Erro ao carregar dados do cliente: " + e.getMessage());
         }
-    }
-}
+    }}
 
 
 

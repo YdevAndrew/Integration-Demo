@@ -5,7 +5,6 @@ import org.jala.university.domain.entity.entity_account.Account;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
@@ -94,9 +93,5 @@ public class AccountServiceImpl implements AccountService {
                 account.getUpdatedAt(),
                 account.getPaymentPassword()
         );
-    }
-
-    public BigDecimal getBalanceByCustomerId(Integer customerId){
-        return accountRepository.findByCustomerId(customerId);
     }
 }

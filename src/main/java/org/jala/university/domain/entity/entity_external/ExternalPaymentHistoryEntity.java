@@ -41,8 +41,11 @@ public class ExternalPaymentHistoryEntity {
     @Column(name = "expired_date", nullable = false)
     private LocalDate expiredDate;
 
-    @Column(name = "cpf_cnpj_receiver")
+    @Column(name = "cpfReceiver")
     private String cpfReceiver;
+
+    @Column(name = "cnpjReceiver")
+    private String cnpjReceiver;
 
     @Column(name = "agency_receiver", nullable = false)
     private String agencyReceiver;

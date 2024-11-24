@@ -13,6 +13,6 @@ import java.util.Optional;
 public interface TransactionTypeRepository extends JpaRepository<TransactionTypeEntity, Integer> {
 
     // Query personalizada para encontrar um TransactionTypeEntity pelo nome do tipo de transação
-    @Query("SELECT t FROM TransactionTypeEntity t WHERE t.transactionTypeName = :transactionTypeName")
+    @Query("SELECT t FROM ExternalTransactionTypeEntity t WHERE t.transactionTypeName = :transactionTypeName")
     Optional<TransactionTypeEntity> findByTransactionTypeName(@Param("transactionTypeName") String transactionTypeName);
 }
