@@ -17,8 +17,8 @@ import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
 import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.domain.entity.entity_account.Account;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.jala.university.domain.entity.entity_account.Authentication;
 import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.repository.repository_account.AuthenticationRepository;
 import org.jala.university.domain.repository.repository_account.CustomerRepository;
@@ -27,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -69,6 +70,7 @@ public class TransactionPasswordController {
     private Label passwordErrorLabel;
 
     private String description;
+    private Integer loggedUserId;
     private BigDecimal value;
     private String cpfReceiver;
     private String accountReceiver;
@@ -92,8 +94,8 @@ public class TransactionPasswordController {
     private Integer getloggedUserId(){
         try {
             // Verifica se existe uma autenticação
-            org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Assert.notNull(authentication,"aiiiiiii");
             if (authentication != null){
 
                 Customer customer = customerRepository.findByCpf(authentication.getName())
@@ -119,6 +121,8 @@ public class TransactionPasswordController {
         this.nameReceiver = nameReceiver;
         this.cpfReceiver = cpfReceiver;
         this.scheduleDate = schedulingDate;
+
+        this.loggedUserId = this.getloggedUserId();
 
         setTextFlowContent(descriptionFlow, "Description: " + description);
         setTextFlowContent(bankFlow, "Bank: Jala Bank");
@@ -193,10 +197,11 @@ public class TransactionPasswordController {
                                     .bankNameReceiver("JalaU Bank")
                                     .build();
 
-                            paymentHistoryService.createPaymentHistory(getloggedUserId(), paymentHistoryDTO,"TRANSACTION");
+                            paymentHistoryService.createPaymentHistory(loggedUserId, paymentHistoryDTO,"TRANSACTION");
                         } catch (Exception e) {
                             Platform.runLater(() -> {
                                 showError("Error processing transaction: " + e.getMessage());
+                                System.out.println(e.getMessage());
                                 loadingStage.close();
                             });
                         }

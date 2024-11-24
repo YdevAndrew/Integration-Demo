@@ -48,25 +48,22 @@ public class TransactionHistoryController extends BaseController {
     }
 
     private Integer getloggedUserId(){
-        try {
-            // Verifica se existe uma autenticação
-            org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        // Verifica se existe uma autenticação
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            if (authentication != null){
+        if (authentication != null){
 
-                Customer customer = customerRepository.findByCpf(authentication.getName())
-                        .orElseThrow(() -> new IllegalArgumentException("customer not found"));
-                System.out.println(customer);
-                System.out.println(customer.getFullName());
-                Account account = accountRepository.findAccountByCustomerId(customer.getId())
-                        .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
-                return account.getId();
-            }
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+            System.out.println(customer);
+            System.out.println(customer.getFullName());
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+
+            return account.getId();
         }
+        return null;
+
     }
 
     @FXML

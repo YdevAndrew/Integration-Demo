@@ -15,5 +15,9 @@ public interface PaymentHistoryService {
 
     List<PaymentHistoryDTO> getPaymentHistoryFiltesSenderOrReceiver(Integer userId, Boolean isSender);
 
+    PaymentHistoryDTO createExternalPayment(Integer userId, PaymentHistoryDTO paymentHistoryDto, String transactionType);
+
+    PaymentHistoryDTO createInternalPayment(Integer userId, PaymentHistoryDTO paymentHistoryDto, String transactionType);
+
     List<PaymentHistoryDTO> getPaymentHistoryFiltesCompletedOrScheduled(Integer userId, Boolean isCompleted);
 }
