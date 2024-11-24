@@ -44,7 +44,7 @@ public class FormControllerLoan {
     private SpringFXMLLoader springFXMLLoader;
 
     @FXML
-    private Pane mainPane;
+    private Pane mainContent;
 
     @FXML
     public TextField salaryField;
@@ -59,7 +59,7 @@ public class FormControllerLoan {
      */
     @FXML
     private void initialize() {
-        if (mainPane == null) {
+        if (mainContent == null) {
             System.err.println("Warning: mainPane is not loaded properly.");
         }
         checkExistingApprovedLoan();
@@ -166,7 +166,7 @@ public class FormControllerLoan {
                 showSuccessPopup("Request sent successfully!");
 
                 // Load payments pane with the saved form details
-                PaymentsControllerLoan.loadPaymentsPane(mainPane, springFXMLLoader, savedFormDto);
+                PaymentsControllerLoan.loadPaymentsPane(mainContent, springFXMLLoader, savedFormDto);
 
                 // Reset file and UI after successful submission
                 resetFormState();

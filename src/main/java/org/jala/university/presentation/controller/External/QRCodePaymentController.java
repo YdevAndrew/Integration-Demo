@@ -15,7 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.imageio.ImageIO;
@@ -28,6 +30,8 @@ import java.time.format.DateTimeParseException;
 
 @Controller
 public class QRCodePaymentController extends BaseController {
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
     @FXML
     public ImageView qrCodeImageView; // Exibe a imagem do QR Code carregada
@@ -57,6 +61,7 @@ public class QRCodePaymentController extends BaseController {
     public String account;
     public String expirationDate;
     public String cnpjReceiver;
+    private ActionEvent event;
 
     // Método para lidar com o clique no botão "Select your QRCode"
     @FXML
@@ -132,11 +137,12 @@ public class QRCodePaymentController extends BaseController {
 
     @FXML
     public void onConfirmButtonClick(ActionEvent event) {
+        this.event = event;
         if (amount > 0 && receiverName != null && !receiverName.isEmpty() &&
                 agency != null && !agency.isEmpty() && account != null && !account.isEmpty() && expirationDate != null) {
 
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml"));
+                FXMLLoader loader = springFXMLLoader.load("/External/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml");
                 Pane paymentDetailsPane = loader.load();
 
                 ManualPaymentInformationController paymentDetailsController = loader.getController();
@@ -170,7 +176,7 @@ public class QRCodePaymentController extends BaseController {
     @FXML
     public void onManualEntryClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/PaymentModule/ManualPaymentScreens/QRCodePayment/ManuallyInsert.fxml"));
+            FXMLLoader loader = springFXMLLoader.load("/External/PaymentModule/ManualPaymentScreens/QRCodePayment/ManuallyInsert.fxml");
             Pane manualInsertPane = loader.load();
 
             ManuallyInsertController manuallyInsertController = loader.getController();

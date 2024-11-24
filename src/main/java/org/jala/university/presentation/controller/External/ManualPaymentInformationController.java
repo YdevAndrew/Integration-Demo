@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.BaseController;
-import org.jala.university.presentation.controller.External.PaymentReceiptController;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;

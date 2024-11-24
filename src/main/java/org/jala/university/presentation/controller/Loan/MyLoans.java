@@ -34,7 +34,7 @@ public class MyLoans {
 
     public HBox filterBar;
 
-    public AnchorPane mainContainer;
+    public AnchorPane mainContent;
 
     @FXML
     private FlowPane loansContainer;
@@ -61,8 +61,8 @@ public class MyLoans {
     public void initialize() {
         noLoanLabel = new Label("No loans found.");
         noLoanLabel.setStyle("-fx-font-size: 16; -fx-text-fill: gray;");
-        loansContainer.getChildren().add(noLoanLabel);
-        mainContainer.setOnScroll(this::handleScroll);
+        mainContent.getChildren().add(noLoanLabel);
+        mainContent.setOnScroll(this::handleScroll);
 
 
 
@@ -83,7 +83,7 @@ public class MyLoans {
         double newOffset = currentOffset - deltaY;
 
 
-        double maxOffset = loansContainer.getHeight() - mainContainer.getPrefHeight();
+        double maxOffset = mainContent.getHeight() - mainContent.getPrefHeight();
         if (newOffset < 0) {
             newOffset = 0;
         } else if (newOffset > maxOffset) {
@@ -91,7 +91,7 @@ public class MyLoans {
         }
 
 
-        loansContainer.setLayoutY(-newOffset);
+        mainContent.setLayoutY(-newOffset);
         currentOffset = newOffset;
 
         event.consume();
@@ -104,7 +104,7 @@ public class MyLoans {
         String selectedStatus = statusFilterComboBox.getValue();
         List<LoanEntityDto> loans = loanService.findAll();
 
-        loansContainer.getChildren().clear();
+        mainContent.getChildren().clear();
 
         if (loans != null && !loans.isEmpty()) {
             if (!"ALL".equals(selectedStatus)) {
@@ -114,7 +114,7 @@ public class MyLoans {
             }
 
             if (loans.isEmpty()) {
-                loansContainer.getChildren().add(noLoanLabel);
+                mainContent.getChildren().add(noLoanLabel);
                 return;
             }
 
@@ -122,10 +122,10 @@ public class MyLoans {
 
             for (LoanEntityDto loan : loans) {
                 VBox loanBox = createLoanBox(loan, dateFormatter);
-                loansContainer.getChildren().add(loanBox);
+                mainContent.getChildren().add(loanBox);
             }
         } else {
-            loansContainer.getChildren().add(noLoanLabel);
+            mainContent.getChildren().add(noLoanLabel);
         }
     }
 
@@ -230,7 +230,7 @@ public class MyLoans {
             if (account == null) {
                 Label errorLabel = new Label("Saldo insuficiente para pagar a parcela.");
                 errorLabel.setStyle("-fx-text-fill: red; -fx-font-size: 14;");
-                loansContainer.getChildren().add(errorLabel);
+                mainContent.getChildren().add(errorLabel);
                 removeLabelAfterDelay(errorLabel, 3);
 
                 return;
@@ -239,21 +239,21 @@ public class MyLoans {
             loadLoanDetails();
             Label successLabel = new Label("Parcela paga com sucesso!");
             successLabel.setStyle("-fx-text-fill: green; -fx-font-size: 14;");
-            loansContainer.getChildren().add(successLabel);
+            mainContent.getChildren().add(successLabel);
             removeLabelAfterDelay(successLabel, 3);
 
         } catch (Exception e) {
             System.err.println("Erro ao processar pagamento: " + e.getMessage());
             Label errorLabel = new Label("Erro ao processar o pagamento. Tente novamente.");
             errorLabel.setStyle("-fx-text-fill: red; -fx-font-size: 14;");
-            loansContainer.getChildren().add(errorLabel);
+            mainContent.getChildren().add(errorLabel);
             removeLabelAfterDelay(errorLabel, 3);
         }
     }
 
 
     private void removeLabelAfterDelay(Label label, int seconds) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), e -> loansContainer.getChildren().remove(label)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), e -> mainContent.getChildren().remove(label)));
         timeline.setCycleCount(1);
         timeline.play();
     }
