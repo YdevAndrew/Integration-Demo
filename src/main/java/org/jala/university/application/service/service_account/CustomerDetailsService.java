@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 @Service
@@ -20,14 +21,21 @@ public class CustomerDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        // Aqui você busca o usuário pelo e-mail ou CPF
-        Customer customer = (Customer) customerRepository.findByCpf(username)
+    public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
+        // Busca o usuário pelo CPF
+        Customer customer = customerRepository.findByCpf(cpf)
                 .orElseThrow(() -> new UsernameNotFoundException("Cliente não encontrado"));
 
-        return User.withUsername(customer.getCpf())
-                .password(Arrays.toString(customer.getPassword())) // Lembre-se de garantir que a senha esteja criptografada
-                .authorities("USER") // Você pode configurar roles de usuário, se necessário
+        // Converte a senha de bytea (byte[]) para String (presumindo que foi criptografada corretamente)
+        String encodedPassword = new String(customer.getPassword(), StandardCharsets.UTF_8);
+
+        // Retorna o UserDetails com a senha criptografada
+        return User.withUsername(customer.getCpf())  // Usando CPF como nome de usuário
+                .password(encodedPassword)  // Senha já criptografada
+                .authorities("USER")  // Você pode configurar roles de usuário, se necessário
                 .build();
     }
 }
+
+
+

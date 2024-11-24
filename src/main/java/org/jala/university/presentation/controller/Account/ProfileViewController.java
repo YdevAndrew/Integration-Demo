@@ -175,31 +175,50 @@ public class ProfileViewController {
 
     private void loadCustomerData() {
         try {
-            // Recuperando o usuário logado a partir do SecurityContextHolder
+            // Verifica se existe uma autenticação
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String username = authentication.getName(); // O username agora é o CPF
+            if (authentication == null) {
+                showAlert(AlertType.ERROR, "Erro", "Usuário não está autenticado.");
+                return;
+            }
 
-            // Aqui, você pode usar o username (CPF) para buscar o cliente
-            CustomerDto user = customerService.getCustomerByCpf(username);
+            String cpf = authentication.getName();
+            if (cpf == null || cpf.trim().isEmpty()) {
+                showAlert(AlertType.ERROR, "Erro", "CPF do usuário não encontrado.");
+                return;
+            }
 
-            // Agora você preenche as informações na interface
-            fullNameLabel.setText(user.getFullName());
-            cpfLabel.setText(user.getCpf());
-            genderLabel.setText(user.getGender());
-            birthdayLabel.setText(user.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            streetLabel.setText(user.getStreet());
-            districtLabel.setText(user.getDistrict());
-            stateLabel.setText(user.getState());
-            postalCodeLabel.setText(user.getPostalCode());
-            countryLabel.setText(user.getCountry());
-            emailLabel.setText(user.getEmail());
-            phoneNumberLabel.setText(user.getPhoneNumber());
+            // Busca o cliente e verifica se foi encontrado
+            CustomerDto user = customerService.getCustomerByCpf(cpf);
+            if (user == null) {
+                showAlert(AlertType.ERROR, "Erro", "Cliente não encontrado para o CPF: " + cpf);
+                return;
+            }
+
+            // Atualiza a interface com verificações null-safe
+            fullNameLabel.setText(user.getFullName() != null ? user.getFullName() : "");
+            cpfLabel.setText(user.getCpf() != null ? user.getCpf() : "");
+            genderLabel.setText(user.getGender() != null ? user.getGender() : "");
+
+            if (user.getBirthday() != null) {
+                birthdayLabel.setText(user.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            } else {
+                birthdayLabel.setText("");
+            }
+
+            streetLabel.setText(user.getStreet() != null ? user.getStreet() : "");
+            districtLabel.setText(user.getDistrict() != null ? user.getDistrict() : "");
+            stateLabel.setText(user.getState() != null ? user.getState() : "");
+            postalCodeLabel.setText(user.getPostalCode() != null ? user.getPostalCode() : "");
+            countryLabel.setText(user.getCountry() != null ? user.getCountry() : "");
+            emailLabel.setText(user.getEmail() != null ? user.getEmail() : "");
+            phoneNumberLabel.setText(user.getPhoneNumber() != null ? user.getPhoneNumber() : "");
+
         } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Erro", "Não foi possível carregar os dados do cliente.");
             e.printStackTrace();
+            showAlert(AlertType.ERROR, "Erro", "Erro ao carregar dados do cliente: " + e.getMessage());
         }
-    }
-}
+    }}
 
 
 
