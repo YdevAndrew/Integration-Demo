@@ -108,7 +108,7 @@ public class ProfileViewController {
 
     @FXML
     private void initialize() {
-        loadCustomerData();
+        //loadCustomerData();
     }
 
 
@@ -171,34 +171,34 @@ public class ProfileViewController {
         alert.setContentText(message);
 
         return alert.showAndWait().filter(response -> response == javafx.scene.control.ButtonType.OK).isPresent();
-    }
-    private void loadCustomerData() {
-        try {
-            // Recuperando o usuário logado a partir do SecurityContextHolder
-            CustomerService customerservice = SecurityContextHolder.getContext().getAuthentication();
-            String username = customerservice.getCpf(); // O username é o email ou CPF
-
-            // Aqui, você pode usar o username para buscar o cliente
-            CustomerDto user = customerService.getCustomerByEmail(username);  // Use o email ou CPF para buscar o cliente
-
-            // Agora você preenche as informações na interface
-            fullNameLabel.setText(user.getFullName());
-            cpfLabel.setText(user.getCpf());
-            genderLabel.setText(user.getGender());
-            birthdayLabel.setText(user.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            streetLabel.setText(user.getStreet());
-            districtLabel.setText(user.getDistrict());
-            stateLabel.setText(user.getState());
-            postalCodeLabel.setText(user.getPostalCode());
-            countryLabel.setText(user.getCountry());
-            emailLabel.setText(user.getEmail());
-            phoneNumberLabel.setText(user.getPhoneNumber());
-        } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Erro", "Não foi possível carregar os dados do cliente.");
-            e.printStackTrace();
-        }
-    }
-}
+    }}
+//    private void loadCustomerData() {
+//        try {
+//            // Recuperando o usuário logado a partir do SecurityContextHolder
+//          //  CustomerService customerservice = SecurityContextHolder.getContext().getAuthentication();
+//            //String username = customerservice.getCpf(); // O username é o email ou CPF
+//
+//            // Aqui, você pode usar o username para buscar o cliente
+//           // CustomerDto user = customerService.getCustomerByEmail(username);  // Use o email ou CPF para buscar o cliente
+//
+//            // Agora você preenche as informações na interface
+//            fullNameLabel.setText(user.getFullName());
+//            cpfLabel.setText(user.getCpf());
+//            genderLabel.setText(user.getGender());
+//            birthdayLabel.setText(user.getBirthday().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+//            streetLabel.setText(user.getStreet());
+//            districtLabel.setText(user.getDistrict());
+//            stateLabel.setText(user.getState());
+//            postalCodeLabel.setText(user.getPostalCode());
+//            countryLabel.setText(user.getCountry());
+//            emailLabel.setText(user.getEmail());
+//            phoneNumberLabel.setText(user.getPhoneNumber());
+//        } catch (Exception e) {
+//            showAlert(AlertType.ERROR, "Erro", "Não foi possível carregar os dados do cliente.");
+//            e.printStackTrace();
+//        }
+//    }
+//}
 
 
 
