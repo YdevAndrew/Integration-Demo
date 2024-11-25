@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -53,7 +54,7 @@ public class ManualPaymentInformationController extends BaseController {
     @FXML
     private Pane mainContent;
 
-    private double amount;
+    private BigDecimal amount;
     private String receiverName;
     private String agency;
     private String account;
@@ -70,10 +71,10 @@ public class ManualPaymentInformationController extends BaseController {
         this.manuallyInsertController = manuallyInsertController;
     }
 
-    private static final double JUROS_DIA = 0.01; // 1% ao dia
+    private static final BigDecimal JUROS_DIA = BigDecimal.valueOf(0.01); // 1% ao dia
 
     // Este método será chamado para inicializar os dados extraídos
-    public void initializePaymentDetails(double amount, String receiverName, String account, String agency, String expirationDate, String cnpjReceiver) {
+    public void initializePaymentDetails(BigDecimal amount, String receiverName, String account, String agency, String expirationDate, String cnpjReceiver) {
         this.amount = amount;
         this.receiverName = receiverName;
         this.account = account;
@@ -108,16 +109,16 @@ public class ManualPaymentInformationController extends BaseController {
         if (dataVencimento.isBefore(dataAtual)) {
             // Calcula a diferença de dias entre a data atual e a data de vencimento
             long diasAtraso = ChronoUnit.DAYS.between(dataVencimento, dataAtual);
-            double juros = amount * JUROS_DIA * diasAtraso; // Juros simples: valor * taxa * dias
-            double total = amount + juros;
+            BigDecimal juros = JUROS_DIA.multiply(new BigDecimal(diasAtraso)).multiply(amount); // Juros simples
+            BigDecimal total = amount.add(juros);
 
             // Atualiza os campos de juros e total na interface
-            interestValueLabel.setText("R$ " + String.format("%.2f", juros));
-            totalValueLabel.setText("R$ " + String.format("%.2f", total));
+            interestValueLabel.setText("R$ " + juros.setScale(2, BigDecimal.ROUND_HALF_UP));
+            totalValueLabel.setText("R$ " + total.setScale(2, BigDecimal.ROUND_HALF_UP));
         } else {
             // Caso a data de vencimento ainda não tenha passado
-            interestValueLabel.setText("R$ 0,00");
-            totalValueLabel.setText("R$ " + String.format("%.2f", amount));
+            interestValueLabel.setText("R$ 0.00");
+            totalValueLabel.setText("R$ " + amount.setScale(2, BigDecimal.ROUND_HALF_UP));;
         }
     }
 
@@ -132,11 +133,13 @@ public class ManualPaymentInformationController extends BaseController {
 
             // Inicializa o controlador do pop-up de senha
             PasswordPromptController passwordPromptController = loader.getController();
+            passwordPromptController.setDetails(amount,receiverName,account,agency,expirationDate,cnpjReceiver);
             if (passwordPromptController != null) {
                 // Define a tela que irá aparecer após a confirmação da senha
                 passwordPromptController.setPath("/External/ScheduleServices/PaymentStatus.fxml");
                 // Passa o controlador de PaymentDetailsController para o pop-up de senha
                 passwordPromptController.setPaymentDetailsController(this);
+
             } else {
                 System.out.println("Erro: O controlador PasswordPromptController não foi injetado corretamente.");
             }

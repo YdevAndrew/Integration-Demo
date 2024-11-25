@@ -8,8 +8,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
+import org.jala.university.application.service.service_transaction.PaymentHistoryService;
+import org.jala.university.application.service.service_transaction.PaymentHistoryServiceImpl;
 import org.jala.university.commons.presentation.BaseController;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.function.Consumer;
 
 import java.util.function.Consumer;
@@ -18,13 +25,29 @@ import java.io.IOException;
 @Controller
 public class PasswordPromptController extends BaseController {
 
+    @Autowired
+    private PaymentHistoryService paymentHistoryService;
     @FXML
     private PasswordField passwordField;
     private Consumer<String> passwordHandler;
     private String path;
+    public BigDecimal amount;
+    public String receiverName;
+    public String agency;
+    public String account;
+    public LocalDate expirationDate;
+    public String cnpjReceiver;
 
-    /**
-     * Define o callback para manipular a senha inserida.
+    public void setDetails(BigDecimal amount, String receiverName, String agency, String account, String expirationDate, String cnpjReceiver) {
+        this.amount = (amount);
+        this.receiverName = receiverName;
+        this.agency = agency;
+        this.account = account;
+        this.expirationDate = LocalDate.parse(expirationDate);
+        this.cnpjReceiver = cnpjReceiver;
+    }
+
+     /* Define o callback para manipular a senha inserida.
      */
     public void setPasswordHandler(Consumer<String> handler) {
         this.passwordHandler = handler;
@@ -53,11 +76,20 @@ public class PasswordPromptController extends BaseController {
 
         if (CORRECT_PASSWORD.equals(enteredPassword)) {
             try {
+
                 System.out.println("Path");
                 System.out.println(path);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
                 Pane root = fxmlLoader.load();
-
+                PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
+                        .amount(amount)
+                        .nameReceiver(receiverName)
+                        .agencyReceiver(agency)
+                        .accountReceiver(account)
+                        .expiredDate(expirationDate)
+                        .cpfReceiver(cnpjReceiver).build()
+                        ;
+                paymentHistoryService.createExternalPayment(48, paymentHistoryDTO,"EXTERNAL_PAYMENT");
 
                 Stage paymentStatusStage = new Stage();
                 paymentStatusStage.setTitle("Status de Pagamento");

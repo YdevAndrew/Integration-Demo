@@ -24,6 +24,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -55,7 +56,7 @@ public class QRCodePaymentController extends BaseController {
     private Pane mainContent;
 
     // Variáveis para armazenar os dados extraídos do QR Code
-    public double amount;
+    public BigDecimal amount;
     public String receiverName;
     public String agency;
     public String account;
@@ -105,7 +106,7 @@ public class QRCodePaymentController extends BaseController {
                     throw new Exception("Mandatory fields missing in QR Code.");
                 }
 
-                amount = json.getDouble("amount");
+                amount = new BigDecimal(json.getString("amount"));
                 cnpjReceiver = json.getString("cnpjReceiver");
                 receiverName = json.getString("nameReceiver");
                 agency = json.getString("agencyReceiver");
@@ -138,7 +139,7 @@ public class QRCodePaymentController extends BaseController {
     @FXML
     public void onConfirmButtonClick(ActionEvent event) {
         this.event = event;
-        if (amount > 0 && receiverName != null && !receiverName.isEmpty() &&
+        if (amount.compareTo(BigDecimal.ZERO) > 0 && receiverName != null && !receiverName.isEmpty() &&
                 agency != null && !agency.isEmpty() && account != null && !account.isEmpty() && expirationDate != null) {
 
             try {

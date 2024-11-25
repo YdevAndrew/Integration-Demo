@@ -3,6 +3,7 @@ package org.jala.university.application.dto.dto_transaction;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,4 +21,5 @@ public class PaymentHistoryDTO {
     String accountReceiver;
     String nameReceiver;
     String bankNameReceiver;
+    LocalDate expiredDate;
 }
