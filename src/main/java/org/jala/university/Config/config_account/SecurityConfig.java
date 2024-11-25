@@ -1,4 +1,4 @@
-package org.jala.university.Config.config_account;
+package org.jala.university.config.config_account;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

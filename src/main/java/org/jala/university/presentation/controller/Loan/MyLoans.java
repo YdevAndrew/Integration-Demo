@@ -206,7 +206,7 @@ public class MyLoans {
         paymentBox.setSpacing(10);
         paymentBox.setStyle("-fx-background-color: #F1F8FF; -fx-padding: 10; -fx-border-color: #CCE7FF; -fx-border-radius: 10; -fx-background-radius: 10;");
 
-        Label installmentLabel = new Label(String.format("Next Installment: R$ %.2f", loan.getValueOfInstallments()));
+        Label installmentLabel = new Label(String.format("Next Installment: R$ %.2f", loanService.getFirstUnpaidInstallment(loan).getAmount()));
         installmentLabel.setStyle("-fx-font-size: 16; -fx-font-weight: bold;");
 
         Label dueDateLabel;
