@@ -20,7 +20,6 @@ public interface PaymentHistoryRepository extends JpaRepository<PaymentHistoryEn
     @Query("SELECT p FROM PaymentHistoryEntity p WHERE p.account.id = :accountId")
     List<PaymentHistoryEntity> findAllByAccountId(@Param("accountId") Integer accountId);
 
-
     @Query("SELECT p FROM PaymentHistoryEntity p WHERE p.accountReceiver = :accountReceiver")
     List<PaymentHistoryEntity> findAllByReceiver(@Param("accountReceiver") String accountReceiver);
 

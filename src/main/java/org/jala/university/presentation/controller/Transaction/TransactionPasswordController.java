@@ -89,30 +89,19 @@ public class TransactionPasswordController {
     @Autowired
     private AccountRepository accountRepository;
 
-    //######################################################################
-    // Placeholder user ID
     private Integer getloggedUserId(){
-        try {
-            // Verifica se existe uma autenticação
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            Assert.notNull(authentication,"aiiiiiii");
-            if (authentication != null){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-                Customer customer = customerRepository.findByCpf(authentication.getName())
-                        .orElseThrow(() -> new IllegalArgumentException("customer not found"));
-                System.out.println(customer);
-                System.out.println(customer.getFullName());
-                Account account = accountRepository.findAccountByCustomerId(customer.getId())
-                        .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
-                return account.getId();
-            }
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        if (authentication != null){
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+            return account.getId();
         }
+        return null;
     }
-    //######################################################################
 
     public void setTransactionDetails(String accountNumber, String description, BigDecimal value, String nameReceiver, String cpfReceiver, LocalDate schedulingDate) {
         this.accountReceiver = accountNumber;
@@ -121,8 +110,7 @@ public class TransactionPasswordController {
         this.nameReceiver = nameReceiver;
         this.cpfReceiver = cpfReceiver;
         this.scheduleDate = schedulingDate;
-
-        this.loggedUserId = this.getloggedUserId();
+        this.loggedUserId = getloggedUserId();
 
         setTextFlowContent(descriptionFlow, "Description: " + description);
         setTextFlowContent(bankFlow, "Bank: Jala Bank");

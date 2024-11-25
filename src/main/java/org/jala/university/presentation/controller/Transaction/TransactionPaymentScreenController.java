@@ -75,29 +75,21 @@ public class TransactionPaymentScreenController extends BaseController {
     private static String savedValue;
     private static LocalDate savedSchedulingDate;
 
-    // Temporary for testing purposes
     private Integer getloggedUserId(){
-        try {
-            // Verifica se existe uma autenticação
-            org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-            if (authentication != null){
+        if (authentication != null){
 
-                Customer customer = customerRepository.findByCpf(authentication.getName())
-                        .orElseThrow(() -> new IllegalArgumentException("customer not found"));
-                System.out.println(customer);
-                System.out.println(customer.getFullName());
-                Account account = accountRepository.findAccountByCustomerId(customer.getId())
-                        .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
-                return account.getId();
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+            return account.getId();
             }
             return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
     }
-    private String userAccountNumber; // Stores the user's own account number
+    private String userAccountNumber;
 
     @FXML
     public void initialize() {
