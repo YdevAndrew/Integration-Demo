@@ -2,6 +2,7 @@ package org.jala.university.application.service.service_loan;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 import org.jala.university.application.dto.dto_loan.LoanEntityDto;
@@ -36,8 +37,8 @@ public class LoanResultsServiceImpl implements LoanResultsService {
         Integer accountId = loanEntity.getAccount().getId();
         Account savedAccount;
         Account account = accountRepository.findById(accountId)
-            .orElseThrow(() -> new IllegalStateException("Conta não encontrada"));
-            
+                .orElseThrow(() -> new IllegalStateException("Conta não encontrada"));
+
         account.setBalance(account.getBalance().add(BigDecimal.valueOf(loanEntity.getAmountBorrowed())));
         savedAccount = accountRepository.save(account);
         return savedAccount;
@@ -58,29 +59,30 @@ public class LoanResultsServiceImpl implements LoanResultsService {
         if (account.getBalance().compareTo(installmentAmount) < 0) {
             return null;
         }
-        
+
         account.setBalance(account.getBalance().subtract(BigDecimal.valueOf(
-            loanEntity.getFirstUnpaidInstallment().getAmount()
-            )));
-        
+                loanEntity.getFirstUnpaidInstallment().getAmount())));
+
         return accountRepository.save(account);
     }
 
     @Scheduled(cron = "0 0 0 * * ?")
+    @Transactional
     public void processScheduledPayments() {
-        List<LoanEntity> loans = loanEntityRepository.findByStatusPaymentMethod(1,1);
+        List<LoanEntity> loans = loanEntityRepository.findByStatusPaymentMethod(1, 1);
         LocalDate today = LocalDate.now();
 
         for (LoanEntity loan : loans) {
             List<InstallmentEntity> overdueInstallments = loan.getInstallments().stream()
-                .filter(installment -> !installment.getDueDate().isBefore(today) && !installment.getPaid())
-                .toList();
+                    .filter(installment -> (installment.getDueDate().isBefore(today)
+                            || installment.getDueDate().isEqual(today)) && !installment.getPaid())
+                    .toList();
 
             for (InstallmentEntity installment : overdueInstallments) {
                 boolean success = processInstallmentPayment(installment);
 
                 if (success) {
-                    loan.markAsPaid();
+                    loan.markAsPaidScheduled();
                     loanEntityRepository.save(loan);
                 } else {
                     System.err.println("Failed to process payment for installment: " + installment.getId());

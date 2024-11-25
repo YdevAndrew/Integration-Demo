@@ -2,6 +2,7 @@ package org.jala.university.domain.entity.entity_loan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.jala.university.commons.domain.BaseEntity;
@@ -132,6 +133,7 @@ public class LoanEntity implements BaseEntity<Integer> {
     public InstallmentEntity getFirstUnpaidInstallment() {
         return installments.stream()
                 .filter(installment -> !installment.getPaid())
+                .sorted(Comparator.comparing(InstallmentEntity::getDueDate))
                 .findFirst()
                 .orElse(null);
     }
@@ -209,6 +211,21 @@ public class LoanEntity implements BaseEntity<Integer> {
             }
         }
     }
+
+    public void markAsPaidScheduled() {
+        LocalDate today = LocalDate.now();
+        for (InstallmentEntity installment : installments) {
+            if (!installment.getPaid() && 
+                (installment.getDueDate().isBefore(today) || installment.getDueDate().isEqual(today))) {
+                
+                installment.setPaid(true);
+                installment.setPaymentDate(today);
+                updateStatusFinished();
+                break;
+            }
+        }
+    }
+    
     public void updateStatusFinished() {
         if (installments.stream().allMatch(InstallmentEntity::getPaid)) {
             setStatus(Status.FINISHED);
