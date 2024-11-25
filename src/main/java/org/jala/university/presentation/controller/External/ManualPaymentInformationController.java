@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -53,7 +54,7 @@ public class ManualPaymentInformationController extends BaseController {
     @FXML
     private Pane mainContent;
 
-    private double amount;
+    private BigDecimal amount;
     private String receiverName;
     private String agency;
     private String account;
@@ -73,7 +74,7 @@ public class ManualPaymentInformationController extends BaseController {
     private static final double JUROS_DIA = 0.01; // 1% ao dia
 
     // Este método será chamado para inicializar os dados extraídos
-    public void initializePaymentDetails(double amount, String receiverName, String account, String agency, String expirationDate, String cnpjReceiver) {
+    public void initializePaymentDetails(BigDecimal amount, String receiverName, String account, String agency, String expirationDate, String cnpjReceiver) {
         this.amount = amount;
         this.receiverName = receiverName;
         this.account = account;
@@ -108,8 +109,13 @@ public class ManualPaymentInformationController extends BaseController {
         if (dataVencimento.isBefore(dataAtual)) {
             // Calcula a diferença de dias entre a data atual e a data de vencimento
             long diasAtraso = ChronoUnit.DAYS.between(dataVencimento, dataAtual);
-            double juros = amount * JUROS_DIA * diasAtraso; // Juros simples: valor * taxa * dias
-            double total = amount + juros;
+
+            // Converting JUROS_DIA to BigDecimal
+            BigDecimal jurosDia = new BigDecimal(JUROS_DIA);
+
+            // Calculate interest and total using BigDecimal
+            BigDecimal juros = amount.multiply(jurosDia).multiply(new BigDecimal(diasAtraso));
+            BigDecimal total = amount.add(juros);
 
             // Atualiza os campos de juros e total na interface
             interestValueLabel.setText("R$ " + String.format("%.2f", juros));
@@ -120,6 +126,32 @@ public class ManualPaymentInformationController extends BaseController {
             totalValueLabel.setText("R$ " + String.format("%.2f", amount));
         }
     }
+
+    // Método para calcular juros se a data de vencimento já passou (juros double)
+//    public void calcularJurosSeVencido(String expirationDate) {
+//        // Formato da data
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//
+//        // Obtém as datas
+//        LocalDate dataVencimento = LocalDate.parse(expirationDate, formatter);
+//        LocalDate dataAtual = LocalDate.now();
+//
+//        // Verifica se a data de vencimento já passou
+//        if (dataVencimento.isBefore(dataAtual)) {
+//            // Calcula a diferença de dias entre a data atual e a data de vencimento
+//            long diasAtraso = ChronoUnit.DAYS.between(dataVencimento, dataAtual);
+//            double juros = amount * JUROS_DIA * diasAtraso; // Juros simples: valor * taxa * dias
+//            double total = amount + juros;
+//
+//            // Atualiza os campos de juros e total na interface
+//            interestValueLabel.setText("R$ " + String.format("%.2f", juros));
+//            totalValueLabel.setText("R$ " + String.format("%.2f", total));
+//        } else {
+//            // Caso a data de vencimento ainda não tenha passado
+//            interestValueLabel.setText("R$ 0,00");
+//            totalValueLabel.setText("R$ " + String.format("%.2f", amount));
+//        }
+//    }
 
 
     // Método chamado quando o usuário clica no botão "Confirmar"

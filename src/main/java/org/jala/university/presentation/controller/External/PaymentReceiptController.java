@@ -20,6 +20,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -170,7 +171,7 @@ public class PaymentReceiptController extends BaseController {
 
 
     // Método de inicialização do controlador
-    public void initializeReceipt(double amount, String receiverName, String account, String agency, String expirationDate, String interestValue, String totalValue) {
+    public void initializeReceipt(BigDecimal amount, String receiverName, String account, String agency, String expirationDate, String interestValue, String totalValue) {
         // Definir os valores nos labels
         amountLabel.setText("R$ " + String.format("%.2f", amount));
         expirationDateLabel.setText(expirationDate);

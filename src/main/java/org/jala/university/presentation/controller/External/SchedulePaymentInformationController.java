@@ -11,6 +11,7 @@ import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -43,13 +44,13 @@ public class SchedulePaymentInformationController extends BaseController {
     private Pane mainContent;
 
     // Método para definir os dados do pagamento com validações
-    public void setPaymentData(String serviceName, String recipient, String amount,
+    public void setPaymentData(String serviceName, String recipient, BigDecimal amount,
                                String agency, String account, String dueDate,
                                String startDate, String endDate, boolean isCNPJ) {
 
         serviceNameText.setText(serviceName);
         recipientText.setText(recipient);
-        serviceAmountText.setText(amount);
+        serviceAmountText.setText(String.valueOf(amount));
         agencyText.setText(agency);
         accountText.setText(account);
         dueDateText.setText(dueDate);

@@ -11,6 +11,7 @@ import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -263,11 +264,14 @@ public class EditingServiceController extends BaseController{
             // Determina se o tipo de documento selecionado é CNPJ
             boolean isCNPJ = cnpjToggleButton.isSelected();
 
+            // Convert amountField to BigDecimal
+            BigDecimal amount = new BigDecimal(amountField.getText().replace(",", "."));
+
             // Passar os dados para o controlador de SchedulePaymentInformationController
             controller.setPaymentData(
                     serviceNameField.getText(),
                     recipientField.getText(),
-                    amountField.getText(),
+                    amount,
                     agencyField.getText(),
                     accountField.getText(),
                     dueDateField.getText(),
