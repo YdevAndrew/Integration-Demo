@@ -163,40 +163,51 @@ public class TransactionPasswordController {
             Task<Void> transactionTask = new Task<>() {
                 @Override
                 protected Void call() throws Exception {
-                    for (int i = 1; i <= 100; i++) {
+                    try {
+                        for (int i = 1; i <= 30; i++) {
+                            if (cancelTransaction) {
+                                updateMessage("Transaction canceled.");
+                                break;
+                            }
+                            updateProgress(i, 100);
+                            Thread.sleep(50);
+                        }
+
                         if (cancelTransaction) {
-                            updateMessage("Transaction canceled.");
-                            break;
+                            return null;
                         }
-                        updateProgress(i, 100);
-                        Thread.sleep(50);
-                    }
 
-                    if (!cancelTransaction) {
-                        try {
-                            PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
-                                    .amount(value)
-                                    .transactionDate(scheduleDate.atStartOfDay())
-                                    .description(description)
-                                    .cpfReceiver(cpfReceiver)
-                                    .agencyReceiver("4545")
-                                    .accountReceiver(accountReceiver)
-                                    .nameReceiver(nameReceiver)
-                                    .bankNameReceiver("JalaU Bank")
-                                    .build();
+                        PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
+                                .amount(value)
+                                .transactionDate(scheduleDate.atStartOfDay())
+                                .description(description)
+                                .cpfReceiver(cpfReceiver)
+                                .agencyReceiver("4545")
+                                .accountReceiver(accountReceiver)
+                                .nameReceiver(nameReceiver)
+                                .bankNameReceiver("JalaU Bank")
+                                .build();
 
-                            paymentHistoryService.createPaymentHistory(loggedUserId, paymentHistoryDTO,"TRANSACTION");
-                        } catch (Exception e) {
-                            Platform.runLater(() -> {
-                                showError("Error processing transaction: " + e.getMessage());
-                                System.out.println(e.getMessage());
-                                loadingStage.close();
-                            });
+                        paymentHistoryService.createPaymentHistory(loggedUserId, paymentHistoryDTO, "TRANSACTION");
+
+                        for (int i = 31; i <= 100; i++) {
+                            if (cancelTransaction) {
+                                updateMessage("Transaction canceled.");
+                                break;
+                            }
+                            updateProgress(i, 100);
+                            Thread.sleep(50);
                         }
-                    } else {
+
                         Platform.runLater(() -> {
                             loadingStage.close();
-                            showSuccessMessage("Transaction canceled.");
+                            showSuccessMessage("Transaction completed successfully.");
+                        });
+
+                    } catch (Exception e) {
+                        Platform.runLater(() -> {
+                            showError("Error processing transaction: " + e.getMessage());
+                            loadingStage.close();
                         });
                     }
 
