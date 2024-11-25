@@ -70,7 +70,7 @@ public class FormControllerLoan {
      */
     private void checkExistingApprovedLoan() {
         try {
-            List<LoanEntityDto> userLoans = loanService.findAll(); // Alterar para buscar por usuário logado no futuro
+            List<LoanEntityDto> userLoans = loanService.findLoansByAccountId(); // Alterar para buscar por usuário logado no futuro
 
 
             boolean hasBlockedLoan = userLoans.stream()

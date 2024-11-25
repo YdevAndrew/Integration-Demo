@@ -5,9 +5,14 @@ import java.util.stream.Collectors;
 
 import org.jala.university.application.dto.dto_loan.FormEntityDto;
 import org.jala.university.application.mapper.mapper_loan.FormEntityMapper;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.entity.entity_loan.FormEntity;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.jala.university.domain.repository.repository_loan.FormEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +21,12 @@ import jakarta.persistence.PersistenceContext;
 
 @Service
 public class FormEntityServiceImpl implements FormEntityService {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     private FormEntityRepository formEntityRepository;
@@ -27,6 +38,24 @@ public class FormEntityServiceImpl implements FormEntityService {
     public FormEntityServiceImpl(FormEntityMapper formEntityMapper) {
         this.formEntityMapper = formEntityMapper;
     }
+
+    @Override
+    public  Integer getloggedUserId() {
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null) {
+
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+            return account.getId();
+        }
+        return null;
+    }
+    private String userAccountNumber;
+
 
     @Override
     @Transactional(readOnly = true)
