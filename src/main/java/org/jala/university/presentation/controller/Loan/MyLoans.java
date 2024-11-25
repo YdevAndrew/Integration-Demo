@@ -16,9 +16,13 @@ import org.jala.university.application.dto.dto_loan.LoanEntityDto;
 import org.jala.university.application.service.service_loan.LoanEntityService;
 import org.jala.university.application.service.service_loan.LoanResultsService;
 import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.entity.entity_loan.InstallmentEntity;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
@@ -31,6 +35,14 @@ import java.util.stream.Collectors;
  */
 @Controller
 public class MyLoans {
+
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
 
     public HBox filterBar;
 
@@ -97,12 +109,15 @@ public class MyLoans {
         event.consume();
     }
 
+
+
     /**
      * Loads the details of loans based on the selected filter status.
      */
     public void loadLoanDetails() {
         String selectedStatus = statusFilterComboBox.getValue();
-        List<LoanEntityDto> loans = loanService.findAll();
+
+        List<LoanEntityDto> loans = loanService.findLoansByAccountId();
 
         loansContainer.getChildren().clear();
 

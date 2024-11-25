@@ -16,4 +16,5 @@ public interface FormEntityService {
     void deleteById(Integer id);
     void delete(FormEntityDto entityDto);
     FormEntityDto update(Integer id, FormEntityDto entityDto);
+    Integer getloggedUserId();
 }
