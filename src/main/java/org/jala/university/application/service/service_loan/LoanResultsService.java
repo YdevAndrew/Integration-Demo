@@ -4,8 +4,6 @@ import org.jala.university.domain.entity.entity_account.Account;
 import org.jala.university.domain.entity.entity_loan.LoanEntity;
 
 public interface LoanResultsService {
-
     Account sendAmountAccount(LoanEntity loanEntity);
     Account payInstallment(LoanEntity loanEntity);
-    void verifyIfScheduled(LoanEntity loanEntity);
 }

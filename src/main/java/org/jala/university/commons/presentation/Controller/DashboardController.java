@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +24,8 @@ import org.jala.university.presentation.controller.Account.ProfileViewController
 import org.jala.university.presentation.controller.Loan.MyLoans;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Transaction.TransactionHistoryController;
+import org.jala.university.presentation.controller.Transaction.TransactionPaymentScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -106,7 +109,7 @@ public class DashboardController extends BaseController {
 
         // Configurar ações dos botões
         transactionButton.setOnAction(event -> loadTransactionView());
-        pixButton.setOnAction(event -> loadPixView());
+        transactionHistButton.setOnAction(event -> loadTransactionHistoryScreen());
     }
 
     @FXML
@@ -205,9 +208,10 @@ public class DashboardController extends BaseController {
     private void loadTransactionView() {
         clearAllPanels();
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_paymentScreen.fxml"));
-            Pane transactionPane = loader.load();
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
+            Node transactionPane = loader.load();
+            TransactionPaymentScreenController controller = loader.getController();
             mainContent.getChildren().add(transactionPane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -215,13 +219,13 @@ public class DashboardController extends BaseController {
     }
 
     @FXML
-    private void loadPixView() {
-        clearAllPanels();
+    private void loadTransactionHistoryScreen(){
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_TED&PIX.fxml"));
-            Pane pixPane = loader.load();
-            mainContent.getChildren().add(pixPane);
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_Historical.fxml");
+            Node transactionPane = loader.load();
+            TransactionHistoryController controller = loader.getController();
+            mainContent.getChildren().add(transactionPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -314,19 +318,23 @@ public class DashboardController extends BaseController {
 
 
     @FXML
-    private void loadProfileView() {
+    private void loadProfileView(ActionEvent event) {
         try {
-            FXMLLoader loader = springFXMLLoader.load("/Account/profile-page.fxml");
-            Node profileView = loader.load();
+            // Carrega o FXML da página de perfil
+            FXMLLoader loader = org.jala.university.config.config_account.SpringFXMLLoader.create("/Account/profile-page.fxml");
+            Parent root = loader.load();
 
-            ProfileViewController controller = loader.getController();
+            // Recupera a Stage atual
+            Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
-
-            mainViewContainer.getChildren().setAll(profileView);
+            // Atualiza a cena com a página de perfil
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     private void loadCustomerInfo() {
         try {

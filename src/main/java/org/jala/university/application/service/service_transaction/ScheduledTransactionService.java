@@ -27,7 +27,7 @@ public class ScheduledTransactionService {
     private final StatusRepository statusRepository;
 
     @Transactional
-    @Scheduled(fixedRate = 100)
+    @Scheduled(fixedRate = 6000)
     public void processScheduledPayments() {
 
         LocalDate today = LocalDate.now();
@@ -51,7 +51,7 @@ public class ScheduledTransactionService {
 
     public PaymentHistoryEntity executePayment(PaymentHistoryEntity paymentHistoryEntity) {
 
-        Account sender = accountRepository.findById(paymentHistoryEntity.getAccount().getId())  // falta implementar a autenticação
+        Account sender = accountRepository.findById(paymentHistoryEntity.getAccount().getId())
                 .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
 
         if (sender.getBalance().compareTo(paymentHistoryEntity.getAmount()) < 0) {
