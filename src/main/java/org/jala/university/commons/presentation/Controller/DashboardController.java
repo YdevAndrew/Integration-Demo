@@ -208,9 +208,23 @@ public class DashboardController extends BaseController {
     private void loadTransactionView() {
         clearAllPanels();
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_paymentScreen.fxml"));
-            Pane transactionPane = loader.load();
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
+            Node transactionPane = loader.load();
+            TransactionPaymentScreenController controller = loader.getController();
+            mainContent.getChildren().add(transactionPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loadTransactionHistoryScreen(){
+        try {
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_Historical.fxml");
+            Node transactionPane = loader.load();
+            TransactionHistoryController controller = loader.getController();
             mainContent.getChildren().add(transactionPane);
         } catch (IOException e) {
             e.printStackTrace();

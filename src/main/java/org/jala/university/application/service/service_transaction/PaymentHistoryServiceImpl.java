@@ -6,11 +6,14 @@ import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
 import org.jala.university.application.mapper.mapper_account.AccountMapper;
 import org.jala.university.application.mapper.mapper_transaction.PaymentHistoryMapper;
 import org.jala.university.application.service.service_account.AccountService;
+import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.entity.entity_transaction.PaymentHistoryEntity;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.jala.university.domain.repository.repository_transaction.PaymentHistoryRepository;
 import org.jala.university.domain.repository.repository_transaction.StatusRepository;
 import org.jala.university.domain.repository.repository_transaction.TransactionTypeRepository;
+import org.jala.university.utils.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -40,13 +43,17 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
     private StatusRepository statusRepository;
     @Autowired
     private TransactionTypeRepository transactionTypeRepository;
-
-
+    @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private EmailService emailService;
 
 
     @Override
     @Transactional
     public PaymentHistoryDTO createPaymentHistory(Integer userId, PaymentHistoryDTO paymentHistoryDto, String transactionType) {
+        String emailStatus;  // Variável para controlar o status do email
+
         if (paymentHistoryDto.getTransactionDate().isBefore(LocalDateTime.now()) || paymentHistoryDto.getTransactionDate().isEqual(LocalDateTime.now())) {
             System.out.println("Executing immediate transaction logic...");
 
@@ -63,9 +70,6 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
             sender.setBalance(sender.getBalance().subtract(paymentHistoryDto.getAmount()));
             receiver.setBalance(receiver.getBalance().add(paymentHistoryDto.getAmount()));
 
-            System.out.println("New sender balance: " + sender.getBalance());
-            System.out.println("New receiver balance: " + receiver.getBalance());
-
             PaymentHistoryEntity paymentHistoryEntity = paymentHistoryMapper.mapFrom(paymentHistoryDto);
             paymentHistoryEntity.setAccount(sender);
             paymentHistoryEntity.setTransactionType(returnTransactionType(transactionType));
@@ -76,9 +80,36 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
             accountRepository.save(sender);
             accountRepository.save(receiver);
 
+            emailStatus = "Transaction Completed";
+
+            // Enviar e-mail para o remetente (sender)
+            Optional<Customer> senderCustomerOpt = customerRepository.findCustomerByAccountId(sender.getId());
+            senderCustomerOpt.ifPresent(senderCustomer -> {
+                String senderEmail = senderCustomer.getEmail();
+                emailService.sendEmail(
+                        senderEmail,
+                        "Transaction " + emailStatus,
+                        "Dear " + senderCustomer.getFullName() + ",\n\nYour transaction of amount "
+                                + paymentHistoryDto.getAmount().toPlainString() + " has been completed successfully.\n\nBest regards, JalaBank."
+                );
+            });
+
+            // Enviar e-mail para o destinatário (receiver)
+            Optional<Customer> receiverCustomerOpt = customerRepository.findCustomerByAccountId(receiver.getId());
+            receiverCustomerOpt.ifPresent(receiverCustomer -> {
+                String receiverEmail = receiverCustomer.getEmail();
+                emailService.sendEmail(
+                        receiverEmail,
+                        "Transaction " + emailStatus,
+                        "Dear " + receiverCustomer.getFullName() + ",\n\nYour transaction of amount "
+                                + paymentHistoryDto.getAmount().toPlainString() + " has been completed successfully.\n\nBest regards, JalaBank."
+                );
+            });
+
             return paymentHistoryMapper.mapTo(savedPaymentHistory);
 
         } else {
+            emailStatus = "Transaction Scheduled";
             System.out.println("Executing scheduled transaction logic...");
 
             Account sender = accountRepository.findById(userId)
@@ -87,9 +118,6 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
             Account receiver = accountRepository.findByAccountNumber(paymentHistoryDto.getAccountReceiver())
                     .orElseThrow(() -> new IllegalArgumentException("Receiver account not found"));
 
-            System.out.println("Current sender balance: " + sender.getBalance());
-            System.out.println("Current receiver balance: " + receiver.getBalance());
-
             PaymentHistoryEntity paymentHistoryEntity = paymentHistoryMapper.mapFrom(paymentHistoryDto);
             paymentHistoryEntity.setAccount(sender);
             paymentHistoryEntity.setTransactionType(returnTransactionType("TRANSACTION"));
@@ -97,9 +125,35 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
 
             PaymentHistoryEntity savedPaymentHistory = paymentHistoryRepository.save(paymentHistoryEntity);
 
+            // Enviar e-mail para o remetente (sender)
+            Optional<Customer> senderCustomerOpt = customerRepository.findCustomerByAccountId(sender.getId());
+            senderCustomerOpt.ifPresent(senderCustomer -> {
+                String senderEmail = senderCustomer.getEmail();
+                emailService.sendEmail(
+                        senderEmail,
+                        "Transaction Scheduled",
+                        "Dear " + senderCustomer.getFullName() + ",\n\nYour transaction of amount "
+                                + paymentHistoryDto.getAmount().toPlainString() + " has been scheduled.\n\nBest regards, JalaBank."
+                );
+            });
+
+            // Enviar e-mail para o destinatário (receiver)
+            Optional<Customer> receiverCustomerOpt = customerRepository.findCustomerByAccountId(receiver.getId());
+            receiverCustomerOpt.ifPresent(receiverCustomer -> {
+                String receiverEmail = receiverCustomer.getEmail();
+                emailService.sendEmail(
+                        receiverEmail,
+                        "Transaction Scheduled",
+                        "Dear " + receiverCustomer.getFullName() + ",\n\nYour transaction of amount "
+                                + paymentHistoryDto.getAmount().toPlainString() + " has been scheduled.\n\nBest regards, JalaBank."
+                );
+            });
+
             return paymentHistoryMapper.mapTo(savedPaymentHistory);
         }
     }
+
+
 
     @Override
     public PaymentHistoryDTO createInternalPayment(Integer userId, PaymentHistoryDTO paymentHistoryDto, String transactionType){

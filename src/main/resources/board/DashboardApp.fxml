@@ -105,7 +105,7 @@
                         <content>
                             <VBox fx:id="transactionMenu" managed="true" visible="true" spacing="10">
                                 <children>
-                                    <Button fx:id="transferButton" styleClass="menu-button" text="Transactions">
+                                    <Button fx:id="transactionHistButton" styleClass="menu-button" text="Transactions">
                                         <graphic>
                                             <ImageView fitHeight="13.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                                                 <image>

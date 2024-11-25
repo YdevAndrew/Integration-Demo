@@ -13,6 +13,7 @@ public interface AuthenticationRepository<A, L extends Integer> extends JpaRepos
 
     @Query("SELECT a FROM Authentication a JOIN a.customer c WHERE c.email = :email AND c.password = :password")
     Optional<Authentication> authenticate(@Param("email") String email, @Param("password") String password);
+
     @Query("SELECT a FROM Authentication a JOIN a.customer c WHERE c.email = :email")
     Optional<Authentication> findByEmail(@Param("email") String email);
 

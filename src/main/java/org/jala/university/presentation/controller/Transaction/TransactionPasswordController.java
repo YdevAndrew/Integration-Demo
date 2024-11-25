@@ -215,7 +215,7 @@ public class TransactionPasswordController {
 
     private void showLoadingScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Style/Transection_LoadingScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_LoadingScreen.fxml"));
             VBox loadingBox = loader.load();
 
             Button cancelButton = (Button) loadingBox.lookup("#cancelButton");
@@ -246,9 +246,9 @@ public class TransactionPasswordController {
         Customer customer = (customerRepository.findCustomerByAccountId(getloggedUserId())
                 .orElseThrow(() -> new IllegalArgumentException("customer not found")));
 
-            if (passwordEncoder.matches(password,new String(customer.getPassword()))){
-                return true;
-            }
+        if (passwordEncoder.matches(password,new String(customer.getPassword()))){
+            return true;
+        }
 
         return false;
     }
@@ -268,7 +268,7 @@ public class TransactionPasswordController {
 
     private void goBack() {
         try {
-            FXMLLoader loader = springFXMLLoader.load("/Style/Transection_paymentScreen.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
             Pane mainPagePane = loader.load();
 
             contentPane2.getChildren().clear();
