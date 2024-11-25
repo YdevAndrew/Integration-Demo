@@ -27,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public Optional<Authentication> getAuthentication(Integer id) {
         return authenticationRepository.findById(id);
     }
-//
+
 //    @Override
 //    public Optional<Authentication> getAuthenticationByEmail(String email) {
 //        return authenticationRepository.findByEmail(email);

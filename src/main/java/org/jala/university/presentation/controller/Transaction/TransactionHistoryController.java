@@ -10,12 +10,24 @@ import javafx.scene.layout.VBox;
 import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
 import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.Customer;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 @Controller
 public class TransactionHistoryController extends BaseController {
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @FXML
     private TextField searchField;
@@ -35,13 +47,27 @@ public class TransactionHistoryController extends BaseController {
         this.paymentHistoryService = paymentHistoryService;
     }
 
+    private Integer getloggedUserId(){
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null){
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+            return account.getId();
+        }
+        return null;
+    }
+
     @FXML
     public void initialize() {
         transactionScrollPane.setFitToWidth(true);
         transactionScrollPane.setContent(transactionListBox);
 
-        filterChoiceBox.setItems(FXCollections.observableArrayList("Type", "Date"));
-        filterChoiceBox.getSelectionModel().select(0);
+        filterChoiceBox.setItems(FXCollections.observableArrayList("All", "Received", "Sent", "Pending", "Completed"));
+        filterChoiceBox.getSelectionModel().select(0); // Seleciona "All" como padrão
 
         loadTransactionHistory();
 
@@ -52,7 +78,27 @@ public class TransactionHistoryController extends BaseController {
     private void loadTransactionHistory() {
         transactionListBox.getChildren().clear();
 
-        List<PaymentHistoryDTO> paymentHistory = paymentHistoryService.getPaymentHistory(34);
+        Integer userId = getloggedUserId();
+
+        String selectedFilter = filterChoiceBox.getValue();
+        List<PaymentHistoryDTO> paymentHistory = null;
+
+        switch (selectedFilter) {
+            case "Received":
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(userId, false); // Filtro para transações recebidas
+                break;
+            case "Sent":
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesSenderOrReceiver(userId, true); // Filtro para transações enviadas
+                break;
+            case "Pending":
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(userId, false); // Filtro para transações pendentes
+                break;
+            case "Completed":
+                paymentHistory = paymentHistoryService.getPaymentHistoryFiltesCompletedOrScheduled(userId, true); // Filtro para transações concluídas
+                break;
+            default:
+                paymentHistory = paymentHistoryService.getPaymentHistory(userId); // Sem filtro
+        }
 
         for (PaymentHistoryDTO payment : paymentHistory) {
             VBox transactionItem = createTransactionItem(payment);
@@ -90,7 +136,7 @@ public class TransactionHistoryController extends BaseController {
     private void filterTransactionHistory(String searchTerm) {
         transactionListBox.getChildren().clear();
 
-        List<PaymentHistoryDTO> filteredHistory = paymentHistoryService.getPaymentHistory(34);
+        List<PaymentHistoryDTO> filteredHistory = paymentHistoryService.getPaymentHistory(getloggedUserId());
         filteredHistory = filteredHistory.stream()
                 .filter(payment -> payment.getDescription().toLowerCase().contains(searchTerm.toLowerCase()))
                 .toList();

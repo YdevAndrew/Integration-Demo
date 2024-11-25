@@ -36,6 +36,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
 
 
+    @Query("SELECT c FROM Customer c WHERE c.email = :email")
+    Optional<Customer> findByEmail(@Param("email") String email);
+
     // Busca clientes ativos (exemplo, supomos que há um campo booleano 'active' na entidade Customer)
    // @Query("SELECT c FROM Customer c WHERE c.active = true")
  //   List<Customer> findActiveCustomers();

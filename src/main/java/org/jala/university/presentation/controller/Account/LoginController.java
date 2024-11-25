@@ -29,7 +29,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-import static org.jala.university.config.config_account.SpringFXMLLoader.applicationContext;
+
 
 import java.io.IOException;
 import java.util.List;
@@ -117,13 +117,14 @@ public class LoginController {
             if (authenticated) {
                 // Agora o Spring Security deve cuidar da autenticação e do contexto
                 Authentication auth = new UsernamePasswordAuthenticationToken(cpf, password, List.of(new SimpleGrantedAuthority("USER")));
+
                 SecurityContextHolder.getContext().setAuthentication(auth);
+
                 // Obter o Stage atual
                 Stage currentStage = (Stage) loginButton.getScene().getWindow();
 
                 // Carregar a tela de Dashboard
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/board/DashboardApp.fxml"));
-                loader.setControllerFactory(applicationContext::getBean);
+                FXMLLoader loader = SpringFXMLLoader.create("/board/DashboardApp.fxml");
                 Parent root = loader.load();
 
                 // Alterar o conteúdo da janela

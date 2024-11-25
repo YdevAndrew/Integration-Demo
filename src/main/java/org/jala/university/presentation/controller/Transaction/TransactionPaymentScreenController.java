@@ -13,9 +13,10 @@ import org.jala.university.application.service.service_transaction.PaymentHistor
 import org.jala.university.commons.presentation.BaseController;
 import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
-import org.jala.university.presentation.MainView;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -70,16 +71,28 @@ public class TransactionPaymentScreenController extends BaseController {
     private static String savedValue;
     private static LocalDate savedSchedulingDate;
 
-    // Temporary for testing purposes
-    private Integer userId = 34;
-    private String userAccountNumber; // Stores the user's own account number
+    private Integer getloggedUserId(){
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null){
+
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+            return account.getId();
+            }
+            return null;
+    }
+    private String userAccountNumber;
 
     @FXML
     public void initialize() {
 
-//        userAccountNumber = accountRepository.findById(userId)
-//                .map(Account::getAccountNumber)
-//                .orElse(null);
+        userAccountNumber = accountRepository.findById(getloggedUserId())
+                .map(Account::getAccountNumber)
+                .orElse(null);
 
         if (savedAccountNumber != null) accountField.setText(savedAccountNumber);
         if (savedDescription != null) descriptionField.setText(savedDescription);
@@ -123,6 +136,27 @@ public class TransactionPaymentScreenController extends BaseController {
 //        }
 //    }
 
+        List<AccountDto> savedContacts = paymentHistoryService.getContactList(getloggedUserId());
+
+        for (AccountDto contact : savedContacts) {
+            Optional<Customer> customerOptional = customerRepository.findCustomerByAccountId(contact.getId());
+
+            customerOptional.ifPresent(customer -> {
+                Button contactButton = new Button(customer.getFullName() + " (" + contact.getAccountNumber() + ")");
+                contactButton.setPrefHeight(66.0);
+                contactButton.setPrefWidth(231.0);
+                contactButton.getStyleClass().add("list-container");
+
+                contactButton.setOnAction(event -> {
+                    accountField.setText(contact.getAccountNumber());
+                    descriptionField.setText("Payment to " + customer.getFullName());
+                    valueField.requestFocus();
+                });
+
+                contactsListVBox.getChildren().add(contactButton);
+            });
+        }
+    }
     private void validateFields() {
         boolean isValid = true;
 
