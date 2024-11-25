@@ -90,9 +90,7 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         entity.generateInstallments();
         entity.generateAndSetDate();
         entity.setForm(formEntityService.findEntityById(entity.getForm().getId()));
-        loanResultsService.verifyIfScheduled(entity);
-        //Quando juntar com o módulo Account
-        entity.setAccount(accountRepository.findById(/*getLoggedAccount().getId())*/ 1).orElse(null));
+        entity.setAccount(accountRepository.findById(formEntityService.getloggedUserId()).orElse(null));
         if (entity.getStatus() == null) {
             entity.setStatus(entity.generateStatus());
         }
@@ -148,7 +146,7 @@ public class LoanEntityServiceImpl implements LoanEntityService {
     @Override
     @Transactional(readOnly = true)
     public List<LoanEntityDto> findLoansByAccountId() {
-        Integer id = 1; //Ajustar quando juntar módulos para o id da conta logada
+        Integer id = formEntityService.getloggedUserId(); //Ajustar quando juntar módulos para o id da conta logada
         List<LoanEntity> loans = loanEntityRepository.findByAccountId(id);
         loans.forEach(LoanEntity::updateStatusFinished);
         return loans.stream()
@@ -182,7 +180,6 @@ public class LoanEntityServiceImpl implements LoanEntityService {
 
         if (newStatus == Status.APPROVED) {
             loanResultsService.sendAmountAccount(loanEntity);
-            loanResultsService.verifyIfScheduled(loanEntity);
         }
     }
 
