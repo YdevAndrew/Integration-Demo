@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="contentPane" prefHeight="750.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Transaction.TransactionPaymentScreenController">
+<Pane fx:id="mainContent" prefHeight="750.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.Transaction.TransactionPaymentScreenController">
    <children>
       <AnchorPane layoutX="5.0" layoutY="11.0" prefHeight="729.0" prefWidth="853.0" stylesheets="@Assets/style.css">
          <children>

@@ -1,0 +1,79 @@
+/* Estilo geral do fundo */
+.root {
+    -fx-background-color: #FFFFFF; /* Fundo branco */
+    -fx-padding: 20px;
+}
+
+/* Estilo do cabeçalho */
+.header-pane {
+    -fx-background-color: #F8F9FA; /* Cinza claro */
+    -fx-padding: 10px;
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 0 0 1 0; /* Apenas a borda inferior */
+}
+
+/* Estilo das Labels principais */
+.label {
+    -fx-font-family: "Graphik-Regular";
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333; /* Cinza escuro */
+    -fx-padding: 5px 0;
+}
+
+.label-title {
+    -fx-font-family: "Graphik-Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #555555; /* Cinza médio */
+    -fx-padding: 5px 0;
+}
+
+/* Estilo para Labels dinâmicas com ID (valores) */
+.label-value {
+    -fx-font-family: "Graphik-Regular";
+    -fx-font-size: 14px;
+    -fx-text-fill: #0078D7; /* Azul claro */
+}
+
+/* Botões gerais */
+.button {
+    -fx-background-color: #FFFFFF; /* Fundo branco */
+    -fx-text-fill: #333333; /* Texto cinza escuro */
+    -fx-border-color: #E0E0E0; /* Borda cinza claro */
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-family: "Graphik-Bold";
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+}
+
+.button:hover {
+    -fx-background-color: #F0F0F0; /* Fundo mais escuro no hover */
+    -fx-cursor: hand;
+}
+
+/* Botões de ação com cor transparente */
+.transparent-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0078D7; /* Azul claro */
+    -fx-font-family: "Graphik-Bold";
+    -fx-font-size: 14px;
+}
+
+.transparent-button:hover {
+    -fx-text-fill: #005A9E; /* Azul escuro */
+    -fx-cursor: hand;
+}
+
+/* Estilo de imagens */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+    -fx-padding: 5px;
+}
+
+/* Imagem do perfil */
+.profile-image {
+    -fx-border-color: #E0E0E0;
+    -fx-border-width: 2;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}

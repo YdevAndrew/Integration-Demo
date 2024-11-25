@@ -4,11 +4,9 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.AccessibleAction;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -17,13 +15,25 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
 import org.jala.university.application.service.service_transaction.PaymentHistoryService;
+import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.jala.university.domain.entity.entity_account.Customer;
+import org.jala.university.domain.repository.repository_account.AuthenticationRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Controller
 public class TransactionPasswordController {
@@ -59,11 +69,10 @@ public class TransactionPasswordController {
     @FXML
     private Label passwordErrorLabel;
 
-    private String accountNumber;
     private String description;
+    private Integer loggedUserId;
     private BigDecimal value;
     private String cpfReceiver;
-    private String agencyReceiver;
     private String accountReceiver;
     private String nameReceiver;
 
@@ -71,10 +80,28 @@ public class TransactionPasswordController {
     private LocalDate scheduleDate;
     private boolean cancelTransaction = false;
 
-    //######################################################################
-    // Placeholder user ID
-    private Integer userId = 34;
-    //######################################################################
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private AuthenticationRepository authenticationRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    private Integer getloggedUserId(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null){
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+            return account.getId();
+        }
+        return null;
+    }
 
     public void setTransactionDetails(String accountNumber, String description, BigDecimal value, String nameReceiver, String cpfReceiver, LocalDate schedulingDate) {
         this.accountReceiver = accountNumber;
@@ -83,6 +110,7 @@ public class TransactionPasswordController {
         this.nameReceiver = nameReceiver;
         this.cpfReceiver = cpfReceiver;
         this.scheduleDate = schedulingDate;
+        this.loggedUserId = getloggedUserId();
 
         setTextFlowContent(descriptionFlow, "Description: " + description);
         setTextFlowContent(bankFlow, "Bank: Jala Bank");
@@ -135,43 +163,51 @@ public class TransactionPasswordController {
             Task<Void> transactionTask = new Task<>() {
                 @Override
                 protected Void call() throws Exception {
-                    for (int i = 1; i <= 100; i++) {
+                    try {
+                        for (int i = 1; i <= 30; i++) {
+                            if (cancelTransaction) {
+                                updateMessage("Transaction canceled.");
+                                break;
+                            }
+                            updateProgress(i, 100);
+                            Thread.sleep(50);
+                        }
+
                         if (cancelTransaction) {
-                            updateMessage("Transaction canceled.");
-                            break;
+                            return null;
                         }
-                        updateProgress(i, 100);
-                        Thread.sleep(50);
-                    }
 
-                    if (!cancelTransaction) {
-                        try {
-                            PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
-                                    .amount(value)
-                                    .transactionDate(scheduleDate.atStartOfDay())
-                                    .description(description)
-                                    .cpfReceiver(cpfReceiver)
-                                    .agencyReceiver("4545")
-                                    .accountReceiver(accountReceiver)
-                                    .nameReceiver(nameReceiver)
-                                    .bankNameReceiver("JalaU Bank")
-                                    .build();
+                        PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
+                                .amount(value)
+                                .transactionDate(scheduleDate.atStartOfDay())
+                                .description(description)
+                                .cpfReceiver(cpfReceiver)
+                                .agencyReceiver("4545")
+                                .accountReceiver(accountReceiver)
+                                .nameReceiver(nameReceiver)
+                                .bankNameReceiver("JalaU Bank")
+                                .build();
 
-                            paymentHistoryService.createPaymentHistory(userId, paymentHistoryDTO,"TRANSACTION");
-                            Platform.runLater(() -> {
-                                loadingStage.close();
-                                showSuccessMessage("Transaction completed successfully!");
-                            });
-                        } catch (Exception e) {
-                            Platform.runLater(() -> {
-                                showError("Error processing transaction: " + e.getMessage());
-                                loadingStage.close();
-                            });
+                        paymentHistoryService.createPaymentHistory(loggedUserId, paymentHistoryDTO, "TRANSACTION");
+
+                        for (int i = 31; i <= 100; i++) {
+                            if (cancelTransaction) {
+                                updateMessage("Transaction canceled.");
+                                break;
+                            }
+                            updateProgress(i, 100);
+                            Thread.sleep(50);
                         }
-                    } else {
+
                         Platform.runLater(() -> {
                             loadingStage.close();
-                            showSuccessMessage("Transaction canceled.");
+                            showSuccessMessage("Transaction completed successfully.");
+                        });
+
+                    } catch (Exception e) {
+                        Platform.runLater(() -> {
+                            showError("Error processing transaction: " + e.getMessage());
+                            loadingStage.close();
                         });
                     }
 
@@ -190,7 +226,7 @@ public class TransactionPasswordController {
 
     private void showLoadingScreen() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Style/Transection_LoadingScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_LoadingScreen.fxml"));
             VBox loadingBox = loader.load();
 
             Button cancelButton = (Button) loadingBox.lookup("#cancelButton");
@@ -215,7 +251,17 @@ public class TransactionPasswordController {
     }
 
     private boolean passwordIsValid(String password) {
-        return password.equals("expectedPassword");
+
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+        Customer customer = (customerRepository.findCustomerByAccountId(getloggedUserId())
+                .orElseThrow(() -> new IllegalArgumentException("customer not found")));
+
+        if (passwordEncoder.matches(password,new String(customer.getPassword()))){
+            return true;
+        }
+
+        return false;
     }
 
     private void showError(String errorMessage) {
@@ -233,7 +279,7 @@ public class TransactionPasswordController {
 
     private void goBack() {
         try {
-            FXMLLoader loader = springFXMLLoader.load("/Style/Transection_paymentScreen.fxml");
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
             Pane mainPagePane = loader.load();
 
             contentPane2.getChildren().clear();

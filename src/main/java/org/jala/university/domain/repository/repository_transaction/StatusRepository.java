@@ -12,7 +12,6 @@ import java.util.Optional;
 @Repository
 public interface StatusRepository extends JpaRepository<StatusEntity, Integer> {
 
-    // Usando uma query JPQL personalizada para buscar pelo statusName
     @Query("SELECT s FROM StatusEntity s WHERE s.statusName = :statusName")
     Optional<StatusEntity> findByStatusName(@Param("statusName") String statusName);
 }
