@@ -30,8 +30,11 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     @Query("SELECT c FROM Customer c ORDER BY c.fullName ASC")
     List<Customer> findAllSortedByName();
 
-    @Query("SELECT c FROM Customer c JOIN Account a ON c.id = a.customerId WHERE a.id = :accountId")
-    Optional<Customer> findCustomerByAccountId(@Param("accountId") Integer accountId);
+    // Busca cliente pelo email
+    @Query("SELECT c FROM Customer c WHERE c.email = :email")
+    Optional<Customer> findByEmail(@Param("email") String email);
+
+
 
     @Query("SELECT c FROM Customer c WHERE c.email = :email")
     Optional<Customer> findByEmail(@Param("email") String email);

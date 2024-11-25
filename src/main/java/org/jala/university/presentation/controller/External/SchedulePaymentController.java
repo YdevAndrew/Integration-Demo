@@ -7,6 +7,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
+import org.jala.university.commons.presentation.BaseController;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -14,9 +16,10 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class SchedulePaymentController {
+@Controller
+public class SchedulePaymentController extends BaseController {
 
-    public TextField serviceDescriptionField;
+    public TextField serviceNameField;
     @FXML
     private ToggleGroup cpfCnpjGroup;
 
@@ -27,7 +30,7 @@ public class SchedulePaymentController {
     private ToggleButton cnpjToggleButton;
 
     @FXML
-    TextField amountField;
+    public TextField amountField;
 
     @FXML
     private TextField dueDateField;
@@ -103,6 +106,12 @@ public class SchedulePaymentController {
         accountField.addEventFilter(KeyEvent.KEY_TYPED, this::validateNumericInput);
         recipientField.addEventFilter(KeyEvent.KEY_TYPED, this::validateRecipientInput);
         dueDateField.addEventFilter(KeyEvent.KEY_TYPED, this::validateNumericInput);
+
+        serviceNameField.textProperty().addListener((obs, oldText, newText) -> {
+            if (newText.length() > 20) {
+                serviceNameField.setText(oldText);
+            }
+        });
 
         agencyField.textProperty().addListener((obs, oldText, newText) -> {
             if (newText.length() > 4) {
@@ -185,9 +194,9 @@ public class SchedulePaymentController {
     }
 
 
-    boolean validateAllFields() {
-        if (serviceDescriptionField.getText() == null || serviceDescriptionField.getText().isEmpty()) {
-            showAlert("Error", "Service description cannot be empty.");
+    public boolean validateAllFields() {
+        if (serviceNameField.getText() == null || serviceNameField.getText().isEmpty()) {
+            showAlert("Error", "Service name cannot be empty.");
             return false;
         }
         if (cpfCnpjGroup.getSelectedToggle() == null) {
@@ -245,7 +254,7 @@ public class SchedulePaymentController {
     @FXML
     private void schedulePaymentInformation() throws IOException {
         if (validateAllFields()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/SchedulePaymentScreens/SchedulePaymentInformation/SchedulePaymentInformation.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/SchedulePaymentScreens/SchedulePaymentInformation/SchedulePaymentInformation.fxml"));
             Pane schedulePaymentInformation = loader.load();
 
             // Obter o controlador de SchedulePaymentInformationController
@@ -256,7 +265,7 @@ public class SchedulePaymentController {
 
             // Passar os dados para o controlador de SchedulePaymentInformationController
             controller.setPaymentData(
-                    serviceDescriptionField.getText(),
+                    serviceNameField.getText(),
                     recipientField.getText(),
                     amountField.getText(),
                     agencyField.getText(),
@@ -271,4 +280,3 @@ public class SchedulePaymentController {
         }
     }
 }
-

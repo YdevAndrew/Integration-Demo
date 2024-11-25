@@ -1,5 +1,5 @@
 package org.jala.university.application.service.service_card;
-
+//teste
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import org.jala.university.domain.entity.entity_card.Customlimit;
