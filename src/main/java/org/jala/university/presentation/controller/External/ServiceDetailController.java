@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -17,8 +19,72 @@ import java.io.IOException;
 
 @Controller
 public class ServiceDetailController extends BaseController {
+
+
+    private String serviceName;
+    private String recipientName;
+    private String recipientDocument;
+    private Text recipient;
+    private String agency;
+    private String account;
+    private String serviceAmount;
+    private String dueDate;
+    private String startDate;
+    private String endDate;
+    private Text bankName;
+
     @FXML
-    private AnchorPane mainContent;
+    private Text serviceNameText;
+    @FXML
+    private Text recipientNameText;
+    @FXML
+    private Text recipientDocumentText;
+    @FXML
+    private Text recipientText;
+    @FXML
+    private Text agencyText;
+    @FXML
+    private Text accountText;
+    @FXML
+    private Text serviceAmountText;
+    @FXML
+    private Text dueDateText;
+    @FXML
+    private Text startDateText;
+    @FXML
+    private Text endDateText;
+    @FXML
+    private Text bankNameText;
+    @FXML
+    private Pane mainContent;
+
+    // Método para definir os dados do pagamento com validações
+    public void initialize(String serviceName, String recipient, String amount,
+                               String agency, String account, String dueDate,
+                               String startDate, String endDate) {
+
+        this.serviceName = serviceName;
+        this.serviceAmount = amount;
+        this.account = account;
+        this.agency = agency;
+        this.dueDate = dueDate;
+        this.recipientDocument = recipient;
+        this.startDate = startDate;
+        this.endDate = endDate;
+
+        serviceNameText.setText("serviceName");
+        recipientText.setText("123.536.136/153-25");
+        serviceAmountText.setText("R$ " + "450,00");
+        agencyText.setText("1252");
+        accountText.setText("01010101-0");
+        dueDateText.setText("03/11/2024");
+        startDateText.setText("startDate");
+        recipientNameText.setText("External User");
+        bankNameText.setText("External Bank");
+        endDateText.setText("Indefinite");
+    }
+
+
     @FXML
     public void handleEditClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/EditService.fxml"));

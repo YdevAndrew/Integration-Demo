@@ -1,30 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #f8f8f8;" styleClass="content" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.ServiceDetailController">
+<AnchorPane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #f8f8f8;" styleClass="content" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.ServiceDetailController">
 
     <!-- Título do Serviço -->
-    <Label layoutX="50.0" layoutY="143.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" text="Service 1" />
+    <Text fx:id="serviceNameText" layoutX="50.0" layoutY="143.0" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
 
     <!-- Caixa de Detalhes do Serviço -->
-    <VBox layoutX="50.0" layoutY="177.0" prefHeight="323.0" prefWidth="333.0" spacing="10" style="-fx-background-color: #F3F4F6; -fx-padding: 15; -fx-border-radius: 15; -fx-background-radius: 10;">
-        <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Recipient: Fulano da Silva" />
-        <Label style="-fx-font-size: 14px;" text="CNPJ: 00.623.904/0001-73" />
-        <Label style="-fx-font-size: 14px;" text="Agency: 4545" />
-        <Label style="-fx-font-size: 14px;" text="Account: 01010101-0" />
-        <Label style="-fx-font-size: 14px;" text="Bank: JalaU" />
-        <Label style="-fx-font-size: 14px;" text="Service Amount: 44,90" />
-        <Label style="-fx-font-size: 14px;" text="Due date: 03/11/2024" />
-        <Label style="-fx-font-size: 14px;" text="Start date: 03/11/2024" />
-        <Label style="-fx-font-size: 14px;" text="End date: indefinite" />
+    <VBox layoutX="50.0" layoutY="177.0" prefHeight="344.0" prefWidth="702.0" spacing="10" style="-fx-background-color: #F3F4F6; -fx-padding: 15; -fx-border-radius: 15; -fx-background-radius: 10;">
+        <HBox layoutX="22.0" layoutY="61.0" prefHeight="26.0" prefWidth="528.0">
+            <Text fill="#004bd6" text="Recipient's name:" wrappingWidth="197.4970703125">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="recipientNameText" wrappingWidth="354.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="22.0" layoutY="100.0" prefHeight="16.0" prefWidth="572.0">
+            <Text fill="#004bd6" text="Document:" wrappingWidth="142.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="recipientText" wrappingWidth="354.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="23.0" layoutY="138.0" prefHeight="26.0" prefWidth="470.0">
+            <Text fill="#004bd6" text="Agency:" wrappingWidth="106.212890625">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="agencyText" wrappingWidth="390.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="23.0" layoutY="174.0" prefHeight="26.0" prefWidth="478.0">
+            <Text fill="#004bd6" text="Account:" wrappingWidth="116.806640625">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="accountText" wrappingWidth="390.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="23.0" layoutY="209.0" prefHeight="12.0" prefWidth="471.0">
+            <Text fill="#004bd6" text="Bank:" wrappingWidth="81.3330078125">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="bankNameText" wrappingWidth="415.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="23.0" layoutY="245.0" prefHeight="26.0" prefWidth="461.0">
+            <Text fill="#004bd6" text="Service Amount:" wrappingWidth="187.03515625">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="serviceAmountText" wrappingWidth="298.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="24.0" layoutY="281.0" prefHeight="26.0" prefWidth="460.0">
+            <Text fill="#004bd6" text="Due Date:" wrappingWidth="126.111328125">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="dueDateText" wrappingWidth="364.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="25.0" layoutY="317.0" prefHeight="18.0" prefWidth="469.0">
+            <Text fill="#004bd6" text="Start Date:" wrappingWidth="127.2529296875">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="startDateText" wrappingWidth="364.0">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
+        <HBox layoutX="25.0" layoutY="355.0" prefHeight="26.0" prefWidth="458.0">
+            <Text fill="#004bd6" text="End Date:" wrappingWidth="117.80078125">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+            <Text fx:id="endDateText" wrappingWidth="363.99999999999994">
+                <font>
+                    <Font name="Roboto Medium" size="22.0" />
+                </font>
+            </Text>
+        </HBox>
     </VBox>
 
-    <VBox alignment="CENTER" layoutX="400.0" layoutY="217.0" spacing="10" style="-fx-padding: 10;">
+          <VBox alignment="CENTER" layoutX="556.0" layoutY="217.0" spacing="10" style="-fx-padding: 10;">
         <Button onAction="#handleEditClick" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 14px; -fx-background-radius: 15px;" text="Edit" />
 
-        <Button onAction="#screenDeleteClick" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 14px; -fx-background-radius: 15px;" text="Delete" />
+              <Button onAction="#screenDeleteClick" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 14px; -fx-background-radius: 15px;" text="Delete" />
     </VBox>
 
     <VBox alignment="CENTER" layoutX="400.0" layoutY="600.0" spacing="10" style="-fx-padding: 10;">
