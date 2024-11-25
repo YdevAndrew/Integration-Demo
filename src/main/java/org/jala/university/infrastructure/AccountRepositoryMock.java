@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -126,9 +127,10 @@ public class AccountRepositoryMock implements AccountRepository {
     }
 
     @Override
-    public BigDecimal findByCustomerId(Integer customerId) {
-        return null;
-    }
+    public BigDecimal findByCustomerId(Integer customerId) {return null;}
+
+    @Override
+    public Optional<Account> findAccountByCustomerId(Integer customerId){return null;}
 
     @Override
     public void flush() {
