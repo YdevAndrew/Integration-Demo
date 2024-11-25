@@ -24,7 +24,7 @@ public class CustomerDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String cpf) throws UsernameNotFoundException {
         // Busca o usuário pelo CPF
         Customer customer = customerRepository.findByCpf(cpf)
-                .orElseThrow(() -> new UsernameNotFoundException("Cliente não encontrado"));
+                .orElseThrow(() -> new UsernameNotFoundException("Customer not found"));
 
         // Converte a senha de bytea (byte[]) para String (presumindo que foi criptografada corretamente)
         String encodedPassword = new String(customer.getPassword(), StandardCharsets.UTF_8);
