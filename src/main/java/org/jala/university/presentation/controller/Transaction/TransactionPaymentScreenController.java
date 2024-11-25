@@ -138,9 +138,11 @@ public class TransactionPaymentScreenController extends BaseController {
             });
         }
     }
+
     private void validateFields() {
         boolean isValid = true;
 
+        // Validação do número da conta
         if (accountField.getText().isEmpty()) {
             accountErrorLabel.setText("Account number cannot be empty.");
             isValid = false;
@@ -151,9 +153,16 @@ public class TransactionPaymentScreenController extends BaseController {
             accountErrorLabel.setText("You cannot transfer to your own account.");
             isValid = false;
         } else {
-            accountErrorLabel.setText("");
+            boolean accountExists = accountRepository.findByAccountNumber(accountField.getText()).isPresent();
+            if (!accountExists) {
+                accountErrorLabel.setText("Account number not found.");
+                isValid = false;
+            } else {
+                accountErrorLabel.setText("");
+            }
         }
 
+        // Validação do valor
         try {
             BigDecimal value = new BigDecimal(valueField.getText().replace(",", "."));
             if (value.compareTo(BigDecimal.ZERO) <= 0) {
@@ -176,6 +185,7 @@ public class TransactionPaymentScreenController extends BaseController {
 
         advanceButton.setDisable(!isValid);
     }
+
 
     @FXML
     private void loadTransactionPasswordScreen() {
