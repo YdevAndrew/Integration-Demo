@@ -157,7 +157,7 @@ public class Personal {
         setMarritalStatus(marritalStatus);
         BillingAddress saveInfo = new BillingAddress(
                 txtCEP.getText(), txtStreet.getText(), txtCity.getText(),
-                txtState.getText(), txtCountry.getText(), Integer.parseInt(LoggedInUser.getLogInUser())
+                txtState.getText(), txtCountry.getText(), Integer.parseInt(LoggedInUser.LoggedUser())
         );
 
         formInformation.add(saveInfo);

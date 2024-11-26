@@ -23,7 +23,7 @@ public class CreditCardSearch {
 
     public static boolean validId(String id) throws SQLException {
 
-        String id_costumer = LoggedInUser.getLogInUser();
+        String id_costumer = LoggedInUser.LoggedUser();
         boolean isValid = false;
 
         if(CreditCardDAO.validId(id)){

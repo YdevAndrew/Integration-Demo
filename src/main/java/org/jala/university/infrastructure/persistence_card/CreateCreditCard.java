@@ -21,7 +21,7 @@ public class CreateCreditCard {
         AddLimitCreditCard.validationValue(txtIncome);
         limitCard = BigDecimal.valueOf(AddLimitCreditCard.getLimit());
 
-        LimitCreditCard limitCreditCard = new LimitCreditCard(limitCard, Integer.parseInt(LoggedInUser.getLogInUser()));
+        LimitCreditCard limitCreditCard = new LimitCreditCard(limitCard, Integer.parseInt(LoggedInUser.LoggedUser()));
 
         limitService.saveLimitCreditCard(limitCreditCard);
 
@@ -53,12 +53,12 @@ public class CreateCreditCard {
 
         CreditCardClient creditCardClientPhysical = new CreditCardClient();
         creditCardClientPhysical.setCredit_card(physicalCard);
-        creditCardClientPhysical.setFk_account_id(Integer.parseInt(LoggedInUser.getLogInUser()));
+        creditCardClientPhysical.setFk_account_id(Integer.parseInt(LoggedInUser.LoggedUser()));
         creditCardClientService.saveCreditCardClient(creditCardClientPhysical);
 
         CreditCardClient creditCardClientVirtual = new CreditCardClient();
         creditCardClientVirtual.setCredit_card(virtualCard);
-        creditCardClientVirtual.setFk_account_id(Integer.parseInt(LoggedInUser.getLogInUser()));
+        creditCardClientVirtual.setFk_account_id(Integer.parseInt(LoggedInUser.LoggedUser()));
         creditCardClientService.saveCreditCardClient(creditCardClientVirtual);
         ConfigurationsCard.addDatePaymentDefault(creditCardClientPhysical.getCredit_card().getNumberCard(), "27");
         ConfigurationsCard.addDatePaymentDefault(creditCardClientVirtual.getCredit_card().getNumberCard(), "27");
@@ -75,7 +75,7 @@ public class CreateCreditCard {
         CreditCardClientService creditCardClientService = new CreditCardClientService();
         CreditCardClient creditCardClientVirtual = new CreditCardClient();
         creditCardClientVirtual.setCredit_card(virtualCard);
-        creditCardClientVirtual.setFk_account_id(Integer.parseInt(LoggedInUser.getLogInUser()));
+        creditCardClientVirtual.setFk_account_id(Integer.parseInt(LoggedInUser.LoggedUser()));
 
         creditCardClientService.saveCreditCardClient(creditCardClientVirtual);
         ConfigurationsCard.addDatePaymentDefault(creditCardClientVirtual.getCredit_card().getNumberCard(), "27");

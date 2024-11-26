@@ -53,7 +53,7 @@ public class FormInformationDAO {
                 stmt.setString(4, info.getCity());
                 stmt.setString(5, info.getState());
                 stmt.setString(6, info.getCountry());
-                stmt.setInt(7, Integer.parseInt(LoggedInUser.getLogInUser()));
+                stmt.setInt(7, Integer.parseInt(LoggedInUser.LoggedUser()));
 
                 stmt.addBatch();
             }
@@ -79,7 +79,7 @@ public class FormInformationDAO {
                 stmt.setBigDecimal(2, incomeValue);
                 stmt.setString(3, info.getOcupationStatus());
                 stmt.setString(4, info.getCurrentPosition());
-                stmt.setInt(5, Integer.parseInt(LoggedInUser.getLogInUser()));
+                stmt.setInt(5, Integer.parseInt(LoggedInUser.LoggedUser()));
 
                 stmt.addBatch();
             }
