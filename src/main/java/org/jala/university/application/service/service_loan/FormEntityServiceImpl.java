@@ -19,42 +19,56 @@ import org.springframework.transaction.annotation.Transactional;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+/**
+ * This class implements the {@link FormEntityService} interface,
+ * providing concrete implementations for managing
+ * {@link FormEntity} objects.
+ */
 @Service
 public class FormEntityServiceImpl implements FormEntityService {
 
+    /**
+     * The repository for managing {@link Customer} objects.
+     */
     @Autowired
     private CustomerRepository customerRepository;
 
+    /**
+     * The repository for managing {@link Account} objects.
+     */
     @Autowired
     private AccountRepository accountRepository;
 
+    /**
+     * The repository for managing {@link FormEntity} objects.
+     */
     @Autowired
     private FormEntityRepository formEntityRepository;
+
+    /**
+     * The mapper for converting between {@link FormEntity}
+     * and {@link FormEntityDto} objects.
+     */
     private final FormEntityMapper formEntityMapper;
 
+    /**
+     * The entity manager for handling persistent entities.
+     */
     @PersistenceContext
     private EntityManager entityManager;
 
+    /**
+     * Constructor for the FormEntityServiceImpl class.
+     *
+     * @param formEntityMapper The mapper instance to be used.
+     */
     public FormEntityServiceImpl(FormEntityMapper formEntityMapper) {
         this.formEntityMapper = formEntityMapper;
     }
 
-    @Override
-    public  Integer getloggedUserId() {
-        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null) {
-
-            Customer customer = customerRepository.findByCpf(authentication.getName())
-                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
-
-            Account account = accountRepository.findAccountByCustomerId(customer.getId())
-                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
-            return account.getId();
-        }
-        return null;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public FormEntityDto findById(Integer id) {
@@ -67,6 +81,9 @@ public class FormEntityServiceImpl implements FormEntityService {
         return formEntityMapper.mapTo(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public FormEntity findEntityById(Integer id) {
@@ -77,6 +94,9 @@ public class FormEntityServiceImpl implements FormEntityService {
         return entityManager.merge(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<FormEntityDto> findAll() {
@@ -85,6 +105,9 @@ public class FormEntityServiceImpl implements FormEntityService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public FormEntityDto save(FormEntityDto formEntityDto) {
@@ -96,6 +119,9 @@ public class FormEntityServiceImpl implements FormEntityService {
         return formEntityMapper.mapTo(savedEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void deleteById(Integer id) {
@@ -108,6 +134,9 @@ public class FormEntityServiceImpl implements FormEntityService {
         formEntityRepository.delete(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void delete(FormEntityDto formEntityDto) {
@@ -123,6 +152,9 @@ public class FormEntityServiceImpl implements FormEntityService {
         formEntityRepository.delete(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public FormEntityDto update(Integer id, FormEntityDto formEntityDto) {
@@ -137,5 +169,24 @@ public class FormEntityServiceImpl implements FormEntityService {
 
         FormEntity savedEntity = formEntityRepository.save(updatedEntity);
         return formEntityMapper.mapTo(savedEntity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public  Integer getloggedUserId() {
+        org.springframework.security.core.Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null) {
+
+            Customer customer = customerRepository.findByCpf(authentication.getName())
+                    .orElseThrow(() -> new IllegalArgumentException("customer not found"));
+
+            Account account = accountRepository.findAccountByCustomerId(customer.getId())
+                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+            return account.getId();
+        }
+        return null;
     }
 }

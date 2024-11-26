@@ -26,27 +26,68 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
 
+/**
+ * This class implements the {@link LoanEntityService} interface, providing concrete
+ * implementations for managing {@link LoanEntity} objects. It handles operations
+ * such as creating, retrieving, updating, deleting loan entities, and managing
+ * loan installments and related information.
+ */
 @Service
 public class LoanEntityServiceImpl implements LoanEntityService {
 
+    /**
+     * The repository for managing {@link LoanEntity} objects.
+     */
     @Autowired
     private LoanEntityRepository loanEntityRepository;
+
+    /**
+     * The mapper for converting between {@link LoanEntity} and {@link LoanEntityDto} objects.
+     */
     private final LoanEntityMapper loanEntityMapper;
+
+    /**
+     * The mapper for converting between {@link InstallmentEntity} and {@link InstallmentEntityDto} objects.
+     */
     private final InstallmentEntityMapper installmentEntityMapper;
+
+    /**
+     * The task scheduler for scheduling tasks related to loans.
+     */
     private final TaskScheduler taskScheduler;
 
+    /**
+     * The repository for managing {@link Account} objects.
+     */
     @Autowired
     private AccountRepository accountRepository;
 
+    /**
+     * The service for handling loan results and related actions.
+     */
     @Autowired
     LoanResultsService loanResultsService;
 
+    /**
+     * The service for managing {@link org.jala.university.domain.entity.FormEntity} objects.
+     */
     @Autowired
     private FormEntityService formEntityService;
 
+    /**
+     * The entity manager for handling persistent entities.
+     */
     @Autowired
     private EntityManager entityManager;
 
+    /**
+     * Constructor for the LoanEntityServiceImpl class.
+     *
+     * @param loanEntityMapper        The loan entity mapper instance.
+     * @param installmentEntityMapper The installment entity mapper instance.
+     * @param formEntityMapper        The form entity mapper instance.
+     * @param taskScheduler           The task scheduler instance.
+     */
     public LoanEntityServiceImpl(LoanEntityMapper loanEntityMapper, InstallmentEntityMapper installmentEntityMapper,
             FormEntityMapper formEntityMapper, TaskScheduler taskScheduler) {
         this.loanEntityMapper = loanEntityMapper;
@@ -54,6 +95,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         this.taskScheduler = taskScheduler;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public LoanEntityDto findById(Integer id) {
@@ -65,6 +109,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return loanEntityMapper.mapTo(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public LoanEntity findEntityById(Integer id) {
@@ -75,6 +122,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return entityManager.merge(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<LoanEntityDto> findAll() {
@@ -83,6 +133,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public LoanEntityDto save(LoanEntityDto entityDto) {
@@ -104,6 +157,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return loanEntityMapper.mapTo(savedEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void deleteById(Integer id) {
@@ -116,6 +172,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         loanEntityRepository.delete(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public void delete(LoanEntityDto entityDto) {
@@ -128,6 +187,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         loanEntityRepository.delete(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public LoanEntityDto update(LoanEntityDto entityDto) {
@@ -144,6 +206,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return loanEntityMapper.mapTo(savedEntity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public List<LoanEntityDto> findLoansByAccountId() {
@@ -155,6 +220,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
                 .toList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public Account payInstallmentManually(LoanEntityDto dto) {
@@ -167,11 +235,17 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return account;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     private void scheduleStatusChange(LoanEntity loanEntity) {
         Instant startTime = Instant.now().plus(Duration.ofSeconds(30));
         taskScheduler.schedule(() -> changeStatusRandomly(loanEntity), startTime);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional
     private void changeStatusRandomly(LoanEntity loanEntity) {
         Status newStatus = loanEntity.generateStatus();
@@ -183,6 +257,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Scheduled(cron = "0 0 0 * * ?")
     @Transactional
     void adjustOverdueInstallments() {
@@ -205,6 +282,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         loanEntityRepository.saveAll(loans);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public long getPaidInstallments(LoanEntityDto dto) {
@@ -212,11 +292,17 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return entity.getNumberOfPaidInstallments();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Double getOutstandingBalance(Integer loanId) {
         Double outstandingBalance = loanEntityRepository.getOutstandingBalance(loanId);
         return outstandingBalance;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional(readOnly = true)
     public InstallmentEntityDto getFirstUnpaidInstallment(LoanEntityDto dto) {
         LoanEntity entity = loanEntityRepository.findByIdWithInstallments(dto.getId());
@@ -226,6 +312,9 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return installmentEntityMapper.mapTo(entity.getFirstUnpaidInstallment());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional(readOnly = true)
     public LocalDate getFirstUnpaidInstallmentDate(LoanEntityDto dto) {
         LoanEntity entity = loanEntityRepository.findByIdWithInstallments(dto.getId());
