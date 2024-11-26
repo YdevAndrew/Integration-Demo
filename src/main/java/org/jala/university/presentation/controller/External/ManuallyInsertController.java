@@ -159,6 +159,10 @@ public class ManuallyInsertController extends BaseController {
             showAlert("Error", "Amount cannot be empty.");
             return false;
         }
+        if (dueDateField.getValue() == null) {
+            showAlert("Error", "Due Date cannot be empty.");
+            return false;
+        }
         try {
             double amount = Double.parseDouble(amountField.getText().replace(",", "."));
             if (amount < 1) {
@@ -185,5 +189,12 @@ public class ManuallyInsertController extends BaseController {
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void back() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
+        Pane schedulePayment = loader.load();
+        mainContent.getChildren().setAll(schedulePayment);
     }
 }

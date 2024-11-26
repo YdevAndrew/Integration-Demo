@@ -11,14 +11,14 @@
 <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1040.0" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.ManualPaymentInformationController">
 
     <!-- Título principal -->
-    <Text layoutX="61.0" layoutY="84.0" styleClass="text-title" text="Check your payment information:" textAlignment="CENTER">
+    <Text layoutX="107.0" layoutY="84.0" styleClass="text-title" text="Check your payment information:" textAlignment="CENTER">
         <font>
             <Font name="GraphikTrial-Bold" size="40.0" />
         </font>
     </Text>
 
     <!-- Seção de informações do pagamento -->
-    <VBox layoutX="182.0" layoutY="146.0" prefWidth="515.0" spacing="15" styleClass="payment-info-box">
+    <VBox layoutX="228.0" layoutY="146.0" prefWidth="515.0" spacing="15" styleClass="payment-info-box">
 <!--    <VBox layoutY="148.0" spacing="15" alignment="CENTER">-->
         <children>
             <HBox spacing="10">
@@ -133,9 +133,9 @@
     </VBox>
 
     <!-- Status Label para mensagens de erro -->
-    <Label fx:id="statusLabel" layoutX="263.0" layoutY="520.0" />
+    <Label fx:id="statusLabel" layoutX="309.0" layoutY="520.0" />
 
     <!-- Botões -->
-    <ToggleButton layoutX="61.0" layoutY="598.0" mnemonicParsing="false" onAction="#back" styleClass="button-custom" text="Cancel" />
-    <ToggleButton layoutX="506.0" layoutY="598.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" styleClass="button-custom" text="Confirm" />
+    <ToggleButton layoutX="107.0" layoutY="598.0" mnemonicParsing="false" onAction="#back" styleClass="button-custom" text="Cancel" />
+    <ToggleButton layoutX="552.0" layoutY="598.0" mnemonicParsing="false" onAction="#onConfirmButtonClick" styleClass="button-custom" text="Confirm" />
 </Pane>

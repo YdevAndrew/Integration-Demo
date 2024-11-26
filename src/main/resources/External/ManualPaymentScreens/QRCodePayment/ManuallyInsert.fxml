@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
@@ -8,46 +9,47 @@
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: transparent;" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.ManuallyInsertController">
-    <Text fill="#004bd6" layoutX="63.0" layoutY="92.0" text=" Enter the details to make the payment:" textAlignment="CENTER">
+    <Text fill="#004bd6" layoutX="111.0" layoutY="92.0" text=" Enter the details to make the payment:" textAlignment="CENTER">
         <font>
             <Font name="GraphikTrial-Bold" size="40.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="74.0" layoutY="145.0" text="Recipient's CNPJ">
+    <Text fill="#004bd6" layoutX="122.0" layoutY="145.0" text="Recipient's CNPJ">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="70.0" layoutY="265.0" text="Agency:">
+    <Text fill="#004bd6" layoutX="118.0" layoutY="265.0" text="Agency:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="70.0" layoutY="399.0" text="Account:">
+    <Text fill="#004bd6" layoutX="118.0" layoutY="399.0" text="Account:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="484.0" layoutY="144.0" text="Amount:">
+    <Text fill="#004bd6" layoutX="532.0" layoutY="144.0" text="Amount:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="487.0" layoutY="264.0" text="Due date:">
+    <Text fill="#004bd6" layoutX="535.0" layoutY="264.0" text="Due date:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
 
 
-    <TextField fx:id="recipientField" layoutX="70.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="14 digits" styleClass="text-field-custom" />
-    <TextField fx:id="agencyField" layoutX="70.0" layoutY="284.0" prefHeight="45.0" prefWidth="329.0" promptText="0000" styleClass="text-field-custom" />
-    <TextField fx:id="accountField" layoutX="70.0" layoutY="413.0" prefHeight="45.0" prefWidth="329.0" promptText="00000000-0" styleClass="text-field-custom" />
-    <TextField fx:id="amountField" layoutX="484.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="00,00" styleClass="text-field-custom" />
-    <DatePicker fx:id="dueDateField" layoutX="484.0" layoutY="284.0" prefHeight="45.0" prefWidth="329.0" promptText="DD/MM/AAAA" styleClass="text-field-custom" />
+    <TextField fx:id="recipientField" layoutX="118.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="14 digits" styleClass="text-field-custom" />
+    <TextField fx:id="agencyField" layoutX="118.0" layoutY="284.0" prefHeight="45.0" prefWidth="329.0" promptText="0000" styleClass="text-field-custom" />
+    <TextField fx:id="accountField" layoutX="118.0" layoutY="413.0" prefHeight="45.0" prefWidth="329.0" promptText="00000000-0" styleClass="text-field-custom" />
+    <TextField fx:id="amountField" layoutX="532.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="00,00" styleClass="text-field-custom" />
+    <DatePicker fx:id="dueDateField" layoutX="532.0" layoutY="284.0" prefHeight="45.0" prefWidth="329.0" promptText="DD/MM/AAAA" styleClass="text-field-custom" />
 
     <TextField fx:id="nameField" editable="false" layoutX="6.0" layoutY="-53.0" />
 
 
-    <ToggleButton layoutX="501.0" layoutY="587.0" mnemonicParsing="false" onAction="#manualPaymentInformation" prefHeight="56.0" prefWidth="312.0" style="-fx-border-radius: 25;" styleClass="button-custom" text="Next" />
+    <ToggleButton layoutX="549.0" layoutY="587.0" mnemonicParsing="false" onAction="#manualPaymentInformation" prefHeight="56.0" prefWidth="312.0" style="-fx-border-radius: 25;" styleClass="button-custom" text="Next" />
+   <Button contentDisplay="RIGHT" layoutX="127.0" layoutY="587.0" onAction="#back" prefHeight="42.0" prefWidth="206.0" styleClass="button-custom" text="Back" />
 </Pane>

@@ -11,23 +11,23 @@
 <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #FFFFFF;" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.QRCodePaymentController">
 
     <!-- Título da tela -->
-    <Text layoutX="71.0" layoutY="143.0" style="-fx-fill: #004bd6;" text="Upload your QR code here:">
+    <Text layoutX="126.0" layoutY="143.0" style="-fx-fill: #004bd6;" text="Upload your QR code here:">
       <font>
          <Font name="GraphikTrial-Bold" size="40.0" />
       </font></Text>
 
     <!-- Botão para selecionar o QR Code -->
-    <Button layoutX="101.0" layoutY="214.0" onAction="#onSelectQRCodeButtonClick" prefHeight="69.0" prefWidth="248.0" style="-fx-background-color: #004bd6; -fx-text-fill: #FFFFFF; -fx-font-family: Roboto Medium; -fx-font-size: 20px; -fx-background-radius: 25px; -fx-pref-height: 56px;" text="Select your QRCode" />
+    <Button layoutX="156.0" layoutY="214.0" onAction="#onSelectQRCodeButtonClick" prefHeight="69.0" prefWidth="248.0" style="-fx-background-color: #004bd6; -fx-text-fill: #FFFFFF; -fx-font-family: Roboto Medium; -fx-font-size: 20px; -fx-background-radius: 25px; -fx-pref-height: 56px;" text="Select your QRCode" />
 
     <!-- Label de Status -->
-    <Label fx:id="statusLabel" layoutX="126.0" layoutY="311.0" style="-fx-font-family: Roboto Medium; -fx-font-size: 17px;" />
+    <Label fx:id="statusLabel" layoutX="181.0" layoutY="311.0" style="-fx-font-family: Roboto Medium; -fx-font-size: 17px;" />
 
     <!-- Botão "Next" -->
-    <Button contentDisplay="RIGHT" layoutX="459.0" layoutY="559.0" onAction="#onConfirmButtonClick" prefHeight="42.0" prefWidth="206.0" styleClass="button-custom" text="Next" />
+    <Button contentDisplay="RIGHT" layoutX="514.0" layoutY="559.0" onAction="#onConfirmButtonClick" prefHeight="42.0" prefWidth="206.0" styleClass="button-custom" text="Next" />
 
     <!-- Botão de Inserção Manual -->
-    <Button fx:id="manualEntryButton" contentDisplay="RIGHT" layoutX="83.0" layoutY="559.0" onAction="#onManualEntryClick" prefHeight="42.0" prefWidth="206.0" styleClass="button-custom" text="Insert manually" visible="false" />
-   <HBox layoutX="485.0" layoutY="199.0" prefHeight="195.0" prefWidth="200.0" style="-fx-background-color: #CCCCC; -fx-border-color: #C9C9C9; -fx-border-radius: 15px;">
+    <Button fx:id="manualEntryButton" contentDisplay="RIGHT" layoutX="138.0" layoutY="559.0" onAction="#onManualEntryClick" prefHeight="42.0" prefWidth="206.0" styleClass="button-custom" text="Insert manually" visible="false" />
+   <HBox layoutX="540.0" layoutY="199.0" prefHeight="195.0" prefWidth="200.0" style="-fx-background-color: #CCCCC; -fx-border-color: #C9C9C9; -fx-border-radius: 15px;">
       <children>
       
             

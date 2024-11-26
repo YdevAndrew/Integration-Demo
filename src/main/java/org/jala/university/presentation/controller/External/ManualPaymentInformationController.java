@@ -9,6 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 
@@ -19,7 +21,8 @@ import java.time.temporal.ChronoUnit;
 
 @Controller
 public class ManualPaymentInformationController extends BaseController {
-
+    @Autowired
+    SpringFXMLLoader springFXMLLoader;
     @FXML
     private Label amountLabel;
     @FXML
@@ -127,7 +130,7 @@ public class ManualPaymentInformationController extends BaseController {
     private void onConfirmButtonClick() {
         try {
             // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/PasswordPrompt.fxml"));
+            FXMLLoader loader = springFXMLLoader.load("/External/password/PasswordPrompt.fxml");
             Parent root = loader.load();
 
             // Inicializa o controlador do pop-up de senha
@@ -161,7 +164,7 @@ public class ManualPaymentInformationController extends BaseController {
     public void showPaymentReceipt() {
         try {
             // Carrega a tela de comprovante de pagamento
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/PaymentReceipt/PaymentReceipt.fxml"));
+            FXMLLoader loader = springFXMLLoader.load("/External/PaymentReceipt/PaymentReceipt.fxml");
             Pane paymentReceiptPane = loader.load();
 
             // Inicializa o controlador da tela de comprovante
@@ -209,7 +212,7 @@ public class ManualPaymentInformationController extends BaseController {
 
     @FXML
     private void back() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
+        FXMLLoader loader = springFXMLLoader.load("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml");
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }

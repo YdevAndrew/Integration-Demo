@@ -7,16 +7,16 @@
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #f8f8f8;" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.SchedulePaymentInformationController">
-    <Text fill="#004bd6" layoutX="116.0" layoutY="84.0" text="Check your service information:" textAlignment="CENTER">
+    <Text fill="#004bd6" layoutX="193.0" layoutY="84.0" text="Check your service information:" textAlignment="CENTER">
         <font>
             <Font name="GraphikTrial-Bold" size="40.0" />
         </font>
     </Text>
 
-    <ToggleButton layoutX="599.0" layoutY="588.0" mnemonicParsing="false" onAction="#insertPassword" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Confirm" />
-    <ToggleButton layoutX="135.0" layoutY="588.0" mnemonicParsing="false" onAction="#back" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Cancel " />
+    <ToggleButton layoutX="579.0" layoutY="588.0" mnemonicParsing="false" onAction="#insertPassword" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Confirm" />
+    <ToggleButton layoutX="115.0" layoutY="588.0" mnemonicParsing="false" onAction="#back" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Cancel " />
 
-    <Pane layoutX="173.0" layoutY="123.0" prefHeight="414.0" prefWidth="515.0" style="-fx-border-color: #000000; -fx-border-radius: 15;">
+    <Pane layoutX="250.0" layoutY="123.0" prefHeight="414.0" prefWidth="515.0" style="-fx-border-color: #000000; -fx-border-radius: 15;">
         <children>
             <HBox layoutX="21.0" layoutY="24.0" prefHeight="19.0" prefWidth="408.0">
                 <children>
