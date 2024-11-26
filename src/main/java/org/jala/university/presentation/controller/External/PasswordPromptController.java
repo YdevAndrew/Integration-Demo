@@ -12,6 +12,7 @@ import org.jala.university.application.dto.dto_transaction.PaymentHistoryDTO;
 import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.application.service.service_transaction.PaymentHistoryServiceImpl;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -24,7 +25,8 @@ import java.io.IOException;
 
 @Controller
 public class PasswordPromptController extends BaseController {
-
+    @Autowired
+    SpringFXMLLoader springFXMLLoader;
     @Autowired
     private PaymentHistoryService paymentHistoryService;
     @FXML
@@ -76,11 +78,6 @@ public class PasswordPromptController extends BaseController {
 
         if (CORRECT_PASSWORD.equals(enteredPassword)) {
             try {
-
-                System.out.println("Path");
-                System.out.println(path);
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
-                Pane root = fxmlLoader.load();
                 PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
                         .amount(amount)
                         .nameReceiver(receiverName)
@@ -91,8 +88,13 @@ public class PasswordPromptController extends BaseController {
                         ;
                 paymentHistoryService.createExternalPayment(48, paymentHistoryDTO,"EXTERNAL_PAYMENT");
 
+                System.out.println("Path");
+                System.out.println(path);
+                FXMLLoader fxmlLoader = springFXMLLoader.load(path);
+                Pane root = fxmlLoader.load();
+
                 Stage paymentStatusStage = new Stage();
-                paymentStatusStage.setTitle("Status de Pagamento");
+                paymentStatusStage.setTitle("Status payment");
                 paymentStatusStage.setScene(new Scene(root));
                 paymentStatusStage.show();
 
@@ -102,14 +104,14 @@ public class PasswordPromptController extends BaseController {
                 currentStage.close(); // Fecha o pop-up de senha após sucesso
 
             } catch (IOException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Erro ao carregar a tela de status de pagamento.", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error loading the payment status screen.", ButtonType.OK);
                 alert.showAndWait();
                 e.printStackTrace();
             }
 
             paymentDetailsController.showPaymentReceipt();
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Senha incorreta. Tente novamente.", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Incorrect password. Please try again.", ButtonType.OK);
             alert.showAndWait();
         }
     }
