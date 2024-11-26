@@ -188,12 +188,10 @@ public class CreditCardClientService {
                     "JOIN CreditCardClient ccc ON ccc.credit_card.id_credit_card = cc.id_credit_card " +
                     "WHERE ccc.fk_account_id = :accountId";
             return em.createQuery(sql, CreditCard.class)
-                    .setParameter("accountId", LoggedInUser.getLogInUser())
+                    .setParameter("accountId", LoggedInUser.LoggedUser())
                     .getResultList();
         } catch (NoResultException e) {
             return List.of();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         } finally {
             em.close();
         }

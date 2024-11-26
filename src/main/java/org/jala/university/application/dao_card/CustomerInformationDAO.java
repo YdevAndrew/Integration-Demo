@@ -49,7 +49,7 @@ public class CustomerInformationDAO {
                 "WHERE id = ?";
 
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, Integer.parseInt(LoggedInUser.getLogInUser()));
+            stmt.setInt(1, Integer.parseInt(LoggedInUser.LoggedUser()));
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     CustomerBankDTO customer = new CustomerBankDTO(

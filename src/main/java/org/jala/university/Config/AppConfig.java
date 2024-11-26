@@ -1,4 +1,4 @@
-package org.jala.university.config;
+package org.jala.university.Config;
 
 
 import org.jala.university.ServiceFactory;
@@ -9,6 +9,7 @@ import org.jala.university.application.mapper.mapper_loan.LoanEntityMapper;
 import org.jala.university.application.mapper.mapper_transaction.PaymentHistoryMapper;
 import org.jala.university.application.service.service_account.AccountService;
 import org.jala.university.application.service.service_account.AccountServiceImpl;
+import org.jala.university.application.service.service_card.LoggedInUser;
 import org.jala.university.application.service.service_loan.FormEntityService;
 import org.jala.university.application.service.service_loan.FormEntityServiceImpl;
 import org.jala.university.application.service.service_loan.LoanEntityService;
@@ -18,6 +19,7 @@ import org.jala.university.application.service.service_loan.LoanResultsServiceIm
 import org.jala.university.application.service.service_transaction.PaymentHistoryService;
 import org.jala.university.application.service.service_transaction.PaymentHistoryServiceImpl;
 import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -98,4 +100,12 @@ public class AppConfig {
     public PaymentHistoryService paymentHistoryService() {
         return new PaymentHistoryServiceImpl();
     }
+
+    @Bean
+    public LoggedInUser loggedInUser(CustomerRepository customerRepository, AccountRepository accountRepository) {
+        return new LoggedInUser(customerRepository, accountRepository);
+    }
+
+
+
 }

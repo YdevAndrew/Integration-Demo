@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class PostgreConnection {
 
-    private static final String URL = "jdbc:postgresql://dpg-csf7lbdsvqrc73fc93sg-a.ohio-postgres.render.com:5432/";
-    private static final String USER = "jala_bank_user";
-    private static final String PASSWORD = "ngcP3qwKLYJBTgZujJkauu8wDMoPWluK";
+    private static final String URL = "jdbc:postgresql://localhost:5432/";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "1234";
     private static Map<String, PostgreConnection> instances = new HashMap<>();
     private Connection conn;
 

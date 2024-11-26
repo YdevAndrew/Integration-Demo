@@ -174,7 +174,7 @@ public class InvoicesService {
                 return;
             }
 
-            Invoices invoice = new Invoices(roundedTotalValue, false, creditCardNumber, numberOfInstallments, Integer.parseInt(LoggedInUser.getLogInUser()), creditCard, cardSeller, product, purchaseRequest);
+            Invoices invoice = new Invoices(roundedTotalValue, false, creditCardNumber, numberOfInstallments, Integer.parseInt(LoggedInUser.LoggedUser()), creditCard, cardSeller, product, purchaseRequest);
 
             em.getTransaction().begin();
             invoice = em.merge(invoice);

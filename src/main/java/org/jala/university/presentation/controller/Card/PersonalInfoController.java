@@ -94,7 +94,7 @@ public class PersonalInfoController {
         setMarritalStatus(marritalStatus);
         BillingAddress saveInfo = new BillingAddress(
                 cepField.getText(), streetField.getText(), cityField.getText(),
-                stateField.getText(), countryField.getText(), Integer.parseInt(LoggedInUser.getLogInUser())
+                stateField.getText(), countryField.getText(), Integer.parseInt(LoggedInUser.LoggedUser())
         );
 
         formInformation.add(saveInfo);

@@ -5,9 +5,9 @@
     <persistence-unit name="jala_bank">
 
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://dpg-csf7lbdsvqrc73fc93sg-a.ohio-postgres.render.com:5432/jala_bank"/>
-            <property name="jakarta.persistence.jdbc.user" value="jala_bank_user"/>
-            <property name="jakarta.persistence.jdbc.password" value="ngcP3qwKLYJBTgZujJkauu8wDMoPWluK"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/jala_bank"/>
+            <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+            <property name="jakarta.persistence.jdbc.password" value="1234"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 
             <property name="hibernate.hikari.maximumPoolSize" value="10"/>
