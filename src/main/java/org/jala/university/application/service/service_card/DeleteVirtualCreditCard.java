@@ -94,7 +94,7 @@ public class DeleteVirtualCreditCard {
 
 
 
-            String deleteCardClient = "DELETE FROM CreditCardClient ccc WHERE ccc.id_credit_card = :cardId";
+            String deleteCardClient = "DELETE FROM CreditCardClient ccc WHERE ccc.id_credit_card_client = :cardId";
             em.createQuery(deleteCardClient)
                     .setParameter("cardId", creditCard.getId_credit_card())
                     .executeUpdate();

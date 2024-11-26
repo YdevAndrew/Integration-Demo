@@ -175,7 +175,7 @@ public class DashboardController extends BaseController {
                 AnchorPane requestCard = loader.load();
                 mainContent.getChildren().setAll(requestCard);
             }else {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestAVirtualCard/request_a_card.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/requestAVirtualCard/request_a_virtual_card.fxml"));
                 AnchorPane requestCard = loader.load();
                 mainContent.getChildren().setAll(requestCard);
 

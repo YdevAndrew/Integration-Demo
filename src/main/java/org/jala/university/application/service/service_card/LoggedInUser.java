@@ -20,13 +20,15 @@ public class LoggedInUser {
     }
 
     public static String getLogInUser() throws SQLException {
-        String id = "9";
+
+        String id = "6";
         if (validId(id)) {
             return LoggedUser(id);
         } else {
             throw new IllegalArgumentException("ID não existe no banco de dados.");
         }
     }
+
 
 
     public static boolean validId(String id) throws SQLException {
