@@ -97,12 +97,13 @@ public class SchedulePaymentInformationController extends BaseController {
         mainContent.getChildren().setAll(schedulePayment);
     }
 
+
     // Método chamado quando o usuário clica no botão "Confirmar"
     @FXML
     private void insertPassword() {
         try {
             // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/PasswordPrompt.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/paymentSchedulePASSWORD.fxml"));
             Parent root = loader.load();
 
             // Inicializa o controlador do pop-up de senha

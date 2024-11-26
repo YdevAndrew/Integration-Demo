@@ -30,6 +30,7 @@ public class ScreenNoPaymentSchedule {
         paymentPedingStage.setTitle(" Pagamento Pendente");
         paymentPedingStage.setScene(new Scene(root));
         paymentPedingStage.show();
+        mainContent.getChildren().clear();
     }
 
 

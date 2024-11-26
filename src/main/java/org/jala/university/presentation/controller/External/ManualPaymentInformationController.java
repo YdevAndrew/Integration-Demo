@@ -134,7 +134,8 @@ public class ManualPaymentInformationController extends BaseController {
             PasswordPromptController passwordPromptController = loader.getController();
             if (passwordPromptController != null) {
                 // Define a tela que irá aparecer após a confirmação da senha
-                passwordPromptController.setPath("/External/ScheduleServices/PaymentStatus.fxml");
+                passwordPromptController.setManualPaymentInformationController(this);
+
                 // Passa o controlador de PaymentDetailsController para o pop-up de senha
                 passwordPromptController.setPaymentDetailsController(this);
             } else {
@@ -157,7 +158,7 @@ public class ManualPaymentInformationController extends BaseController {
     }
 
 
-    // Método para exibir o comprovante de pagamento
+    /* Método para exibir o comprovante de pagamento
     public void showPaymentReceipt() {
         try {
             // Carrega a tela de comprovante de pagamento
@@ -189,7 +190,7 @@ public class ManualPaymentInformationController extends BaseController {
                 statusLabel.setStyle("-fx-text-fill: red;");
             }
         }
-    }
+    }*/
 
 
     // Método chamado quando o usuário clica no botão "Cancelar"

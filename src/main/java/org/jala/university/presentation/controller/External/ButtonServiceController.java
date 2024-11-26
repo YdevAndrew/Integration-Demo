@@ -5,45 +5,57 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import org.jala.university.commons.presentation.BaseController;
-import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
-@Controller
-public class ButtonServiceController extends BaseController {
-    @FXML
-    private AnchorPane mainContent; // Altere para AnchorPane para corresponder ao tipo em ButtonService.fxml
+public class ButtonServiceController {
 
     @FXML
-    public void handleService1Click(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ServiceDetail.fxml"));
-        Pane serviceDetailContent = loader.load();
-        mainContent.getChildren().setAll(serviceDetailContent);
+    private AnchorPane mainContent; // Painel principal onde o conteúdo será carregado
+
+    /**
+     * Método para carregar uma nova tela dentro do `mainContent`.
+     * Substitui o conteúdo existente pelo novo.
+     *
+     * @param fxmlPath Caminho do arquivo FXML a ser carregado.
+     */
+    private void loadContent(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Pane newContent = loader.load();
+            mainContent.getChildren().setAll(newContent); // Substitui o conteúdo atual pelo novo
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Erro ao carregar a tela: " + fxmlPath);
+        }
+    }
+
+    /**
+     * Ações para cada botão de serviço.
+     * Cada método carrega um conteúdo diferente no painel principal.
+     */
+    @FXML
+    public void handleService1Click(ActionEvent event) {
+        loadContent("/External/ScheduleServices/ServiceDetail.fxml");
     }
 
     @FXML
-    public void handleService2Click(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ServiceDetail.fxml"));
-        Pane serviceDetailContent = loader.load();
-        mainContent.getChildren().setAll(serviceDetailContent);
+    public void handleService2Click(ActionEvent event) {
+        loadContent("/External/ScheduleServices/ServiceDetail.fxml");
     }
 
     @FXML
     public void handleService3Click(ActionEvent event) {
-        System.out.println("Service 3 clicked");
-        // Adicione a ação desejada aqui
+        loadContent("/External/ScheduleServices/ServiceDetail.fxml");
     }
 
     @FXML
     public void handleService4Click(ActionEvent event) {
-        System.out.println("Service 4 clicked");
-        // Adicione a ação desejada aqui
+        loadContent("/External/ScheduleServices/ServiceDetail.fxml");
     }
 
     @FXML
     public void handleService5Click(ActionEvent event) {
-        System.out.println("Service 5 clicked");
-        // Adicione a ação desejada aqui
+        loadContent("/External/ScheduleServices/ServiceDetail.fxml");
     }
 }

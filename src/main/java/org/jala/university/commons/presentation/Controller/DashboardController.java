@@ -247,7 +247,7 @@ public class DashboardController extends BaseController {
     @FXML
     private void ScheduleService() throws IOException {
         clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ButtonService.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ScreenNoPaymentSchedule.fxml"));
         Pane scheduleService = loader.load();
         mainContent.getChildren().add(scheduleService);
     }

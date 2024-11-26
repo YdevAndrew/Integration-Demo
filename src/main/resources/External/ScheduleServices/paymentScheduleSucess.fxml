@@ -3,22 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="300.0" prefWidth="500.0" style="-fx-background-color: #f5f5f5; -fx-padding: 20;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.PaymentScheduleSucessController">
+<AnchorPane fx:id="mainContent" prefHeight="436.0" prefWidth="682.0" style="-fx-background-color: #f5f5f5; -fx-padding: 20;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.PaymentScheduleSucessController">
 
     <!-- Caixa de Layout Principal -->
-    <VBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="216.0" prefWidth="473.0" spacing="20">
+    <VBox alignment="CENTER" layoutX="52.0" layoutY="30.0" prefHeight="383.0" prefWidth="625.0" spacing="20">
 
         <!-- Título -->
-        <Label layoutX="120.0" layoutY="20.0" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #4CAF50; -fx-padding: 10px;" text="Payment Schedule Success" />
+        <Label layoutX="120.0" layoutY="20.0" prefHeight="84.0" prefWidth="463.0" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #4CAF50; -fx-padding: 10px;" text="       Payment Schedule Success" textAlignment="CENTER" />
 
         <!-- Mensagem -->
-        <Label fx:id="messageLabel" layoutX="138.0" layoutY="82.0" style="-fx-font-size: 16px; -fx-text-fill: #555; -fx-padding: 10px;" text="Your payment has been scheduled successfully!" />
+        <Label fx:id="messageLabel" layoutX="138.0" layoutY="82.0" prefHeight="72.0" prefWidth="455.0" style="-fx-font-size: 16px; -fx-text-fill: #555; -fx-padding: 10px;" text="Your payment has been scheduled successfully!" />
 
         <!-- Botão Lateral para Ver Todos os Pagamentos Agendados -->
         <Button onAction="#handleViewScheduledPayments" style="-fx-background-color: #4CAF50; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 14px; -fx-background-radius: 12px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);" text="Ver Pagamentos Agendados" />
 
         <!-- Botão Fechar -->
-        <Button layoutX="160.0" layoutY="140.0" onAction="#handleClose" prefHeight="38.0" prefWidth="67.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 18px; -fx-background-radius: 15px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);" text="OK" />
+        <Button layoutX="160.0" layoutY="140.0" onAction="#handleOkButtonClick" prefHeight="48.0" prefWidth="78.0" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 18px; -fx-background-radius: 15px; -fx-padding: 10px 20px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 2);" text="OK" />
     </VBox>
 
 </AnchorPane>

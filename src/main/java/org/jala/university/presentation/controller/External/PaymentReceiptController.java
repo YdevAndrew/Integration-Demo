@@ -211,7 +211,7 @@ public class PaymentReceiptController extends BaseController {
         // Agora, vamos carregar a tela do Dashboard (tela inicial)
         try {
             // Carrega o FXML do Dashboard
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/board/DashboardApp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
             Parent root = loader.load();
 
             // Verifica se a janela principal (Dashboard) já está aberta

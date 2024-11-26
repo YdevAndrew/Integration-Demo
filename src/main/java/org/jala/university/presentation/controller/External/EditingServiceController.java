@@ -286,5 +286,6 @@ public class EditingServiceController extends BaseController{
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }
+
 }
 

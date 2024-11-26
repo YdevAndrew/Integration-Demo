@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="External.ScheduleServices.LoadReceipt"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f8f8f8; -fx-padding: 10;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.LoadReceiptController">
 
+    <!-- VBox centralizado no AnchorPane -->
+    <VBox alignment="CENTER" spacing="20.0" AnchorPane.bottomAnchor="0.0"
+          AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+        <!-- Ícone de carregamento -->
+        <ImageView fitHeight="100.0" fitWidth="100.0">
+            <Image url="@loading-icon.png" /> <!-- Substitua pelo caminho correto do ícone -->
+        </ImageView>
+
+        <!-- Mensagem de sucesso -->
+        <Label text="Pagamento realizado com sucesso!" textAlignment="CENTER" style="-fx-font-family: 'Arial'; -fx-font-size: 18px; -fx-font-weight: bold;" />
+
+        <!-- Submensagem indicando que o comprovante está sendo gerado -->
+        <Label text="Estamos gerando o comprovante, por favor aguarde..." textAlignment="CENTER" style="-fx-text-fill: #555555; -fx-font-family: 'Arial'; -fx-font-size: 14px;" />
+
+        <!-- Barra de progresso (opcional) -->
+        <ProgressIndicator prefHeight="50.0" prefWidth="50.0" />
+
+        <!-- Botão OK -->
+
+        <Button fx:id="okButton" text="OK" onAction="#onOkButtonClick" style="-fx-background-color: #1a73e8; -fx-text-fill: #FFFFFF; -fx-font-family: Arial; -fx-font-size: 17px; -fx-background-radius: 15px;"/>
+
+    </VBox>
 </AnchorPane>
