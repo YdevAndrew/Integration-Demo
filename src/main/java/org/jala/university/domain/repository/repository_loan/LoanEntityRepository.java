@@ -29,21 +29,21 @@ public interface LoanEntityRepository extends JpaRepository<LoanEntity, Integer>
     List<LoanEntity> findByAccountId(@Param("accountId") Integer accountId);
 
     /**
-     * Counts the number of completed payments for a loan associated
-     * with a scheduled payment.
+     * Retrieves a list of {@link LoanEntity} with a specific status
+     * and payment method.
      *
-     * @param scheduledPayment The scheduled payment entity.
-     * @return The number of completed payments for the loan.
+     * @param status        The status code of the loan.
+     * @param paymentMethod The payment method code of the loan.
+     * @return A list of {@link LoanEntity} matching the given
+     *     criteria.
      */
     @Query("SELECT l FROM LoanEntity l WHERE l.status = :status AND l.paymentMethod = :paymentMethod")
     List<LoanEntity> findByStatusPaymentMethod(@Param("status") Integer status, @Param("paymentMethod") Integer paymentMethod);
     
     /**
      * Retrieves a list of {@link LoanEntity} with a specific status
-     * and payment method.
      *
      * @param status        The status code of the loan.
-     * @param paymentMethod The payment method code of the loan.
      * @return A list of {@link LoanEntity} matching the given
      *     criteria.
      */
