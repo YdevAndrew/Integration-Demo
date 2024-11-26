@@ -21,16 +21,28 @@ import jakarta.transaction.Transactional;
 @Service
 public class LoanResultsServiceImpl implements LoanResultsService {
 
+    /**
+     * The repository for managing {@link LoanEntity} objects.
+     */
     @Autowired
     private LoanEntityRepository loanEntityRepository;
 
+    /**
+     * The service for handling loan and related actions.
+     */
     @Autowired
     @Lazy
     private LoanEntityService loanEntityService;
 
+    /**
+     * The repository for managing {@link Account} objects.
+     */
     @Autowired
     private AccountRepository accountRepository;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public Account sendAmountAccount(LoanEntity loanEntity) {
@@ -44,6 +56,9 @@ public class LoanResultsServiceImpl implements LoanResultsService {
         return savedAccount;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public Account payInstallment(LoanEntity loanEntity) {
@@ -66,6 +81,9 @@ public class LoanResultsServiceImpl implements LoanResultsService {
         return accountRepository.save(account);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Scheduled(cron = "0 0 0 * * ?")
     @Transactional
     public void processScheduledPayments() {
@@ -91,6 +109,9 @@ public class LoanResultsServiceImpl implements LoanResultsService {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Transactional
     private boolean processInstallmentPayment(InstallmentEntity installment) {
         LoanEntity loan = installment.getLoan();

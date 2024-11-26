@@ -1,4 +1,4 @@
-package org.jala.university.application.service;
+package org.jala.university.application.service.service_account;
 
 import org.jala.university.application.dto.dto_account.AccountDto;
 import org.jala.university.application.service.service_account.AccountService;
