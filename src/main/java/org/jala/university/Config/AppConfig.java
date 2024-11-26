@@ -1,4 +1,4 @@
-package org.jala.university.Config;
+package org.jala.university.config;
 
 
 import org.jala.university.ServiceFactory;

@@ -56,41 +56,41 @@ public class CardsPageController {
     @FXML
     private void initialize() throws IOException {
 
-            if(validIfPhysicalExist() == null && validIfVirtualExist() == null){
-                textPhysical.setText("");
-                textVirtual.setText("");
-                physicalCardsImage1.setVisible(false);
-                VirtualCardsImage2.setVisible(false);
-                physicalCardNumber.setVisible(false);
-                physicalDateCard.setVisible(false);
-                physicalNameSurname.setVisible(false);
-                virtualCardNumber.setVisible(false);
-                virtualDateCard.setVisible(false);
-                virtualNameSurname.setVisible(false);
-                blockButtonPhysical.setVisible(false);
-                blockButtonVirtual.setVisible(false);
-                statusCard.setVisible(false);
-                configVirtual.setVisible(false);
-                configPhysical.setVisible(false);
-                menuButtonVirtual.setVisible(false);
-                menuButtonPhysical.setVisible(false);
-            }else if(Boolean.TRUE.equals(CardsPageController.validIfPhysicalExist()) && CardsPageController.validIfVirtualExist() == null) {
-                addInfo();
-                checkStatusCard();
-                textVirtual.setText("");
-                VirtualCardsImage2.setVisible(false);
-                virtualCardNumber.setVisible(false);
-                virtualDateCard.setVisible(false);
-                virtualNameSurname.setVisible(false);
-                blockButtonVirtual.setVisible(false);
-                statusCard.setVisible(false);
-                configVirtual.setVisible(false);
-                menuButtonVirtual.setVisible(false);
-                System.out.println("Inicializando CardsPageController");
-            }else{
-                addInfo();
-                checkStatusCard();
-            }
+        if(validIfPhysicalExist() == null && validIfVirtualExist() == null){
+            textPhysical.setText("");
+            textVirtual.setText("");
+            physicalCardsImage1.setVisible(false);
+            VirtualCardsImage2.setVisible(false);
+            physicalCardNumber.setVisible(false);
+            physicalDateCard.setVisible(false);
+            physicalNameSurname.setVisible(false);
+            virtualCardNumber.setVisible(false);
+            virtualDateCard.setVisible(false);
+            virtualNameSurname.setVisible(false);
+            blockButtonPhysical.setVisible(false);
+            blockButtonVirtual.setVisible(false);
+            statusCard.setVisible(false);
+            configVirtual.setVisible(false);
+            configPhysical.setVisible(false);
+            menuButtonVirtual.setVisible(false);
+            menuButtonPhysical.setVisible(false);
+        }else if(Boolean.TRUE.equals(CardsPageController.validIfPhysicalExist()) && CardsPageController.validIfVirtualExist() == null) {
+            addInfo();
+            checkStatusCard();
+            textVirtual.setText("");
+            VirtualCardsImage2.setVisible(false);
+            virtualCardNumber.setVisible(false);
+            virtualDateCard.setVisible(false);
+            virtualNameSurname.setVisible(false);
+            blockButtonVirtual.setVisible(false);
+            statusCard.setVisible(false);
+            configVirtual.setVisible(false);
+            menuButtonVirtual.setVisible(false);
+            System.out.println("Inicializando CardsPageController");
+        }else{
+            addInfo();
+            checkStatusCard();
+        }
 
 
     }
@@ -134,29 +134,29 @@ public class CardsPageController {
 
     @FXML
     private void deletCard(ActionEvent event) throws IOException {
-    try {
-        Button sourceButton = (Button) event.getSource();
-        String buttonId = sourceButton.getId();
+        try {
+            Button sourceButton = (Button) event.getSource();
+            String buttonId = sourceButton.getId();
 
-        if ("deletCardButton".equals(buttonId)) {
-            setCardClicked(virtualCardNumber.getText());
-            System.out.println("Botão de Alterar Senha 2 clicado.");
+            if ("deletCardButton".equals(buttonId)) {
+                setCardClicked(virtualCardNumber.getText());
+                System.out.println("Botão de Alterar Senha 2 clicado.");
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/deletVirtualCard/delet_virtual_card.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Delete Virtual Card");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.initStyle(StageStyle.UTILITY);
+
+            stage.show();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cards/deletVirtualCard/delet_virtual_card.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.setTitle("Delete Virtual Card");
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        stage.initStyle(StageStyle.UTILITY);
-
-        stage.show();
-    } catch (Exception e) {
-        throw new RuntimeException(e);
-    }
 
     }
     /**

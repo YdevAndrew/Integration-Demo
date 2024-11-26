@@ -47,7 +47,8 @@ public class LoanEntityServiceImpl implements LoanEntityService {
     @Autowired
     private EntityManager entityManager;
 
-    public LoanEntityServiceImpl(LoanEntityMapper loanEntityMapper, InstallmentEntityMapper installmentEntityMapper, FormEntityMapper formEntityMapper, TaskScheduler taskScheduler) {
+    public LoanEntityServiceImpl(LoanEntityMapper loanEntityMapper, InstallmentEntityMapper installmentEntityMapper,
+            FormEntityMapper formEntityMapper, TaskScheduler taskScheduler) {
         this.loanEntityMapper = loanEntityMapper;
         this.installmentEntityMapper = installmentEntityMapper;
         this.taskScheduler = taskScheduler;
@@ -90,9 +91,7 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         entity.generateInstallments();
         entity.generateAndSetDate();
         entity.setForm(formEntityService.findEntityById(entity.getForm().getId()));
-        loanResultsService.verifyIfScheduled(entity);
-        //Quando juntar com o módulo Account
-        entity.setAccount(accountRepository.findById(/*getLoggedAccount().getId())*/ 1).orElse(null));
+        entity.setAccount(accountRepository.findById(formEntityService.getloggedUserId()).orElse(null));
         if (entity.getStatus() == null) {
             entity.setStatus(entity.generateStatus());
         }
@@ -122,7 +121,7 @@ public class LoanEntityServiceImpl implements LoanEntityService {
     public void delete(LoanEntityDto entityDto) {
         LoanEntity entity = loanEntityMapper.mapFrom(entityDto);
         LoanEntity foundEntity = loanEntityRepository.findById(entity.getId()).orElse(null);
-        
+
         if (foundEntity == null) {
             throw new IllegalArgumentException("Entity " + entityDto + " not found.");
         }
@@ -148,7 +147,7 @@ public class LoanEntityServiceImpl implements LoanEntityService {
     @Override
     @Transactional(readOnly = true)
     public List<LoanEntityDto> findLoansByAccountId() {
-        Integer id = 1; //Ajustar quando juntar módulos para o id da conta logada
+        Integer id = formEntityService.getloggedUserId();
         List<LoanEntity> loans = loanEntityRepository.findByAccountId(id);
         loans.forEach(LoanEntity::updateStatusFinished);
         return loans.stream()
@@ -169,8 +168,7 @@ public class LoanEntityServiceImpl implements LoanEntityService {
     }
 
     private void scheduleStatusChange(LoanEntity loanEntity) {
-        Instant startTime = Instant.now().plus(Duration.ofSeconds(30)); // 2 minutos no futuro
-    
+        Instant startTime = Instant.now().plus(Duration.ofSeconds(30));
         taskScheduler.schedule(() -> changeStatusRandomly(loanEntity), startTime);
     }
 
@@ -182,14 +180,13 @@ public class LoanEntityServiceImpl implements LoanEntityService {
 
         if (newStatus == Status.APPROVED) {
             loanResultsService.sendAmountAccount(loanEntity);
-            loanResultsService.verifyIfScheduled(loanEntity);
         }
     }
 
-    @Scheduled(cron = "0 0 0 * * ?") // Executa diariamente à meia-noite
+    @Scheduled(cron = "0 0 0 * * ?")
     @Transactional
     void adjustOverdueInstallments() {
-        List<LoanEntity> loans = loanEntityRepository.findByStatusPaymentMethod(1, 2);
+        List<LoanEntity> loans = loanEntityRepository.findByStatusCode(1);
 
         for (LoanEntity loan : loans) {
             for (InstallmentEntity installment : loan.getInstallments()) {
@@ -220,17 +217,19 @@ public class LoanEntityServiceImpl implements LoanEntityService {
         return outstandingBalance;
     }
 
+    @Transactional(readOnly = true)
     public InstallmentEntityDto getFirstUnpaidInstallment(LoanEntityDto dto) {
-        LoanEntity entity = loanEntityMapper.mapFrom(dto);
+        LoanEntity entity = loanEntityRepository.findByIdWithInstallments(dto.getId());
         if (entity == null || entity.getFirstUnpaidInstallment() == null) {
             return null;
         }
         return installmentEntityMapper.mapTo(entity.getFirstUnpaidInstallment());
     }
 
-
-    public LocalDate getFirstUnpaidInstallmentDate(LoanEntityDto loan) {
-        List<InstallmentEntity> installments = loan.getInstallments();
+    @Transactional(readOnly = true)
+    public LocalDate getFirstUnpaidInstallmentDate(LoanEntityDto dto) {
+        LoanEntity entity = loanEntityRepository.findByIdWithInstallments(dto.getId());
+        List<InstallmentEntity> installments = entity.getInstallments();
 
         return installments.stream()
                 .filter(installment -> installment.getPaymentDate() == null)

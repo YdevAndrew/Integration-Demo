@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1040.0" style="-fx-background-color: #f8f8f8;" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.SchedulePaymentInformationController">
+    <Text fill="#004bd6" layoutX="116.0" layoutY="84.0" text="Check your service information:" textAlignment="CENTER">
+        <font>
+            <Font name="GraphikTrial-Bold" size="40.0" />
+        </font>
+    </Text>
+
+    <ToggleButton layoutX="599.0" layoutY="588.0" mnemonicParsing="false" onAction="#insertPassword" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Confirm" />
+    <ToggleButton layoutX="135.0" layoutY="588.0" mnemonicParsing="false" onAction="#back" prefHeight="56.0" prefWidth="312.0" styleClass="button-custom" text="Cancel " />
+
+    <Pane layoutX="173.0" layoutY="123.0" prefHeight="414.0" prefWidth="515.0" style="-fx-border-color: #000000; -fx-border-radius: 15;">
+        <children>
+            <HBox layoutX="21.0" layoutY="24.0" prefHeight="19.0" prefWidth="408.0">
+                <children>
+                    <Text fill="#004bd6" text="Service name:" wrappingWidth="151.0361328125">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="serviceNameText" wrappingWidth="268.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="22.0" layoutY="61.0" prefHeight="26.0" prefWidth="528.0">
+                <children>
+
+                    <Text fill="#004bd6" text="Recipient's name:" wrappingWidth="185.4970703125">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="recipientNameText" wrappingWidth="354.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="22.0" layoutY="100.0" prefHeight="16.0" prefWidth="572.0">
+                <children>
+
+                    <Text fx:id="recipientDocumentText" fill="#004bd6" wrappingWidth="73.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="recipientText" wrappingWidth="354.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="23.0" layoutY="138.0" prefHeight="26.0" prefWidth="470.0">
+                <children>
+
+                    <Text fill="#004bd6" text="Agency:" wrappingWidth="90.212890625">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="agencyText" wrappingWidth="390.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="23.0" layoutY="174.0" prefHeight="26.0" prefWidth="478.0">
+                <children>
+
+                    <Text fill="#004bd6" text="Account:" wrappingWidth="100.806640625">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="accountText" wrappingWidth="390.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="23.0" layoutY="209.0" prefHeight="12.0" prefWidth="471.0">
+                <children>
+
+                    <Text fill="#004bd6" text="Bank:" wrappingWidth="68.3330078125">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="bankNameText" wrappingWidth="415.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="23.0" layoutY="245.0" prefHeight="26.0" prefWidth="461.0">
+                <children>
+
+                    <Text fill="#004bd6" text="Service Amount:" wrappingWidth="175.03515625">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="serviceAmountText" wrappingWidth="298.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="24.0" layoutY="281.0" prefHeight="26.0" prefWidth="460.0">
+                <children>
+
+                    <Text fill="#004bd6" text="Due Date:" wrappingWidth="108.111328125">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="dueDateText" wrappingWidth="364.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="317.0" prefHeight="18.0" prefWidth="469.0">
+                <children>
+
+                    <Text fill="#004bd6" text="Start Date:" wrappingWidth="118.2529296875">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="startDateText" wrappingWidth="364.0">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="355.0" prefHeight="26.0" prefWidth="458.0">
+                <children>
+
+                    <Text fill="#004bd6" text="End Date:" wrappingWidth="106.80078125">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                    <Text fx:id="endDateText" wrappingWidth="363.99999999999994">
+                        <font>
+                            <Font name="Roboto Medium" size="22.0" />
+                        </font>
+                    </Text>
+                </children>
+            </HBox>
+        </children>
+    </Pane>
+</Pane>

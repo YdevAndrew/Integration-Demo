@@ -172,10 +172,10 @@ public class CreditCardClientService {
         List<CreditCard> creditCards = searchCreditCardsByAccountId();
 
         if (creditCards.isEmpty()) {
-            System.out.println("Nenhum cartão encontrado para a conta ");
+            System.out.println("No card found for account ");
         } else {
             creditCards.forEach(card ->
-                    System.out.println("Cartão encontrado: " + card.getNumberCard()));
+                    System.out.println("Card found: " + card.getNumberCard()));
         }
         //updatePasswordCreditCard("5029101227636919", new PasswordCreditCard("544432"));
     }

@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -23,6 +24,8 @@ import org.jala.university.presentation.controller.Account.ProfileViewController
 import org.jala.university.presentation.controller.Loan.MyLoans;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Transaction.TransactionHistoryController;
+import org.jala.university.presentation.controller.Transaction.TransactionPaymentScreenController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
@@ -106,7 +109,7 @@ public class DashboardController extends BaseController {
 
         // Configurar ações dos botões
         transactionButton.setOnAction(event -> loadTransactionView());
-        pixButton.setOnAction(event -> loadPixView());
+        transactionHistButton.setOnAction(event -> loadTransactionHistoryScreen());
     }
 
     @FXML
@@ -193,6 +196,7 @@ public class DashboardController extends BaseController {
      * Remove todos os painéis e limpa os contêineres.
      */
     private void clearAllPanels() {
+        mainContent.getChildren().clear();
         contentPane.getChildren().clear();
         mainViewContainer.getChildren().clear();
         myCardsVBox.setVisible(false);
@@ -204,23 +208,24 @@ public class DashboardController extends BaseController {
     private void loadTransactionView() {
         clearAllPanels();
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_paymentScreen.fxml"));
-            Pane transactionPane = loader.load();
-            contentPane.getChildren().add(transactionPane);
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_paymentScreen.fxml");
+            Node transactionPane = loader.load();
+            TransactionPaymentScreenController controller = loader.getController();
+            mainContent.getChildren().add(transactionPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void loadPixView() {
-        clearAllPanels();
+    private void loadTransactionHistoryScreen(){
         try {
-            clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Transaction/Transection_TED&PIX.fxml"));
-            Pane pixPane = loader.load();
-            contentPane.getChildren().add(pixPane);
+            clearAllPanels();
+            FXMLLoader loader = springFXMLLoader.load("/Transaction/Transection_Historical.fxml");
+            Node transactionPane = loader.load();
+            TransactionHistoryController controller = loader.getController();
+            mainContent.getChildren().add(transactionPane);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -229,25 +234,25 @@ public class DashboardController extends BaseController {
     @FXML
     private void scheduleAPayment() throws IOException {
         clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/SchedulePaymentScreens/SchedulePayment/SchedulePayment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/SchedulePaymentScreens/SchedulePayment/SchedulePayment.fxml"));
         Pane schedulePayment = loader.load();
-        contentPane.getChildren().add(schedulePayment);
+        mainContent.getChildren().add(schedulePayment);
     }
 
     @FXML
     private void QRCodePayment() throws IOException {
         clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
+        FXMLLoader loader = springFXMLLoader.load("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml");
         Pane QRCodePayments = loader.load();
-        contentPane.getChildren().add(QRCodePayments);
+        mainContent.getChildren().add(QRCodePayments);
     }
 
     @FXML
     private void ScheduleService() throws IOException {
         clearAllPanels(); // Oculta os outros painéis antes de carregar um novo
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/gui/ScheduleServices/ButtonService.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ButtonService.fxml"));
         Pane scheduleService = loader.load();
-        contentPane.getChildren().add(scheduleService);
+        mainContent.getChildren().add(scheduleService);
     }
 
     @FXML
@@ -269,7 +274,7 @@ public class DashboardController extends BaseController {
 
             FXMLLoader loader = springFXMLLoader.load("/Loans/main-viewLoan.fxml");
             Node mainViewContent = loader.load();
-            mainViewContainer.getChildren().add(mainViewContent);
+            mainContent.getChildren().add(mainViewContent);
 
             System.out.println("main-viewLoan.fxml loaded successfully!");
         } catch (IOException e) {
@@ -291,7 +296,7 @@ public class DashboardController extends BaseController {
             MyLoans controller = loader.getController();
             controller.loadLoanDetails();
 
-            mainViewContainer.getChildren().setAll(loansView);
+            mainContent.getChildren().setAll(loansView);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -313,19 +318,23 @@ public class DashboardController extends BaseController {
 
 
     @FXML
-    private void loadProfileView() {
+    private void loadProfileView(ActionEvent event) {
         try {
-            FXMLLoader loader = springFXMLLoader.load("/Account/profile-page.fxml");
-            Node profileView = loader.load();
+            // Carrega o FXML da página de perfil
+            FXMLLoader loader = org.jala.university.config.config_account.SpringFXMLLoader.create("/Account/profile-page.fxml");
+            Parent root = loader.load();
 
-            ProfileViewController controller = loader.getController();
+            // Recupera a Stage atual
+            Stage stage = (Stage) ((MenuItem) event.getSource()).getParentPopup().getOwnerWindow();
 
-
-            mainViewContainer.getChildren().setAll(profileView);
+            // Atualiza a cena com a página de perfil
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     private void loadCustomerInfo() {
         try {

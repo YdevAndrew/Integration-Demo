@@ -2,11 +2,10 @@ package org.jala.university.domain.entity.entity_external;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
+import java.util.UUID;
 import org.jala.university.domain.entity.entity_account.Account;
 
 @Data
@@ -30,29 +29,27 @@ public class ScheduledPaymentEntity {
     @Column(name = "amount", nullable = false)
     private BigDecimal amount;
 
-    @Column(name = "cpfReceiver")
+    @Column(name = "cpf_receiver", nullable = true)
     private String cpfReceiver;
 
-    @Column(name = "cnpjReceiver")
+    @Column(name = "cnpj_receiver", nullable = true)
     private String cnpjReceiver;
 
-    @Column(name = "account_receiver", nullable = false)
+    @Column(name = "account_recipient", nullable = false)
     private String accountReceiver;
 
-    @Column(name = "agency_receiver", nullable = false)
+    @Column(name = "agency_recipient", nullable = false)
     private String agencyReceiver;
 
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "endDate")
+    @Column(name = "end_date", nullable = true)
     private LocalDate endDate;
 
-    @Column(name = "transaction_date", nullable = false)
-    private LocalDateTime transactionDate;
-
     @Column(name = "expired_date", nullable = false)
-    private LocalDate expiredDate;
+    private String expiredDate;
+
 
 
 

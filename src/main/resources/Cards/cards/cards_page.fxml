@@ -19,7 +19,7 @@
             <Label id="physical-date-card" fx:id="physicalDateCard" layoutX="248.0" layoutY="101.0" text="00/00" />
             <Label id="physical-name-surname" fx:id="physicalNameSurname" layoutX="104.0" layoutY="138.0" prefHeight="30.0" prefWidth="234.0" styleClass="label-name-surname" text="Name S. Surname" />
             <MenuButton fx:id="menuButtonPhysical" layoutX="248.0" layoutY="30.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="46.0" style="-fx-background-color: transparent;">
-              <items>
+               <items>
                   <MenuItem mnemonicParsing="false" style="-fx-text-fill: #004BD6;">
                      <graphic>
                         <Button fx:id="changePasswordButton" mnemonicParsing="false" onAction="#changePassword" style="-fx-background-color: transparent; -fx-text-fill: blue;" text="Change Password" />
@@ -34,7 +34,7 @@
                         <Button fx:id="buttonAdjustLimit" mnemonicParsing="false" onAction="#adjustLimit" style="-fx-background-color: transparent; -fx-text-fill: blue;" text="Adjust Limit" />
                      </graphic>
                   </MenuItem>
-              </items>
+               </items>
                <graphic>
                   <ImageView fx:id="configPhysical" fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>

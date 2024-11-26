@@ -16,9 +16,13 @@ import org.jala.university.application.dto.dto_loan.LoanEntityDto;
 import org.jala.university.application.service.service_loan.LoanEntityService;
 import org.jala.university.application.service.service_loan.LoanResultsService;
 import org.jala.university.domain.entity.entity_account.Account;
+import org.jala.university.domain.entity.entity_account.Customer;
 import org.jala.university.domain.entity.entity_loan.InstallmentEntity;
+import org.jala.university.domain.repository.repository_account.AccountRepository;
+import org.jala.university.domain.repository.repository_account.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import java.time.LocalDate;
@@ -32,9 +36,17 @@ import java.util.stream.Collectors;
 @Controller
 public class MyLoans {
 
+
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+
     public HBox filterBar;
 
-    public AnchorPane mainContainer;
+    public AnchorPane mainContent;
 
     @FXML
     private FlowPane loansContainer;
@@ -62,7 +74,7 @@ public class MyLoans {
         noLoanLabel = new Label("No loans found.");
         noLoanLabel.setStyle("-fx-font-size: 16; -fx-text-fill: gray;");
         loansContainer.getChildren().add(noLoanLabel);
-        mainContainer.setOnScroll(this::handleScroll);
+        mainContent.setOnScroll(this::handleScroll);
 
 
 
@@ -83,7 +95,7 @@ public class MyLoans {
         double newOffset = currentOffset - deltaY;
 
 
-        double maxOffset = loansContainer.getHeight() - mainContainer.getPrefHeight();
+        double maxOffset = loansContainer.getHeight() - mainContent.getPrefHeight();
         if (newOffset < 0) {
             newOffset = 0;
         } else if (newOffset > maxOffset) {
@@ -97,12 +109,15 @@ public class MyLoans {
         event.consume();
     }
 
+
+
     /**
      * Loads the details of loans based on the selected filter status.
      */
     public void loadLoanDetails() {
         String selectedStatus = statusFilterComboBox.getValue();
-        List<LoanEntityDto> loans = loanService.findAll();
+
+        List<LoanEntityDto> loans = loanService.findLoansByAccountId();
 
         loansContainer.getChildren().clear();
 
@@ -191,7 +206,7 @@ public class MyLoans {
         paymentBox.setSpacing(10);
         paymentBox.setStyle("-fx-background-color: #F1F8FF; -fx-padding: 10; -fx-border-color: #CCE7FF; -fx-border-radius: 10; -fx-background-radius: 10;");
 
-        Label installmentLabel = new Label(String.format("Next Installment: R$ %.2f", loan.getValueOfInstallments()));
+        Label installmentLabel = new Label(String.format("Next Installment: R$ %.2f", loanService.getFirstUnpaidInstallment(loan).getAmount()));
         installmentLabel.setStyle("-fx-font-size: 16; -fx-font-weight: bold;");
 
         Label dueDateLabel;
@@ -253,7 +268,7 @@ public class MyLoans {
 
 
     private void removeLabelAfterDelay(Label label, int seconds) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), e -> loansContainer.getChildren().remove(label)));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(seconds), e -> mainContent.getChildren().remove(label)));
         timeline.setCycleCount(1);
         timeline.play();
     }

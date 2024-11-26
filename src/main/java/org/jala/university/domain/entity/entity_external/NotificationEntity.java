@@ -1,10 +1,10 @@
 package org.jala.university.domain.entity.entity_external;
 
 
-import org.jala.university.domain.entity.entity_account.Account;
-
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.UUID;
+import org.jala.university.domain.entity.entity_account.Account;
 
 
 @Data
@@ -27,6 +27,4 @@ public class NotificationEntity {
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
-
-
 }
