@@ -7,6 +7,7 @@ import org.jala.university.domain.entity.entity_external.ScheduledPaymentEntity;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -56,6 +57,9 @@ public class PaymentHistoryEntity {
 
     @Column(name = "bank_name_receiver")
     private String bankNameReceiver;
+
+    @Column(name = "expired_date")
+    private LocalDate expiredDate;
 
     @ManyToOne
     @JoinColumn(name = "scheduled_payment", nullable = true)

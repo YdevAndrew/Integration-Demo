@@ -277,6 +277,7 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
 
             PaymentHistoryEntity paymentHistoryEntity = paymentHistoryMapper.mapFrom(paymentHistoryDto);
             paymentHistoryEntity.setAccount(sender);
+            paymentHistoryEntity.setBankNameReceiver("External Bank");
             paymentHistoryEntity.setTransactionType(returnTransactionType(transactionType));
             paymentHistoryEntity.setStatus(returnStatusScheduledOrCompleted(true));
             paymentHistoryEntity.setTransactionDate(LocalDateTime.now());

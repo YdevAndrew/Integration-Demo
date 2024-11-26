@@ -12,6 +12,7 @@ import org.jala.university.commons.presentation.BaseController;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 
 @Controller
@@ -122,7 +123,7 @@ public class ManuallyInsertController extends BaseController {
                     // Passa a referência do controlador anterior
                     paymentDetailsController.setManuallyInsertController(this);
                     paymentDetailsController.initializePaymentDetails(
-                        amount,
+                            BigDecimal.valueOf(amount),
                         nameField.getText(),
                         agencyField.getText(),
                         accountField.getText(),
