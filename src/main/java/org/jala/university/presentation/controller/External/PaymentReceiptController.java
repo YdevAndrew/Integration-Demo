@@ -18,7 +18,9 @@ import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +32,7 @@ import java.util.Date;
 public class PaymentReceiptController extends BaseController {
     @Autowired
     private SpringFXMLLoader springFXMLLoader;
+
 
     @FXML
     private Label amountLabel;
@@ -61,7 +64,7 @@ public class PaymentReceiptController extends BaseController {
     private Label dateLabel;
 
 
-//    //     Método para exportar como PDF (imagem ok)
+    //    //     Método para exportar como PDF (imagem ok)
     @FXML
     private void exportAsPDF() {
         try {
@@ -90,7 +93,7 @@ public class PaymentReceiptController extends BaseController {
                     byte[] imageBytes = inputStream.readAllBytes();  // Lê todos os bytes da imagem
                     pdImage = PDImageXObject.createFromByteArray(document, imageBytes, "jala_bank_logo.jpg");
                 } else {
-                    System.out.println("Imagem não encontrada no classpath.");
+                    System.out.println("Image not found on classpath.");
                 }
 
                 // Iniciar o fluxo de conteúdo no PDF
@@ -162,20 +165,20 @@ public class PaymentReceiptController extends BaseController {
                 document.save(file);
                 document.close();
 
-                System.out.println("PDF exportado com sucesso!");
+                System.out.println("PDF exported successfully");
             } else {
                 System.out.println("Nenhum arquivo foi selecionado ou a operação foi cancelada.");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Erro ao tentar salvar o PDF: " + e.getMessage());
+            System.out.println("Error when trying to save the PDF: " + e.getMessage());
         }
     }
 
 
     // Método de inicialização do controlador
-    public void initializeReceipt(BigDecimal amount, String receiverName, String account, String agency, String expirationDate, String interestValue, String totalValue) {
+    public void initializeReceipt(double amount, String receiverName, String account, String agency, String expirationDate, String interestValue, String totalValue) {
         // Definir os valores nos labels
         amountLabel.setText("R$ " + String.format("%.2f", amount));
         expirationDateLabel.setText(expirationDate);
@@ -196,10 +199,11 @@ public class PaymentReceiptController extends BaseController {
         dateLabel.setText(currentDateTime);
     }
 
+
     @FXML
     private void onExportButtonClick() {
         // Mostrar opções para o usuário
-        System.out.println("Escolha o formato para exportar");
+        System.out.println("Choose the format to export");
         // Aqui você pode criar uma janela para o usuário escolher o formato (imagem ou PDF)
         exportAsPDF();
     }
@@ -216,7 +220,7 @@ public class PaymentReceiptController extends BaseController {
         // Agora, vamos carregar a tela do Dashboard (tela inicial)
         try {
             // Carrega o FXML do Dashboard
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/board/DashboardApp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
             Parent root = loader.load();
 
             // Verifica se a janela principal (Dashboard) já está aberta
@@ -237,7 +241,7 @@ public class PaymentReceiptController extends BaseController {
         } catch (IOException e) {
             e.printStackTrace();
             // Em caso de erro ao carregar o Dashboard, imprime uma mensagem de erro
-            System.out.println("Erro ao carregar o Dashboard.");
+            System.out.println("Error loading Dashboard.");
         }
     }
 

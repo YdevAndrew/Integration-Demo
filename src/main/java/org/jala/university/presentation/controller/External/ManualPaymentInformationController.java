@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.BaseController;
@@ -148,7 +149,8 @@ public class ManualPaymentInformationController extends BaseController {
             passwordPromptController.setDetails(amount,receiverName,account,agency,expirationDate,cnpjReceiver,transactionDate,description,startDate,endDate);
             if (passwordPromptController != null) {
                 // Define a tela que irá aparecer após a confirmação da senha
-                passwordPromptController.setPath("/External/ScheduleServices/PaymentStatus.fxml");
+                passwordPromptController.setManualPaymentInformationController(this);
+
                 // Passa o controlador de PaymentDetailsController para o pop-up de senha
                 passwordPromptController.setPaymentDetailsController(this);
 
@@ -172,7 +174,14 @@ public class ManualPaymentInformationController extends BaseController {
     }
 
 
-    // Método para exibir o comprovante de pagamento
+    // Método para inicializar o controlador
+    public void setMainContent(AnchorPane mainContent) {
+        this.mainContent = mainContent; // Atribuir o valor
+    }
+
+
+
+   // Método para exibir o comprovante de pagamento
     public void showPaymentReceipt() {
         try {
             // Carrega a tela de comprovante de pagamento
@@ -228,6 +237,7 @@ public class ManualPaymentInformationController extends BaseController {
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }
+
 
 
 }

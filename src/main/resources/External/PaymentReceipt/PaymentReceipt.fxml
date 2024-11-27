@@ -5,15 +5,15 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="731.0" prefWidth="1029.0" style="-fx-background-color: transparent; -fx-border-color: none; -fx-effect: none;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.PaymentReceiptController">
+<AnchorPane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="679.0" prefWidth="1024.0" style="-fx-background-color: transparent; -fx-border-color: none; -fx-effect: none;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.PaymentReceiptController">
 
     <!-- VBox principal contendo todas as seções -->
     <VBox alignment="CENTER_LEFT" layoutX="142.0" layoutY="18.0" prefHeight="563.0" prefWidth="700.0" spacing="15" styleClass="payment-info-box">
@@ -136,4 +136,4 @@
       <Cursor fx:constant="OPEN_HAND" />
    </cursor>
 
-</Pane>
+</AnchorPane>

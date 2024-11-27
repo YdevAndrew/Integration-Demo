@@ -74,16 +74,16 @@ public class LoginControllerTest extends ApplicationTest {
     @Test
     public void testSuccessfulLogin() {
         // Arrange
-        when(customerService.authenticate("12345678900", "correctpassword")).thenReturn(true);
+        when(customerService.authenticate("987.654.321-12", "12345")).thenReturn(true);
 
         // Act
-        clickOn("#cpfField").write("12345678900");
-        clickOn("#passwordField").write("correctpassword");
+        clickOn("#cpfField").write("987.654.321-12");
+        clickOn("#passwordField").write("12345");
         clickOn("#loginButton");
 
         // Assert - this is tricky as it changes scenes
         // You might want to verify the stage has changed or a new scene is loaded
         // This is a placeholder assertion
-        verify(customerService).authenticate("12345678900", "correctpassword");
+        verify(customerService).authenticate("98765432112", "12345");
     }}
 

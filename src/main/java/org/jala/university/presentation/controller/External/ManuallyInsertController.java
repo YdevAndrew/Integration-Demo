@@ -73,10 +73,9 @@ public class ManuallyInsertController extends BaseController {
                 return;
             }
 
-            // Remover o hífen antigo para que a formatação seja aplicada de maneira consistente
+
             String plainText = newText.replace("-", "");
 
-            // Adicionar o hífen antes do último dígito quando tiver entre 6 e 11 dígitos
             if (plainText.length() >= 6) {
                 accountField.setText(plainText.substring(0, plainText.length() - 1) + "-" + plainText.substring(plainText.length() - 1));
                 accountField.positionCaret(accountField.getText().length()); // Posiciona o cursor no final do texto

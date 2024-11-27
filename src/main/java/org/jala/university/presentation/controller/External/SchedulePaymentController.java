@@ -287,7 +287,15 @@ public class SchedulePaymentController extends BaseController {
                     isCNPJ // Passa o valor de CNPJ/CPF
             );
 
+            // Substitui o conteúdo atual pela nova tela de informações de agendamento
             mainContent.getChildren().setAll(schedulePaymentInformation);
+
+            // Carrega a tela de "Agendamento com Sucesso"
+            FXMLLoader successLoader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/paymentScheduleSucess.fxml")); // Ajuste o caminho conforme necessário
+            Pane successScreen = successLoader.load();
+
+            // Exibe a tela de sucesso
+            mainContent.getChildren().setAll(successScreen);
+        }
         }
     }
-}

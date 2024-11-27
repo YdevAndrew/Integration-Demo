@@ -1,9 +1,11 @@
 package org.jala.university.presentation.controller.External;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
@@ -31,5 +33,10 @@ public class ScreenSuccessController {
             // Opcional: Alerta de erro em caso de falha
             System.err.println("Erro ao carregar a tela inicial.");
         }
+    }
+    public void handleCancel(ActionEvent event) {
+        // Fechar a janela sem realizar nenhuma ação
+        Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

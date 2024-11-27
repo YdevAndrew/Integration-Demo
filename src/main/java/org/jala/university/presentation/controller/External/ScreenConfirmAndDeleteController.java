@@ -30,22 +30,13 @@ public class ScreenConfirmAndDeleteController extends BaseController {
         stage.close();
 
         try {
-            // Carrega o FXML do pop-up de senha
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/password/PasswordPrompt.fxml"));
+            // Carrega o FXML de sucesso na exclusão
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/ScreenDeleteSuccess.fxml"));
             Parent root = loader.load();
 
-            // Inicializa o controlador do pop-up de senha
-            PasswordPromptController passwordPromptController = loader.getController();
-            if (passwordPromptController != null) {
-                // Passa o controlador de SchedulePaymentInformationController para o pop-up de senha
-                passwordPromptController.setScreenConfirmAndDeleteController(this);  // Altere para passar o controlador correto
-            } else {
-                System.out.println("Erro: O controlador PasswordPromptController não foi injetado corretamente.");
-            }
-
-            // Exibe o pop-up de senha
+            // Inicializa a nova cena
             stage = new Stage();
-            stage.setTitle("Autenticação");
+            stage.setTitle("Sucesso");
             stage.setScene(new Scene(root));
             stage.show();
 
