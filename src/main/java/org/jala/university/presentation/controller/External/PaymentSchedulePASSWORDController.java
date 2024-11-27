@@ -14,6 +14,10 @@ public class PaymentSchedulePASSWORDController {
     @FXML
     private Pane mainContent; // Painel principal onde os conteúdos serão exibidos
 
+    private int failedAttempts = 0; // Contador de tentativas incorretas
+    private static final int MAX_ATTEMPTS = 3; // Limite de tentativas
+    private static final String CORRECT_PASSWORD = "1234"; // Senha correta
+
     /**
      * Método chamado ao clicar no botão "Pagar Agora".
      * Carrega a tela de senha para autenticação no painel principal.
@@ -27,15 +31,39 @@ public class PaymentSchedulePASSWORDController {
 
             // Configurar o controlador da tela de senha
             PasswordPromptController passwordController = fxmlLoader.getController();
-            passwordController.setOnPasswordVerified(() -> {
-                // Após a verificação da senha, carregar a tela de sucesso no painel principal
-                try {
-                    FXMLLoader successLoader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/paymentScheduleSucess.fxml"));
-                    Pane successPane = successLoader.load();
-                    mainContent.getChildren().setAll(successPane); // Substituir o conteúdo do painel principal
-                } catch (IOException e) {
-                    showErrorAlert("Erro ao carregar a tela de sucesso do pagamento.");
-                    e.printStackTrace();
+            passwordController.setPasswordHandler(password -> {
+                System.out.println("Senha recebida: " + password); // Log da senha recebida
+                if (CORRECT_PASSWORD.equals(password)) {
+                    failedAttempts = 0; // Reseta o contador de tentativas após sucesso
+                    try {
+                        // Após a verificação da senha, carregar a tela de sucesso no painel principal
+                        FXMLLoader successLoader = new FXMLLoader(getClass().getResource("/External/ScheduleServices/paymentScheduleSucess.fxml"));
+                        Pane successPane = successLoader.load();
+                        mainContent.getChildren().setAll(successPane); // Substituir o conteúdo do painel principal
+                    } catch (IOException e) {
+                        showErrorAlert("Erro ao carregar a tela de sucesso do pagamento.");
+                        e.printStackTrace();
+                    }
+                } else {
+                    failedAttempts++;
+                    if (failedAttempts >= MAX_ATTEMPTS) {
+                        // Exibe mensagem de bloqueio e redireciona para a tela de pagamento
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Número máximo de tentativas alcançado. Voltando para a tela de pagamento.", ButtonType.OK);
+                        alert.showAndWait();
+
+                        try {
+                            FXMLLoader paymentLoader = new FXMLLoader(getClass().getResource("/External/QRCodePayment/QRCodePayment.fxml"));
+                            Pane paymentPane = paymentLoader.load();
+                            mainContent.getChildren().setAll(paymentPane); // Substituir o conteúdo do painel principal
+                        } catch (IOException e) {
+                            showErrorAlert("Erro ao carregar a tela de pagamento.");
+                            e.printStackTrace();
+                        }
+                    } else {
+                        // Exibe mensagem de erro com o número de tentativas restantes
+                        Alert alert = new Alert(Alert.AlertType.WARNING, "Senha incorreta. Tentativas restantes: " + (MAX_ATTEMPTS - failedAttempts), ButtonType.OK);
+                        alert.showAndWait();
+                    }
                 }
             });
 

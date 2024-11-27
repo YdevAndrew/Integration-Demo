@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -20,6 +21,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.cert.PolicyNode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -56,7 +58,7 @@ public class PaymentReceiptController extends BaseController {
     private Label dateLabel;
 
 
-//    //     Método para exportar como PDF (imagem ok)
+    //    //     Método para exportar como PDF (imagem ok)
     @FXML
     private void exportAsPDF() {
         try {
@@ -201,41 +203,29 @@ public class PaymentReceiptController extends BaseController {
 
     // Método para lidar com o botão "OK" - assim que encerrar abre uma nova página do dashboard
     @FXML
+    private Pane mainContent; // Certifique-se de que isso esteja definido como um campo de classe
+
+    @FXML
     private void onOkButtonClick() {
-        // Obtém a janela (stage) atual, que é o pop-up
-        Stage currentStage = (Stage) amountLabel.getScene().getWindow();
-
-        // Fecha o pop-up
-        currentStage.close();
-
-        // Agora, vamos carregar a tela do Dashboard (tela inicial)
+        // Carrega a tela do Dashboard (tela inicial)
         try {
-            // Carrega o FXML do Dashboard
+            // Carrega o FXML do QR Code Payment
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
             Parent root = loader.load();
 
-            // Verifica se a janela principal (Dashboard) já está aberta
-            Stage mainStage = (Stage) currentStage.getOwner(); // Tenta pegar a janela que originou o pop-up
-
-            if (mainStage == null) {
-                // Se não existir, cria uma nova janela principal
-                mainStage = new Stage();
+            // Substitui o conteúdo atual pelo novo conteúdo
+            if (mainContent != null) {
+                mainContent.getChildren().setAll(root);
+            } else {
+                System.out.println("mainContent não está definido.");
             }
-
-            // Define o título e a cena da janela principal
-            mainStage.setTitle("External Payment Module Application");
-            mainStage.setScene(new Scene(root));
-
-            // Exibe a janela com o Dashboard
-            mainStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Em caso de erro ao carregar o Dashboard, imprime uma mensagem de erro
-            System.out.println("Erro ao carregar o Dashboard.");
+            // Em caso de erro ao carregar, imprime uma mensagem de erro
+            System.out.println("Erro ao carregar a tela QR Code Payment.");
         }
     }
-
 }
 
 

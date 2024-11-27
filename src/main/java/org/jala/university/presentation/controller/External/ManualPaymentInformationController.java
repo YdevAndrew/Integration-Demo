@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.BaseController;
@@ -156,6 +157,13 @@ public class ManualPaymentInformationController extends BaseController {
             }
         }
     }
+
+
+    // Método para inicializar o controlador
+    public void setMainContent(AnchorPane mainContent) {
+        this.mainContent = mainContent; // Atribuir o valor
+    }
+
 
 
     /* Método para exibir o comprovante de pagamento

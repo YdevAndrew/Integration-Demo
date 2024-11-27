@@ -371,4 +371,7 @@ public class DashboardController extends BaseController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public void setMainContent(AnchorPane mainContent) {
+    }
 }

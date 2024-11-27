@@ -20,18 +20,19 @@ import java.io.IOException;
 
 @Controller
 public class PasswordPromptController extends BaseController {
-    @FXML
-    private AnchorPane mainContent; // Painel onde o conteúdo será substituído
 
     @FXML
     private PasswordField passwordField;
     private Consumer<String> passwordHandler;
     private String path;
-    private ManualPaymentInformationController paymentDetailsController; // Controlador para detalhes de pagamento
+    private ManualPaymentInformationController paymentDetailsController;
 
     private static final String CORRECT_PASSWORD = "1234";
-    private Runnable onPasswordVerified; // Callback para lógica personalizada após senha correta
+    private Runnable onPasswordVerified;
     private ManualPaymentInformationController manualPaymentInformationController;
+
+    private int failedAttempts = 0; // Contador de tentativas incorretas
+    private static final int MAX_ATTEMPTS = 3; // Limite de tentativas
 
     public void setPasswordHandler(Consumer<String> handler) {
         this.passwordHandler = handler;
@@ -59,10 +60,14 @@ public class PasswordPromptController extends BaseController {
     }
 
     @FXML
+    private AnchorPane mainContent;
+
+    @FXML
     private void onConfirmButtonClick() {
         String enteredPassword = passwordField.getText();
 
         if (CORRECT_PASSWORD.equals(enteredPassword)) {
+            failedAttempts = 0; // Reseta o contador ao inserir a senha correta
             if (passwordHandler != null) {
                 passwordHandler.accept(enteredPassword);
             }
@@ -87,6 +92,26 @@ public class PasswordPromptController extends BaseController {
             } catch (IOException e) {
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Erro ao carregar o comprovante.", ButtonType.OK);
+                alert.showAndWait();
+            }
+        } else {
+            failedAttempts++;
+            if (failedAttempts >= MAX_ATTEMPTS) {
+                // Bloqueia o usuário após 3 tentativas incorretas
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Você atingiu o número máximo de tentativas. Voltando para a tela de pagamento.", ButtonType.OK);
+                alert.showAndWait();
+
+                try {
+                    // Redireciona para a tela de pagamento
+                    loadContent("/External/QRCodePayment/QRCodePayment.fxml");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Alert errorAlert = new Alert(Alert.AlertType.ERROR, "Erro ao carregar a tela de pagamento.", ButtonType.OK);
+                    errorAlert.showAndWait();
+                }
+            } else {
+                // Exibe mensagem de erro para tentativa incorreta
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Senha incorreta. Tentativas restantes: " + (MAX_ATTEMPTS - failedAttempts), ButtonType.OK);
                 alert.showAndWait();
             }
         }

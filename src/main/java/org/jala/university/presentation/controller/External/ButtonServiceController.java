@@ -17,7 +17,6 @@ public class ButtonServiceController {
      * Método para carregar uma nova tela dentro do `mainContent`.
      * Substitui o conteúdo existente pelo novo.
      *
-     * @param fxmlPath Caminho do arquivo FXML a ser carregado.
      */
     private void loadContent(String fxmlPath) {
         try {
@@ -30,10 +29,7 @@ public class ButtonServiceController {
         }
     }
 
-    /**
-     * Ações para cada botão de serviço.
-     * Cada método carrega um conteúdo diferente no painel principal.
-     */
+
     @FXML
     public void handleService1Click(ActionEvent event) {
         loadContent("/External/ScheduleServices/ServiceDetail.fxml");
