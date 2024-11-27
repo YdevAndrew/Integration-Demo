@@ -6,10 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
 public class ScreenNoPaymentSchedule {
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
     @FXML
     private Pane mainContent; // Certifique-se de que existe um contêiner correspondente no arquivo FXML.
 

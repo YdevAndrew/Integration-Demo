@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.function.Consumer;
 
 import java.util.function.Consumer;
@@ -35,16 +36,24 @@ public class PasswordPromptController extends BaseController {
     public String receiverName;
     public String agency;
     public String account;
-    public LocalDate expirationDate;
+    public String expirationDate;
     public String cnpjReceiver;
+    public LocalDate startDate;
+    public LocalDate endDate;
+    public String description;
+    public LocalDateTime transactionDate;
 
-    public void setDetails(BigDecimal amount, String receiverName, String agency, String account, String expirationDate, String cnpjReceiver) {
+    public void setDetails(BigDecimal amount, String receiverName, String agency, String account, String expirationDate, String cnpjReceiver, LocalDateTime transactionDate, String description, LocalDate startDate, LocalDate endDate) {
         this.amount = (amount);
         this.receiverName = receiverName;
         this.agency = agency;
         this.account = account;
-        this.expirationDate = LocalDate.parse(expirationDate);
+        this.expirationDate = expirationDate;
         this.cnpjReceiver = cnpjReceiver;
+        this.transactionDate = transactionDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
     }
 
      /* Define o callback para manipular a senha inserida.
@@ -75,21 +84,31 @@ public class PasswordPromptController extends BaseController {
         String enteredPassword = passwordField.getText();
 
         if (CORRECT_PASSWORD.equals(enteredPassword)) {
+            System.out.println(startDate);
             try {
-
+                PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
+                        .amount(amount)
+                        .nameReceiver(receiverName)
+                        .accountReceiver(account)
+                        .agencyReceiver(agency)
+                        .expiredDate(expirationDate)
+                        .cpfReceiver(cnpjReceiver)
+                        .transactionDate(transactionDate)
+                        .description(description)
+                        .startDate(startDate)
+                        .endDate(endDate)
+                        .bankNameReceiver("External Bank").build()
+                        ;
+                if(startDate == null) {
+                    paymentHistoryService.createExternalPayment(1, paymentHistoryDTO, "EXTERNAL_PAYMENT");
+                }else{
+                    paymentHistoryService.createScheduledExternalPayment(1,paymentHistoryDTO,"EXTERNAL_PAYMENT");
+                }
                 System.out.println("Path");
                 System.out.println(path);
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(path));
                 Pane root = fxmlLoader.load();
-                PaymentHistoryDTO paymentHistoryDTO = PaymentHistoryDTO.builder()
-                        .amount(amount)
-                        .nameReceiver(receiverName)
-                        .agencyReceiver(agency)
-                        .accountReceiver(account)
-                        .expiredDate(expirationDate)
-                        .cpfReceiver(cnpjReceiver).build()
-                        ;
-                paymentHistoryService.createExternalPayment(48, paymentHistoryDTO,"EXTERNAL_PAYMENT");
+
 
                 Stage paymentStatusStage = new Stage();
                 paymentStatusStage.setTitle("Status de Pagamento");

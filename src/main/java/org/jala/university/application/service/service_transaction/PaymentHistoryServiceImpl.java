@@ -245,7 +245,7 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
             paymentHistoryEntityList.sort(Comparator.comparing(PaymentHistoryEntity::getTransactionDate).reversed());
         }else{
 
-             Account account = accountRepository.findById(userId)
+            Account account = accountRepository.findById(userId)
                     .orElseThrow(() -> new IllegalArgumentException("account not found"));
 
             paymentHistoryEntityList = paymentHistoryRepository.findAllByReceiver(account.getAccountNumber());
@@ -262,30 +262,47 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
     @Override
     public PaymentHistoryDTO createExternalPayment(Integer userId, PaymentHistoryDTO paymentHistoryDto, String transactionType) {
 
-            System.out.println("Executing immediate transaction logic...");
+        System.out.println("Executing immediate transaction logic...");
 
-            Account sender = accountRepository.findById(userId)
-                    .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+        Account sender = accountRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
 
-            if (sender.getBalance().compareTo(paymentHistoryDto.getAmount()) < 0) {
-                throw new IllegalArgumentException("Insufficient balance");
-            }
+        if (sender.getBalance().compareTo(paymentHistoryDto.getAmount()) < 0) {
+            throw new IllegalArgumentException("Insufficient balance");
+        }
 
-            sender.setBalance(sender.getBalance().subtract(paymentHistoryDto.getAmount()));
+        sender.setBalance(sender.getBalance().subtract(paymentHistoryDto.getAmount()));
 
-            System.out.println("New sender balance: " + sender.getBalance());
+        System.out.println("New sender balance: " + sender.getBalance());
 
-            PaymentHistoryEntity paymentHistoryEntity = paymentHistoryMapper.mapFrom(paymentHistoryDto);
-            paymentHistoryEntity.setAccount(sender);
-            paymentHistoryEntity.setBankNameReceiver("External Bank");
-            paymentHistoryEntity.setTransactionType(returnTransactionType(transactionType));
-            paymentHistoryEntity.setStatus(returnStatusScheduledOrCompleted(true));
-            paymentHistoryEntity.setTransactionDate(LocalDateTime.now());
+        PaymentHistoryEntity paymentHistoryEntity = paymentHistoryMapper.mapFrom(paymentHistoryDto);
+        paymentHistoryEntity.setAccount(sender);
+        paymentHistoryEntity.setTransactionType(returnTransactionType(transactionType));
+        paymentHistoryEntity.setStatus(returnStatusScheduledOrCompleted(true));
+        paymentHistoryEntity.setTransactionDate(LocalDateTime.now());
 
-            PaymentHistoryEntity savedPaymentHistory = paymentHistoryRepository.save(paymentHistoryEntity);
-            accountRepository.save(sender);
+        PaymentHistoryEntity savedPaymentHistory = paymentHistoryRepository.save(paymentHistoryEntity);
+        accountRepository.save(sender);
 
-            return paymentHistoryMapper.mapTo(savedPaymentHistory);
+        return paymentHistoryMapper.mapTo(savedPaymentHistory);
+    }
+
+    @Override
+    public PaymentHistoryDTO createScheduledExternalPayment(Integer userId, PaymentHistoryDTO paymentHistoryDTO, String transactionType){
+        System.out.println("Executing scheduled transaction logic...");
+
+        Account sender = accountRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Sender account not found"));
+
+
+        PaymentHistoryEntity paymentHistoryEntity = paymentHistoryMapper.mapFrom(paymentHistoryDTO);
+        paymentHistoryEntity.setAccount(sender);
+        paymentHistoryEntity.setTransactionType(returnTransactionType("EXTERNAL_PAYMENT"));
+        paymentHistoryEntity.setStatus(returnStatusScheduledOrCompleted(false));
+
+        PaymentHistoryEntity savedPaymentHistory = paymentHistoryRepository.save(paymentHistoryEntity);
+
+        return paymentHistoryMapper.mapTo(savedPaymentHistory);
     }
 
     public List<PaymentHistoryDTO> getPaymentHistoryFiltesCompletedOrScheduled(Integer userId, Boolean isCompleted){
@@ -316,7 +333,7 @@ public class PaymentHistoryServiceImpl implements PaymentHistoryService {
     }
 
     public TransactionTypeEntity returnTransactionType(String transactionType){
-         return transactionTypeRepository.findByTransactionTypeName(transactionType)
-                    .orElseThrow(() -> new IllegalArgumentException("Status ("+transactionType+") not found"));
+        return transactionTypeRepository.findByTransactionTypeName(transactionType)
+                .orElseThrow(() -> new IllegalArgumentException("Status ("+transactionType+") not found"));
     }
 }

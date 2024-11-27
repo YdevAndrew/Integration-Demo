@@ -21,5 +21,7 @@ public class PaymentHistoryDTO {
     String accountReceiver;
     String nameReceiver;
     String bankNameReceiver;
-    LocalDate expiredDate;
+    String expiredDate;
+    LocalDate startDate;
+    LocalDate endDate;
 }

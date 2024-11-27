@@ -13,12 +13,16 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
 @Controller
 public class ServiceDetailController extends BaseController {
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
 
     private String serviceName;

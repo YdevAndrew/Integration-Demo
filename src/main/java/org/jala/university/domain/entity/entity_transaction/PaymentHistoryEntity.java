@@ -37,10 +37,10 @@ public class PaymentHistoryEntity {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @Column(name = "cpf_cnpj_receiver", nullable = true)
+    @Column(name = "cpf_cnpj_receiver")
     private String cpfReceiver;
 
-    @Column(name = "transaction_date")
+    @Column(name = "transaction_date",nullable = true)
     private LocalDateTime transactionDate;
 
     @Column(name = "description")
@@ -59,7 +59,14 @@ public class PaymentHistoryEntity {
     private String bankNameReceiver;
 
     @Column(name = "expired_date")
-    private LocalDate expiredDate;
+    private String expiredDate;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
 
     @ManyToOne
     @JoinColumn(name = "scheduled_payment", nullable = true)

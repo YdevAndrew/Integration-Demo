@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
@@ -61,8 +62,12 @@ public class ManualPaymentInformationController extends BaseController {
     private String receiverName;
     private String agency;
     private String account;
+    private LocalDateTime transactionDate;
     private String expirationDate;
     private String cnpjReceiver;
+    public LocalDate startDate;
+    public LocalDate endDate;
+    public String description;
 
     private QRCodePaymentController qrCodePaymentController;  // Referência para o controlador da tela anterior
     private ManuallyInsertController manuallyInsertController;
@@ -77,13 +82,17 @@ public class ManualPaymentInformationController extends BaseController {
     private static final BigDecimal JUROS_DIA = BigDecimal.valueOf(0.01); // 1% ao dia
 
     // Este método será chamado para inicializar os dados extraídos
-    public void initializePaymentDetails(BigDecimal amount, String receiverName, String account, String agency, String expirationDate, String cnpjReceiver) {
+    public void initializePaymentDetails(BigDecimal amount, String receiverName, String account, String agency, String expirationDate, String cnpjReceiver, LocalDateTime transactionDate, String description, LocalDate startDate, LocalDate endDate) {
         this.amount = amount;
         this.receiverName = receiverName;
+        this.transactionDate = transactionDate;
         this.account = account;
         this.agency = agency;
         this.expirationDate = expirationDate;
         this.cnpjReceiver = cnpjReceiver;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.description = description;
 
         // Atualiza os rótulos com os dados para exibição
         amountLabel.setText("R$ " + amount);
@@ -136,7 +145,7 @@ public class ManualPaymentInformationController extends BaseController {
 
             // Inicializa o controlador do pop-up de senha
             PasswordPromptController passwordPromptController = loader.getController();
-            passwordPromptController.setDetails(amount,receiverName,account,agency,expirationDate,cnpjReceiver);
+            passwordPromptController.setDetails(amount,receiverName,account,agency,expirationDate,cnpjReceiver,transactionDate,description,startDate,endDate);
             if (passwordPromptController != null) {
                 // Define a tela que irá aparecer após a confirmação da senha
                 passwordPromptController.setPath("/External/ScheduleServices/PaymentStatus.fxml");

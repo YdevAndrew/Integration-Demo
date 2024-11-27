@@ -20,4 +20,6 @@ public interface PaymentHistoryService {
     PaymentHistoryDTO createInternalPayment(Integer userId, PaymentHistoryDTO paymentHistoryDto, String transactionType);
 
     List<PaymentHistoryDTO> getPaymentHistoryFiltesCompletedOrScheduled(Integer userId, Boolean isCompleted);
+
+    PaymentHistoryDTO createScheduledExternalPayment(Integer userId, PaymentHistoryDTO paymentHistoryDTO, String transactionType);
 }

@@ -8,12 +8,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 
 @Controller
 public class ScreenConfirmAndDeleteController extends BaseController {
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
     // Método chamado quando o usuário clica no botão "Confirmar"
     @FXML

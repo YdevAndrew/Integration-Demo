@@ -9,15 +9,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Controller
 public class ManuallyInsertController extends BaseController {
 
+    @Autowired
+    SpringFXMLLoader springFXMLLoader;
     @FXML
     private TextField nameField;
     @FXML
@@ -30,6 +36,11 @@ public class ManuallyInsertController extends BaseController {
     private TextField accountField;
     @FXML
     private DatePicker dueDateField;
+
+    public LocalDateTime transactionDate;
+    public LocalDate startDate;
+    public LocalDate endDate;
+    public String description;
     @FXML
     private Pane mainContent;
 
@@ -112,7 +123,7 @@ public class ManuallyInsertController extends BaseController {
         if (validateAllFields()) {
             try {
                 // Carrega a nova tela de exibição dos detalhes do pagamento (como um container dentro da tela atual)
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml"));
+                FXMLLoader loader = springFXMLLoader.load("/External/ManualPaymentScreens/ManualPaymentInformation/ManualPaymentInformation.fxml");
                 Pane paymentDetailsPane = loader.load();
 
                 // Inicializa o controlador da nova tela com os dados
@@ -128,7 +139,11 @@ public class ManuallyInsertController extends BaseController {
                         agencyField.getText(),
                         accountField.getText(),
                         getDueDateFormatted(),  // Modificação para pegar a data formatada ou null
-                        recipientField.getText());
+                        recipientField.getText(),
+                        transactionDate,
+                        description,
+                        startDate,
+                        endDate);
                 } else {
                     System.out.println("Error: PaymentDetailsController controller was not injected correctly.");
                 }
@@ -194,7 +209,7 @@ public class ManuallyInsertController extends BaseController {
 
     @FXML
     private void back() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
+        FXMLLoader loader = springFXMLLoader.load("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml");
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }

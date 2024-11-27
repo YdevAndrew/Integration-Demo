@@ -14,6 +14,8 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.awt.*;
@@ -26,6 +28,8 @@ import java.util.Date;
 
 @Controller
 public class PaymentReceiptController extends BaseController {
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
     @FXML
     private Label amountLabel;

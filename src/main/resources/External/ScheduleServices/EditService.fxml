@@ -10,75 +10,75 @@
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="mainContent" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="943.0" style="-fx-background-color: transparent;" styleClass="content" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jala.university.presentation.controller.External.EditingServiceController">
-    <Text fill="#004bd6" layoutX="20.0" layoutY="92.0" text="Edit the details of your schedule service:" textAlignment="LEFT">
+    <Text fill="#004bd6" layoutX="87.0" layoutY="92.0" text="Edit the details of your schedule service:" textAlignment="LEFT">
         <font>
             <Font name="GraphikTrial-Bold" size="40.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="53.0" layoutY="151.0" text="Service name:">
+    <Text fill="#004bd6" layoutX="120.0" layoutY="151.0" text="Service name:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="53.0" layoutY="248.0" text="Recipient's">
+    <Text fill="#004bd6" layoutX="120.0" layoutY="248.0" text="Recipient's">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="53.0" layoutY="351.0" text="Agency:">
+    <Text fill="#004bd6" layoutX="120.0" layoutY="351.0" text="Agency:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="53.0" layoutY="460.0" text="Account:">
+    <Text fill="#004bd6" layoutX="120.0" layoutY="460.0" text="Account:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="433.0" layoutY="150.0" text="Amount:">
+    <Text fill="#004bd6" layoutX="500.0" layoutY="150.0" text="Amount:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="433.0" layoutY="247.0" text="Due date:">
+    <Text fill="#004bd6" layoutX="500.0" layoutY="247.0" text="Due date:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="433.0" layoutY="350.0" text="Start date:">
+    <Text fill="#004bd6" layoutX="500.0" layoutY="350.0" text="Start date:">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
-    <Text fill="#004bd6" layoutX="433.0" layoutY="459.0" text="End date (optional):">
+    <Text fill="#004bd6" layoutX="500.0" layoutY="459.0" text="End date (optional):">
         <font>
             <Font name="Roboto Medium" size="26.0" />
         </font>
     </Text>
 
-    <TextField fx:id="serviceNameField" layoutX="53.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="e.g., college, electricity, internet" styleClass="text-field-custom" />
+    <TextField fx:id="serviceNameField" layoutX="120.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="e.g., college, electricity, internet" styleClass="text-field-custom" />
 
-    <RadioButton fx:id="cpfToggleButton" layoutX="188.0" layoutY="225.0" text="CPF" textFill="#004bd6">
+    <RadioButton fx:id="cpfToggleButton" layoutX="255.0" layoutY="225.0" text="CPF" textFill="#004bd6">
         <toggleGroup>
             <ToggleGroup fx:id="cpfCnpjGroup" />
         </toggleGroup>
         <font>
             <Font name="Roboto Medium" size="22.0" />
         </font></RadioButton>
-    <RadioButton fx:id="cnpjToggleButton" layoutX="273.0" layoutY="225.0" text="CNPJ" textFill="#004bd6" toggleGroup="$cpfCnpjGroup">
+    <RadioButton fx:id="cnpjToggleButton" layoutX="340.0" layoutY="225.0" text="CNPJ" textFill="#004bd6" toggleGroup="$cpfCnpjGroup">
         <font>
             <Font name="Roboto Medium" size="22.0" />
         </font>
     </RadioButton>
 
-    <TextField fx:id="recipientField" layoutX="53.0" layoutY="259.0" prefHeight="45.0" prefWidth="329.0" promptText="11 or 14 digits" styleClass="text-field-custom" />
-    <TextField fx:id="agencyField" layoutX="53.0" layoutY="364.0" prefHeight="45.0" prefWidth="329.0" promptText="0000" styleClass="text-field-custom" />
-    <TextField fx:id="accountField" layoutX="53.0" layoutY="479.0" prefHeight="45.0" prefWidth="329.0" promptText="00000000-0" styleClass="text-field-custom" />
-    <TextField fx:id="amountField" layoutX="433.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="00,00" styleClass="text-field-custom" />
-    <TextField fx:id="dueDateField" layoutX="433.0" layoutY="261.0" prefHeight="45.0" prefWidth="329.0" promptText="00" styleClass="text-field-custom" />
-    <DatePicker fx:id="startDateField" layoutX="433.0" layoutY="371.0" prefHeight="45.0" prefWidth="329.0" promptText="DD/MM/AAAA" styleClass="text-field-custom" />
-    <DatePicker fx:id="endDateField" layoutX="433.0" layoutY="479.0" prefHeight="45.0" prefWidth="329.0" promptText="MM/AAAA" styleClass="text-field-custom" />
+    <TextField fx:id="recipientField" layoutX="120.0" layoutY="259.0" prefHeight="45.0" prefWidth="329.0" promptText="11 or 14 digits" styleClass="text-field-custom" />
+    <TextField fx:id="agencyField" layoutX="120.0" layoutY="364.0" prefHeight="45.0" prefWidth="329.0" promptText="0000" styleClass="text-field-custom" />
+    <TextField fx:id="accountField" layoutX="120.0" layoutY="479.0" prefHeight="45.0" prefWidth="329.0" promptText="00000000-0" styleClass="text-field-custom" />
+    <TextField fx:id="amountField" layoutX="500.0" layoutY="161.0" prefHeight="45.0" prefWidth="329.0" promptText="00,00" styleClass="text-field-custom" />
+    <TextField fx:id="dueDateField" layoutX="500.0" layoutY="261.0" prefHeight="45.0" prefWidth="329.0" promptText="00" styleClass="text-field-custom" />
+    <DatePicker fx:id="startDateField" layoutX="500.0" layoutY="371.0" prefHeight="45.0" prefWidth="329.0" promptText="DD/MM/AAAA" styleClass="text-field-custom" />
+    <DatePicker fx:id="endDateField" layoutX="500.0" layoutY="479.0" prefHeight="45.0" prefWidth="329.0" promptText="MM/AAAA" styleClass="text-field-custom" />
 
-    <ToggleButton layoutX="433.0" layoutY="588.0" mnemonicParsing="false" onAction="#schedulePaymentInformation" prefHeight="56.0" prefWidth="312.0" style="-fx-border-radius: 25;" styleClass="radio-button-custom" text="Next" />
-   <ToggleButton layoutX="61.0" layoutY="588.0" mnemonicParsing="false" onAction="#back" prefHeight="56.0" prefWidth="312.0" style="-fx-border-radius: 25;" styleClass="radio-button-custom" text="Back" />
+    <ToggleButton layoutX="500.0" layoutY="588.0" mnemonicParsing="false" onAction="#schedulePaymentInformation" prefHeight="56.0" prefWidth="312.0" style="-fx-border-radius: 25;" styleClass="radio-button-custom" text="Next" />
+   <ToggleButton layoutX="128.0" layoutY="588.0" mnemonicParsing="false" onAction="#back" prefHeight="56.0" prefWidth="312.0" style="-fx-border-radius: 25;" styleClass="radio-button-custom" text="Back" />
 </Pane>

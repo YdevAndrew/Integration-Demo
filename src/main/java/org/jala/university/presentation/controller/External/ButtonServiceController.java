@@ -6,6 +6,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import javafx.scene.control.Button;
 
@@ -15,6 +17,8 @@ import java.io.IOException;
 
 @Controller
 public class ButtonServiceController extends BaseController {
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
     private String serviceName;
 

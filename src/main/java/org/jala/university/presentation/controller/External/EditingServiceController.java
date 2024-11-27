@@ -8,16 +8,22 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.StringConverter;
 import org.jala.university.commons.presentation.BaseController;
+import org.jala.university.presentation.controller.Loan.SpringFXMLLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 @Controller
 public class EditingServiceController extends BaseController{
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
     public TextField serviceNameField;
     @FXML
@@ -52,6 +58,8 @@ public class EditingServiceController extends BaseController{
 
     @FXML
     private Pane mainContent;
+
+    public LocalDateTime transactionDate;
 
     private final DateTimeFormatter monthYearFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
 
@@ -262,17 +270,18 @@ public class EditingServiceController extends BaseController{
 
             // Determina se o tipo de documento selecionado é CNPJ
             boolean isCNPJ = cnpjToggleButton.isSelected();
-
+            BigDecimal amount = new BigDecimal(amountField.getText().replace(",", "."));
             // Passar os dados para o controlador de SchedulePaymentInformationController
             controller.setPaymentData(
-                    serviceNameField.getText(),
+                    amount,
                     recipientField.getText(),
-                    amountField.getText(),
                     agencyField.getText(),
                     accountField.getText(),
                     dueDateField.getText(),
-                    startDateField.getValue().toString(),
-                    endDateField.getValue() != null ? endDateField.getValue().toString() : "",
+                    transactionDate,
+                    serviceNameField.getText(),
+                    startDateField.getValue(),
+                    endDateField.getValue(),
                     isCNPJ // Passa o valor de CNPJ/CPF
             );
 

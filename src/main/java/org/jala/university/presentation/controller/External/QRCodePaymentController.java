@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -58,10 +59,15 @@ public class QRCodePaymentController extends BaseController {
     // Variáveis para armazenar os dados extraídos do QR Code
     public BigDecimal amount;
     public String receiverName;
+    LocalDateTime transactionDate;
     public String agency;
     public String account;
     public String expirationDate;
     public String cnpjReceiver;
+    public LocalDate startDate;
+    public LocalDate endDate;
+    public String description;
+
     private ActionEvent event;
 
     // Método para lidar com o clique no botão "Select your QRCode"
@@ -149,7 +155,7 @@ public class QRCodePaymentController extends BaseController {
                 ManualPaymentInformationController paymentDetailsController = loader.getController();
                 if (paymentDetailsController != null) {
                     paymentDetailsController.setQRCodePaymentController(this);
-                    paymentDetailsController.initializePaymentDetails(amount, receiverName, agency, account, expirationDate, cnpjReceiver);
+                    paymentDetailsController.initializePaymentDetails(amount, receiverName, agency, account, expirationDate, cnpjReceiver, transactionDate, description,endDate,startDate);
                 } else {
                     System.out.println("Error: PaymentDetailsController controller was not injected correctly.");
                 }
