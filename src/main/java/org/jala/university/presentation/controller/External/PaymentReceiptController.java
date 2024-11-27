@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -14,19 +13,18 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.jala.university.commons.presentation.BaseController;
-import org.springframework.stereotype.Controller;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.security.cert.PolicyNode;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@Controller
-public class PaymentReceiptController extends BaseController {
+
+public class PaymentReceiptController {
 
     @FXML
     private Label amountLabel;
@@ -87,7 +85,7 @@ public class PaymentReceiptController extends BaseController {
                     byte[] imageBytes = inputStream.readAllBytes();  // Lê todos os bytes da imagem
                     pdImage = PDImageXObject.createFromByteArray(document, imageBytes, "jala_bank_logo.jpg");
                 } else {
-                    System.out.println("Imagem não encontrada no classpath.");
+                    System.out.println("Image not found on classpath.");
                 }
 
                 // Iniciar o fluxo de conteúdo no PDF
@@ -159,14 +157,14 @@ public class PaymentReceiptController extends BaseController {
                 document.save(file);
                 document.close();
 
-                System.out.println("PDF exportado com sucesso!");
+                System.out.println("PDF exported successfully");
             } else {
                 System.out.println("Nenhum arquivo foi selecionado ou a operação foi cancelada.");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Erro ao tentar salvar o PDF: " + e.getMessage());
+            System.out.println("Error when trying to save the PDF: " + e.getMessage());
         }
     }
 
@@ -177,8 +175,8 @@ public class PaymentReceiptController extends BaseController {
         amountLabel.setText("R$ " + String.format("%.2f", amount));
         expirationDateLabel.setText(expirationDate);
         receiverNameLabel.setText(receiverName);
-        accountLabel.setText(agency);
-        agencyLabel.setText(account);
+        accountLabel.setText(account);
+        agencyLabel.setText(agency);
         bankReceiverLabel.setText("Instituição Externa");
         interestValueLabel.setText(interestValue);
         totalValueLabel.setText(totalValue);
@@ -193,39 +191,52 @@ public class PaymentReceiptController extends BaseController {
         dateLabel.setText(currentDateTime);
     }
 
+
     @FXML
     private void onExportButtonClick() {
         // Mostrar opções para o usuário
-        System.out.println("Escolha o formato para exportar");
+        System.out.println("Choose the format to export");
         // Aqui você pode criar uma janela para o usuário escolher o formato (imagem ou PDF)
         exportAsPDF();
     }
 
     // Método para lidar com o botão "OK" - assim que encerrar abre uma nova página do dashboard
     @FXML
-    private Pane mainContent; // Certifique-se de que isso esteja definido como um campo de classe
-
-    @FXML
     private void onOkButtonClick() {
-        // Carrega a tela do Dashboard (tela inicial)
+        // Obtém a janela (stage) atual, que é o pop-up
+        Stage currentStage = (Stage) amountLabel.getScene().getWindow();
+
+        // Fecha o pop-up
+        currentStage.close();
+
+        // Agora, vamos carregar a tela do Dashboard (tela inicial)
         try {
-            // Carrega o FXML do QR Code Payment
+            // Carrega o FXML do Dashboard
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/External/ManualPaymentScreens/QRCodePayment/QRCodePayment.fxml"));
             Parent root = loader.load();
 
-            // Substitui o conteúdo atual pelo novo conteúdo
-            if (mainContent != null) {
-                mainContent.getChildren().setAll(root);
-            } else {
-                System.out.println("mainContent não está definido.");
+            // Verifica se a janela principal (Dashboard) já está aberta
+            Stage mainStage = (Stage) currentStage.getOwner(); // Tenta pegar a janela que originou o pop-up
+
+            if (mainStage == null) {
+                // Se não existir, cria uma nova janela principal
+                mainStage = new Stage();
             }
+
+            // Define o título e a cena da janela principal
+            mainStage.setTitle("External Payment Module Application");
+            mainStage.setScene(new Scene(root));
+
+            // Exibe a janela com o Dashboard
+            mainStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();
-            // Em caso de erro ao carregar, imprime uma mensagem de erro
-            System.out.println("Erro ao carregar a tela QR Code Payment.");
+            // Em caso de erro ao carregar o Dashboard, imprime uma mensagem de erro
+            System.out.println("Error loading Dashboard.");
         }
     }
+
 }
 
 

@@ -166,7 +166,7 @@ public class ManualPaymentInformationController extends BaseController {
 
 
 
-    /* Método para exibir o comprovante de pagamento
+   // Método para exibir o comprovante de pagamento
     public void showPaymentReceipt() {
         try {
             // Carrega a tela de comprovante de pagamento
@@ -198,7 +198,7 @@ public class ManualPaymentInformationController extends BaseController {
                 statusLabel.setStyle("-fx-text-fill: red;");
             }
         }
-    }*/
+    }
 
 
     // Método chamado quando o usuário clica no botão "Cancelar"
@@ -222,6 +222,7 @@ public class ManualPaymentInformationController extends BaseController {
         Pane schedulePayment = loader.load();
         mainContent.getChildren().setAll(schedulePayment);
     }
+
 
 
 }
